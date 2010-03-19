@@ -1,0 +1,21 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>br.com.doit</groupId>
+		<artifactId>doit-parent</artifactId>
+		<version>1.1</version>
+	</parent>
+
+	<groupId>br.com.doit.pontofrio</groupId>
+	<artifactId>ponto-frio-boleto</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Ponto Frio Boleto</name>
+	<description>Integra\u00e7\u00e3o para gera\u00e7\u00e3o de boletos para a loja virtual do Ponto Frio.</description>
+
+	<modules>
+		<module>boleto-service</module>
+		<module>boleto-client</module>
+	</modules>
+</project>
