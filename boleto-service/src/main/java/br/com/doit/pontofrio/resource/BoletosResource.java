@@ -43,14 +43,19 @@ public class BoletosResource
 		String dueDate = parameters.getFirst( "dueDate" );
 		String amount = parameters.getFirst( "amount" );
 
-		boleto.sacado().setCpf( "     CPF/CNPJ: " + customerCpf );
-		boleto.sacado().setNome( customerName );
 		boleto.setNumeroDocumento( orderId );
+		boleto.setEspecieDocumento( "Mercan" );
 		boleto.setBanco( BancoEnum.ITAU );
+
 		boleto.emissor().setCarteira( 158 );
 		boleto.emissor().setCedente( "PONTOFRIO.COM COMERCIO ELETRONICO S/A     CNPJ:09.358.108/0001-25" );
-		boleto.setEspecieDocumento( "Mercan" );
+		boleto.emissor().setAgencia( 911 );
+		boleto.emissor().setContaCorrente( 10077L );
+		boleto.emissor().setDigitoVerificadorContaCorrente( "4" );
+		boleto.emissor().setNossoNumero( 1234L );
 
+		boleto.sacado().setCpf( "     CPF/CNPJ: " + customerCpf );
+		boleto.sacado().setNome( customerName );
 		boleto.sacado().setBairro( "" );
 		boleto.sacado().setCep( "" );
 		boleto.sacado().setCidade( "" );

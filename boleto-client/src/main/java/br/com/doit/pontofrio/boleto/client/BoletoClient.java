@@ -27,12 +27,12 @@ public class BoletoClient
 
 		parameters.put( "orderId", "1234" );
 		parameters.put( "customerCpf", "123.456.789-09" );
-		parameters.put( "customerName", "Fulano de Tal" );
+		parameters.put( "customerName", "Teste DOit" );
 
 		DateFormat dateFormatter = new SimpleDateFormat( "dd/MM/yyyy" );
 
 		parameters.put( "dueDate", dateFormatter.format( new Date() ) );
-		parameters.put( "amount", "200.00" );
+		parameters.put( "amount", "1.00" );
 
 		System.out.println( client.createBoleto( parameters ) );
 	}
