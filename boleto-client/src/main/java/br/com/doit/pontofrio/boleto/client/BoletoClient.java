@@ -1,9 +1,6 @@
 package br.com.doit.pontofrio.boleto.client;
 
 import java.net.URI;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -19,22 +16,20 @@ import com.sun.jersey.api.representation.Form;
  */
 public class BoletoClient
 {
-	public static void main( final String[] args ) throws BoletoOperationException
+	public static void main(final String[] args) throws BoletoOperationException
 	{
 		BoletoClient client = new BoletoClient();
 
 		Map<String, String> parameters = new HashMap<String, String>();
 
-		parameters.put( "orderId", "1234" );
-		parameters.put( "customerCpf", "123.456.789-09" );
-		parameters.put( "customerName", "Teste DOit" );
+		parameters.put("orderId", "12345678");
+		parameters.put("customerName", "Fulano");
+		parameters.put("customerCpf", "123.456.789-09");
 
-		DateFormat dateFormatter = new SimpleDateFormat( "dd/MM/yyyy" );
+		parameters.put("dueDate", "01/05/2010");
+		parameters.put("amount", "1.00");
 
-		parameters.put( "dueDate", dateFormatter.format( new Date() ) );
-		parameters.put( "amount", "1.00" );
-
-		System.out.println( client.createBoleto( parameters ) );
+		System.out.println(client.createBoleto(parameters));
 	}
 
 	/**
@@ -53,54 +48,55 @@ public class BoletoClient
 	 * <li><b>customerName</b>: o nome do cliente</li>
 	 * </ul>
 	 * 
-	 * @param parameters Um conjunto de par\u00e2metros para cria\u00e7\u00e3o
-	 *            do boleto
+	 * @param parameters
+	 *            Um conjunto de par\u00e2metros para cria\u00e7\u00e3o do
+	 *            boleto
 	 * @return A {@link URI} para acessar o boleto que foi gerado
-	 * @throws BoletoOperationException caso algum erro aconteça durante a
-	 *             comunicação
+	 * @throws BoletoOperationException
+	 *             caso algum erro aconteça durante a comunicação
 	 */
-	public URI createBoleto( final Map<String, String> parameters ) throws BoletoOperationException
+	public URI createBoleto(final Map<String, String> parameters) throws BoletoOperationException
 	{
 		Client client = Client.create();
 
-		client.setFollowRedirects( true );
+		client.setFollowRedirects(true);
 
-		WebResource resource = client.resource( "http://localhost:8080/boleto-service/boletos" );
+		WebResource resource = client.resource("http://localhost:8080/boleto-service/boletos");
 
 		Form form = new Form();
 
 		Set<String> keys = parameters.keySet();
 
-		for( String key : keys )
+		for(String key : keys)
 		{
-			form.add( key, parameters.get( key ) );
+			form.add(key, parameters.get(key));
 		}
 
-		ClientResponse response = resource.post( ClientResponse.class, form );
+		ClientResponse response = resource.post(ClientResponse.class, form);
 
-		if( !Status.CREATED.equals( response.getClientResponseStatus() ) )
+		if(!Status.CREATED.equals(response.getClientResponseStatus()))
 		{
-			throw new BoletoOperationException( "Ocorreu um erro ao criar o boleto. Status: " + response.getStatus() );
+			throw new BoletoOperationException("Ocorreu um erro ao criar o boleto. Status: " + response.getStatus());
 		}
 
 		return response.getLocation();
 	}
 
-	public Voucher requestVoucher( final String orderId )
+	public Voucher requestVoucher(final String orderId)
 	{
 		Client client = Client.create();
 
-		client.setFollowRedirects( true );
+		client.setFollowRedirects(true);
 
-		WebResource resource = client.resource( "http://localhost:8080/boleto-service/boletos/" + orderId + "/comprovante" );
+		WebResource resource = client.resource("http://localhost:8080/boleto-service/boletos/" + orderId + "/comprovante");
 
-		String voucherXml = resource.get( String.class );
+		String voucherXml = resource.get(String.class);
 
-		if( voucherXml == null )
+		if(voucherXml == null)
 		{
 			return null;
 		}
 
-		return Voucher.fromXml( voucherXml );
+		return Voucher.fromXml(voucherXml);
 	}
 }
