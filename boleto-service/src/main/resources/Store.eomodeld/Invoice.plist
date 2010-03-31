@@ -9,6 +9,12 @@
         {columnName = "external_id"; name = externalId; prototypeName = varchar16; }, 
         {allowsNull = N; name = id; prototypeName = id; }, 
         {
+            allowsNull = N; 
+            columnName = "validation_key"; 
+            name = validationKey; 
+            prototypeName = varchar255; 
+        }, 
+        {
             allowsNull = Y; 
             columnName = "voucher_id"; 
             name = voucherId; 
@@ -17,7 +23,7 @@
     ); 
     attributesUsedForLocking = (boletoId, id, voucherId); 
     className = "br.com.doit.pontofrio.model.Invoice"; 
-    classProperties = (boleto, externalId, voucher); 
+    classProperties = (boleto, externalId, validationKey, voucher); 
     externalName = "store_invoice"; 
     fetchSpecificationDictionary = {}; 
     name = Invoice; 

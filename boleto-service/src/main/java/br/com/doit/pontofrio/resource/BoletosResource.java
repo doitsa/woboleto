@@ -83,11 +83,11 @@ public class BoletosResource
 		boleto.setDataProcessamento(new NSTimestamp());
 		boleto.setValor(new BigDecimal(amount));
 
-		Invoice.createInvoice(editingContext, orderId, boleto);
+		Invoice invoice = Invoice.createInvoice(editingContext, orderId, boleto);
 
 		editingContext.saveChanges();
 
-		URI uri = uriInfo.getRequestUriBuilder().path(orderId).build().normalize();
+		URI uri = uriInfo.getRequestUriBuilder().path(orderId).queryParam(BoletoResource.HASH_QUERY_PARAM, invoice.validationKey()).build().normalize();
 
 		Response response = Response.created(uri).build();
 

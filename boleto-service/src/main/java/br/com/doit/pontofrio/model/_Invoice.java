@@ -14,6 +14,7 @@ public abstract class _Invoice extends  EOGenericRecord {
 
 	// Attributes
 	public static final String EXTERNAL_ID_KEY = "externalId";
+	public static final String VALIDATION_KEY_KEY = "validationKey";
 
 	// Relationships
 	public static final String BOLETO_KEY = "boleto";
@@ -38,6 +39,17 @@ public abstract class _Invoice extends  EOGenericRecord {
     	_Invoice.LOG.debug( "updating externalId from " + externalId() + " to " + value);
     }
     takeStoredValueForKey(value, "externalId");
+  }
+
+  public String validationKey() {
+    return (String) storedValueForKey("validationKey");
+  }
+
+  public void setValidationKey(String value) {
+    if (_Invoice.LOG.isDebugEnabled()) {
+    	_Invoice.LOG.debug( "updating validationKey from " + validationKey() + " to " + value);
+    }
+    takeStoredValueForKey(value, "validationKey");
   }
 
   public br.com.wobr.boleto.model.EOBoleto boleto() {
@@ -78,9 +90,11 @@ public abstract class _Invoice extends  EOGenericRecord {
   
 
   public static Invoice createInvoice(EOEditingContext editingContext, String externalId
+, String validationKey
 , br.com.wobr.boleto.model.EOBoleto boleto) {
     Invoice eo = (Invoice) EOUtilities.createAndInsertInstance(editingContext, _Invoice.ENTITY_NAME);    
 		eo.setExternalId(externalId);
+		eo.setValidationKey(validationKey);
     eo.setBoletoRelationship(boleto);
     return eo;
   }
