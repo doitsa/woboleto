@@ -69,6 +69,7 @@ public class BoletoResource
 		return gerador.toPNG();
 	}
 
+	@GET
 	@Path("/comprovante")
 	@Produces(MediaType.TEXT_XML)
 	public Response comprovanteAsXml(@PathParam("order_id") final String orderId)
