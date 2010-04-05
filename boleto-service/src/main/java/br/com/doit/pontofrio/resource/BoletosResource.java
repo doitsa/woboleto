@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
@@ -31,8 +32,10 @@ public class BoletosResource
 {
 	@POST
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public Response createBoleto(final MultivaluedMap<String, String> parameters, @Context final UriInfo uriInfo) throws URISyntaxException
+	public Response createBoleto(final MultivaluedMap<String, String> parameters, @Context final UriInfo uriInfo, @HeaderParam("Authorization") String token) throws URISyntaxException
 	{
+		System.out.println("Token: " + token);
+
 		EOEditingContext editingContext = ERXEC.newEditingContext();
 
 		EOBoleto boleto = EOBoleto.createEOBoleto(editingContext);

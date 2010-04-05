@@ -17,7 +17,7 @@ import br.com.caelum.stella.boleto.Boleto;
 import br.com.caelum.stella.boleto.transformer.BoletoGenerator;
 import br.com.doit.pontofrio.model.Invoice;
 import br.com.wobr.boleto.model.EOBoleto;
-import br.com.wobr.unittest.TemporaryEditingContextProvider;
+import br.com.wobr.unittest.rules.TemporaryEditingContextProvider;
 
 import com.webobjects.eocontrol.EOEditingContext;
 

@@ -121,13 +121,7 @@ public class BoletoClient
 			}
 		}
 
-		Client client = createClient();
-
-		client.setFollowRedirects(true);
-
-		WebResource resource = client.resource(String.format("%s/boletos", baseUri));
-
-		ClientResponse response = resource.post(ClientResponse.class, form);
+		ClientResponse response = postResource(form);
 
 		if(!Status.CREATED.equals(response.getClientResponseStatus()))
 		{
@@ -139,7 +133,20 @@ public class BoletoClient
 
 	Client createClient()
 	{
-		return Client.create();
+		Client client = Client.create();
+
+		client.setFollowRedirects(true);
+
+		return client;
+	}
+
+	ClientResponse postResource(Form form)
+	{
+		Client client = createClient();
+
+		WebResource resource = client.resource(String.format("%s/boletos", baseUri));
+
+		return resource.header("Authorization", "b027df2995d9fc3d795f91745f449bd8").post(ClientResponse.class, form);
 	}
 
 	/**
@@ -163,8 +170,6 @@ public class BoletoClient
 		}
 
 		Client client = createClient();
-
-		client.setFollowRedirects(true);
 
 		WebResource resource = client.resource(String.format("%s/boletos/%s/comprovante", baseUri, orderId));
 

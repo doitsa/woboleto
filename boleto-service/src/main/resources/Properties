@@ -1,4 +1,4 @@
-# Overrides the JavaWebObjects.framework Properties
+java.awt.headless=true
 
 #Configure if using derby example set
 #derby.system.home=/Users/[username]/Library/Databases/derby-10.2.2.0/data/
