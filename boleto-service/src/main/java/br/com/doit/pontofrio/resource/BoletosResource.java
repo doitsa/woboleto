@@ -57,8 +57,8 @@ public class BoletosResource
 		boleto.emissor().setCarteira(175);
 		boleto.emissor().setNossoNumero(Long.valueOf(orderId));
 
-		boleto.sacado().setCpf("     CPF/CNPJ: " + customerCpf);
-		boleto.sacado().setNome(customerName);
+		boleto.sacado().setCpf("     CPF/CNPJ: " + customerCpf == null ? "" : customerCpf);
+		boleto.sacado().setNome(customerName == null ? "" : customerName);
 		boleto.sacado().setBairro("");
 		boleto.sacado().setCep("");
 		boleto.sacado().setCidade("");
