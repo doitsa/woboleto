@@ -17,70 +17,65 @@ import br.com.caelum.stella.boleto.Boleto;
 import br.com.caelum.stella.boleto.transformer.BoletoGenerator;
 import br.com.doit.pontofrio.model.Invoice;
 import br.com.wobr.boleto.model.EOBoleto;
-import br.com.wobr.unittest.rules.TemporaryEditingContextProvider;
 
-import com.webobjects.eocontrol.EOEditingContext;
+import com.wounit.annotations.Dummy;
+import com.wounit.rules.MockEditingContext;
 
 /**
  * @author <a href="mailto:hprange@gmail.com">Henrique Prange</a>
  */
-public class TestBoletoResource
-{
-	private EOEditingContext editingContext;
-
+public class TestBoletoResource {
 	@Rule
-	public final TemporaryEditingContextProvider editingContextProvider = new TemporaryEditingContextProvider("Store", "Boleto");
+	public final MockEditingContext ec = new MockEditingContext("Store",
+			"Boleto");
+
+	@Dummy
+	private Invoice mockInvoice;
+
+	@Dummy
+	private EOBoleto mockBoleto;
 
 	private BoletoResource resource;
 
 	@Test
-	public void exceptionIfHashKeyIsNotValid() throws Exception
-	{
-		Invoice.createInvoice(editingContext, "1234", "yyyyy", EOBoleto.createEOBoleto(editingContext));
+	public void exceptionIfHashKeyIsNotValid() throws Exception {
+		mockInvoice.setValidationKey("yyyyy");
 
-		editingContext.saveChanges();
-
-		try
-		{
+		try {
 			resource.boletoAsPng("1234", "xxxxx");
 
 			fail();
-		}
-		catch(WebApplicationException exception)
-		{
-			assertThat(exception.getResponse().getStatus(), is(Response.Status.BAD_REQUEST.getStatusCode()));
-			assertThat(exception.getResponse().getEntity().toString(), is("The validation hash provided is invalid"));
+		} catch (WebApplicationException exception) {
+			assertThat(exception.getResponse().getStatus(),
+					is(Response.Status.BAD_REQUEST.getStatusCode()));
+			assertThat(exception.getResponse().getEntity().toString(),
+					is("The validation hash provided is invalid"));
 		}
 	}
 
 	@Test
-	public void exceptionIfHashKeyIsNull() throws Exception
-	{
-		try
-		{
+	public void exceptionIfHashKeyIsNull() throws Exception {
+		try {
 			resource.boletoAsPng("1234", null);
 
 			fail();
-		}
-		catch(WebApplicationException exception)
-		{
-			assertThat(exception.getResponse().getStatus(), is(Response.Status.BAD_REQUEST.getStatusCode()));
-			assertThat(exception.getResponse().getEntity().toString(), is("The validation hash provided is invalid"));
+		} catch (WebApplicationException exception) {
+			assertThat(exception.getResponse().getStatus(),
+					is(Response.Status.BAD_REQUEST.getStatusCode()));
+			assertThat(exception.getResponse().getEntity().toString(),
+					is("The validation hash provided is invalid"));
 		}
 	}
 
 	@Test
-	public void generateBoletoIfValidationKeyIsCorrect() throws Exception
-	{
-		Invoice.createInvoice(editingContext, "1234", "xxx", EOBoleto.createEOBoleto(editingContext));
-
-		editingContext.saveChanges();
-
+	public void generateBoletoIfValidationKeyIsCorrect() throws Exception {
 		resource = Mockito.spy(resource);
 
-		BoletoGenerator mockBoletoGenerator = Mockito.mock(BoletoGenerator.class);
+		BoletoGenerator mockBoletoGenerator = Mockito
+				.mock(BoletoGenerator.class);
 
-		Mockito.doReturn(mockBoletoGenerator).when(resource).createBoletoGenerator(Mockito.any(Boleto.class));
+		Mockito.doReturn(mockBoletoGenerator).when(resource)
+				.createBoletoGenerator(Mockito.any(Boleto.class));
 
 		resource.boletoAsPng("1234", "xxx");
 
@@ -88,12 +83,13 @@ public class TestBoletoResource
 	}
 
 	@Before
-	public void setup()
-	{
-		editingContext = editingContextProvider.editingContext();
-
+	public void setup() {
 		UriInfo mockUriInfo = Mockito.mock(UriInfo.class);
 
-		resource = new BoletoResource(editingContext, mockUriInfo);
+		resource = new BoletoResource(ec, mockUriInfo);
+
+		mockInvoice.setExternalId("1234");
+		mockInvoice.setValidationKey("xxx");
+		mockInvoice.setBoletoRelationship(mockBoleto);
 	}
 }
