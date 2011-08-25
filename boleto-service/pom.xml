@@ -13,7 +13,7 @@
 	<name>Boleto Service</name>
 
 	<properties>
-		<wonder.version>5.0.0-SNAPSHOT</wonder.version>
+		<wonder.version>5.4.2</wonder.version>
 		<webobjects.version>5.4.3</webobjects.version>
 	</properties>
 
@@ -82,7 +82,6 @@
 			<groupId>wonder.core</groupId>
 			<artifactId>ERExtensions</artifactId>
 			<version>${wonder.version}</version>
-			<classifier>wo54</classifier>
 			<exclusions>
 				<exclusion>
 					<groupId>com.webobjects</groupId>
@@ -100,7 +99,6 @@
 			<groupId>wonder.core</groupId>
 			<artifactId>WOOgnl</artifactId>
 			<version>${wonder.version}</version>
-			<classifier>wo54</classifier>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
@@ -150,6 +148,12 @@
 			<groupId>br.com.wobr</groupId>
 			<artifactId>wobr-boleto</artifactId>
 			<version>1.0-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>JavaXML</artifactId>
+					<groupId>com.webobjects</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>br.com.wobr</groupId>
