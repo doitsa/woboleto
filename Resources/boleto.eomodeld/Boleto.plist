@@ -1,0 +1,334 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = aceite; 
+            name = aceite; 
+            prototypeName = varchar50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = acrescimo; 
+            name = acrescimo; 
+            prototypeName = varchar50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = agencia; 
+            name = agencia; 
+            prototypeName = varchar50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = bairroSacado; 
+            name = bairroSacado; 
+            prototypeName = varchar50; 
+        }, 
+        {allowsNull = N; columnName = banco; name = banco; prototypeName = intNumber; }, 
+        {
+            allowsNull = Y; 
+            columnName = carteira; 
+            name = carteira; 
+            prototypeName = varchar50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = cedente; 
+            name = cedente; 
+            prototypeName = varchar255; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = cepSacado; 
+            name = cepSacado; 
+            prototypeName = varchar16; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = cidadeSacado; 
+            name = cidadeSacado; 
+            prototypeName = varchar50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = codCliente; 
+            name = codCliente; 
+            prototypeName = varchar50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = codigoBarras; 
+            name = codigoBarras; 
+            prototypeName = varchar50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = codigoFornecidoAgencia; 
+            name = codigoFornecidoAgencia; 
+            prototypeName = varchar50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = codigoOperacao; 
+            name = codigoOperacao; 
+            prototypeName = varchar50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = contaCorrente; 
+            name = contaCorrente; 
+            prototypeName = varchar50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = cpfSacado; 
+            name = cpfSacado; 
+            prototypeName = varchar16; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = dataCriada; 
+            name = dataCriada; 
+            prototypeName = dateTime; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = dataDocumento; 
+            name = dataDocumento; 
+            prototypeName = varchar16; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = dataProcessamento; 
+            name = dataProcessamento; 
+            prototypeName = varchar255; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = dataVencimento; 
+            name = dataVencimento; 
+            prototypeName = varchar16; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = descricoes; 
+            name = descricoes; 
+            prototypeName = varchar255; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = dvAgencia; 
+            name = dvAgencia; 
+            prototypeName = varchar50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = dvCodigoFornecidoAgencia; 
+            name = dvCodigoFornecidoAgencia; 
+            prototypeName = varchar255; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = dvContaCorrente; 
+            name = dvContaCorrente; 
+            prototypeName = varchar255; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = dvNossoNumero; 
+            name = dvNossoNumero; 
+            prototypeName = varchar50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = email; 
+            name = email; 
+            prototypeName = varchar100; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = enderecoCodBar; 
+            name = enderecoCodBar; 
+            prototypeName = varchar255; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = enderecoSacado; 
+            name = enderecoSacado; 
+            prototypeName = varchar255; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = especieDocumento; 
+            name = especieDocumento; 
+            prototypeName = varchar50; 
+        }, 
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {
+            allowsNull = Y; 
+            columnName = imagemMarketing; 
+            name = imagemMarketing; 
+            prototypeName = varchar255; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = instrucao1; 
+            name = instrucao1; 
+            prototypeName = varchar255; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = instrucao2; 
+            name = instrucao2; 
+            prototypeName = varchar255; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = instrucao3; 
+            name = instrucao3; 
+            prototypeName = varchar255; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = instrucao4; 
+            name = instrucao4; 
+            prototypeName = varchar255; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = instrucao5; 
+            name = instrucao5; 
+            prototypeName = varchar255; 
+        }, 
+        {allowsNull = Y; columnName = ios; name = ios; prototypeName = varchar255; }, 
+        {
+            allowsNull = Y; 
+            columnName = linhaDigitavel; 
+            name = linhaDigitavel; 
+            prototypeName = varchar255; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = localPagamento; 
+            name = localPagamento; 
+            prototypeName = varchar255; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = localPagamento2; 
+            name = localPagamento2; 
+            prototypeName = varchar255; 
+        }, 
+        {allowsNull = Y; columnName = moeda; name = moeda; prototypeName = varchar50; }, 
+        {
+            allowsNull = Y; 
+            columnName = noDocumento; 
+            name = noDocumento; 
+            prototypeName = varchar50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = nomeSacado; 
+            name = nomeSacado; 
+            prototypeName = varchar255; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = nossoNumero; 
+            name = nossoNumero; 
+            prototypeName = varchar50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = numConvenio; 
+            name = numConvenio; 
+            prototypeName = varchar50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = qtdMoeda; 
+            name = qtdMoeda; 
+            prototypeName = varchar50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = status; 
+            name = status; 
+            prototypeName = intNumber; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = ufSacado; 
+            name = ufSacado; 
+            prototypeName = varchar16; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = valorBoleto; 
+            name = valorBoleto; 
+            prototypeName = varchar255; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = valorMoeda; 
+            name = valorMoeda; 
+            prototypeName = varchar255; 
+        }
+    ); 
+    attributesUsedForLocking = (email, id); 
+    className = "br.com.doit.boleto.model.Boleto"; 
+    classProperties = (
+        aceite, 
+        acrescimo, 
+        agencia, 
+        bairroSacado, 
+        banco, 
+        carteira, 
+        cedente, 
+        cepSacado, 
+        cidadeSacado, 
+        codCliente, 
+        codigoBarras, 
+        codigoFornecidoAgencia, 
+        codigoOperacao, 
+        contaCorrente, 
+        cpfSacado, 
+        dataCriada, 
+        dataDocumento, 
+        dataProcessamento, 
+        dataVencimento, 
+        descricoes, 
+        dvAgencia, 
+        dvCodigoFornecidoAgencia, 
+        dvContaCorrente, 
+        dvNossoNumero, 
+        email, 
+        enderecoCodBar, 
+        enderecoSacado, 
+        especieDocumento, 
+        imagemMarketing, 
+        instrucao1, 
+        instrucao2, 
+        instrucao3, 
+        instrucao4, 
+        instrucao5, 
+        ios, 
+        linhaDigitavel, 
+        localPagamento, 
+        localPagamento2, 
+        moeda, 
+        noDocumento, 
+        nomeSacado, 
+        nossoNumero, 
+        numConvenio, 
+        qtdMoeda, 
+        status, 
+        ufSacado, 
+        valorBoleto, 
+        valorMoeda
+    ); 
+    externalName = boleto; 
+    fetchSpecificationDictionary = {}; 
+    name = Boleto; 
+    primaryKeyAttributes = (id); 
+}

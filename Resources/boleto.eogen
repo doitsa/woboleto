@@ -1,0 +1,1 @@
+ -destination Sources -extension java -java -javaTemplate _Entity.java -model Resources/boleto.eomodeld -packagedirs -subclassDestination Sources -subclassJavaTemplate Entity.java -templatedir Resources/Templates -verbose -loadModelGroup -superclassPackage base

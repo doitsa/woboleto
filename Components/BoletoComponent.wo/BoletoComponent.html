@@ -1,0 +1,106 @@
+<html>
+  <head>
+    <title><wo:WOString value = "$boletoBean.tituloBoletoHtml" /></title>
+    <style type = "text/css">
+      #linhaDigitavel {
+      	font-size:13px;
+      	top:150px;
+      	left:235px;
+      	position:absolute;
+      	font-family:Verdana;
+      	font-weight:bold;
+      }
+    </style>
+    <style type = "text/css" media = "print">
+      .hide {display: none;}
+      #linhaDigitavel {
+       font-size:12px;
+       top:150px;
+       left:235px;
+       position:absolute;
+       font-family:Verdana;
+       font-weight:bold;
+      }
+    </style>
+  </head>
+  <body>
+    <wo:WOImage data = "$boletoTemplateImage" mimeType = "image/gif" style = "top:10px; left:10px; position:absolute;" />
+    <!-- header -->
+    <div style = "top:7px; left:80px; position:absolute;font-family:Verdana; font-size:12;"> <wo:WOString value = "$boletoBean.cedente" /> </div>
+    <!-- Linha 1 -->
+    <div style = "top:35px; left:25px; position:absolute;font-family:Verdana; font-size:12;"> <wo:WOString value = "$boletoBean.nomeSacado" /> </div>
+    <div style = "top:35px; left:330px; position:absolute; font-family:Verdana; font-size:12;"> <wo:WOString value = "$boletoBean.dataVencimento" /> </div>
+    <div style = "top:35px; left:520px; position:absolute;font-family:Verdana; font-size:12;"> <wo:WOString value = "$boletoBean.valorBoleto" /> </div>
+    <!-- Linha 2 -->
+    <div style = "top:65px; left:25px; position:absolute;font-family:Verdana; font-size:12;"> <wo:WOString value = "$banco.agenciaCodCedenteFormatted" /> </div>
+    <div style = "top:65px; left:215px; position:absolute;font-family:Verdana; font-size:12;"> <wo:WOString value = "$boletoBean.nossoNumero" /> </div>
+    <!-- Linha 3 -->
+    <wo:WOImage data = "$bancoImage" mimeType = "image/gif" width = "160px" style = "top:130px; left:10px; position:absolute;" />
+    <div style = "top:150px; left:180px; position:absolute;font-family:Verdana; font-size:13px; font-weight:bold;"><wo:WOString value = "$banco.numero" /></div>
+    <div id = "linhaDigitavel"><wo:WOString value = "$banco.linhaDigitavel" /></div>
+    <!-- Linha 4 -->
+    <div style = "top:185px; left:25px; position:absolute; font-family:Verdana; font-size:10;">
+      <wo:WOString value = "$boletoBean.localPagamento" />
+      <br />
+      <wo:WOString value = "$boletoBean.localPagamento2" />
+    </div>
+    <div style = "top:195px; left:565px; position:absolute; font-family:Verdana; font-size:12;"> <wo:WOString value = "$boletoBean.dataVencimento" /></div>
+    <!-- Linha 5 -->
+    <div style = "top:225px; left:25px; position:absolute; font-family:Verdana; font-size:12;"> <wo:WOString value = "$boletoBean.cedente" /></div>
+    <div style = "top:225px; left:555px; position:absolute; font-family:Verdana; font-size:12;"> <wo:WOString value = "$banco.agenciaCodCedenteFormatted" /> </div>
+    <!-- Linha 6 -->
+    <div style = "top:252px; left:15px; position:absolute; font-family:Verdana; font-size:12;"> <wo:WOString value = "$boletoBean.dataDocumento" /> </div>
+    <div style = "top:252px; left:115px; position:absolute; font-family:Verdana; font-size:12;"> <wo:WOString value = "$boletoBean.noDocumento" /> </div>
+    <div style = "top:252px; left:245px; position:absolute; font-family:Verdana; font-size:12;"> <wo:WOString value = "$boletoBean.especieDocumento" /> </div>
+    <div style = "top:252px; left:355px; position:absolute; font-family:Verdana; font-size:12;"> <wo:WOString value = "$boletoBean.aceite" /> </div>
+    <div style = "top:252px; left:415px; position:absolute; font-family:Verdana; font-size:12;"> <wo:WOString value = "$boletoBean.dataProcessamento" /> </div>
+    <div style = "top:252px; left:555px; position:absolute; font-family:Verdana; font-size:12;">
+      <wo:WOString value = "$boletoBean.carteira" />/<wo:WOString value = "$boletoBean.nossoNumero" />
+    </div>
+    <!-- Linha 7 -->
+    <div style = "top:282px; left:25px; position:absolute; font-family:Verdana; font-size:12;"> <!-- usoBanco --> &nbsp; </div>
+    <div style = "top:282px; left:175px; position:absolute; font-family:Verdana; font-size:12;"> <wo:WOString value = "$boletoBean.carteira" /> </div>
+    <div style = "top:282px; left:265px; position:absolute; font-family:Verdana; font-size:12;"> <wo:WOString value = "$boletoBean.moeda" /> </div>
+    <div style = "top:282px; left:355px; position:absolute; font-family:Verdana; font-size:12;"> <wo:WOString value = "$boletoBean.qtdMoeda" /> </div>
+    <div style = "top:282px; left:465px; position:absolute; font-family:Verdana; font-size:12;"> <wo:WOString value = "$boletoBean.valorBoleto" /> </div>
+    <div style = "top:282px; left:565px; position:absolute; font-family:Verdana; font-size:12;"> <wo:WOString value = "$boletoBean.valorBoleto" /> </div>
+    <!-- Linha 8 -->
+    <div style = "top:310px; left:565px; position:absolute; font-family:Verdana; font-size:12;"> <!-- desconto -->&nbsp; </div>
+    <!-- Linha 9 -->
+    <div style = "top:340px; left:565px; position:absolute; font-family:Verdana; font-size:12;"> <!-- outraDeducao --> &nbsp; </div>
+    <!-- Linha 10 -->
+    <div style = "top:368px; left:565px; position:absolute; font-family:Verdana; font-size:12;"> <!-- multa -->&nbsp; </div>
+    <!-- Linha 11 -->
+    <div style = "top:396px; left:565px; position:absolute; font-family:Verdana; font-size:12;"> <!-- acrescimo -->&nbsp; </div>
+    <!-- Linha 12 -->
+    <div style = "top:424px; left:565px; position:absolute; font-family:Verdana; font-size:12;"> <wo:WOString value = "$boletoBean.valorBoleto" /> </div>
+    <!-- Bloco Instrucoes -->
+    <div style = "top:312px; left:25px; position:absolute; font-family:Verdana; font-size:12;">
+      <wo:WOString value = "$boletoBean.instrucao1" />
+      <br />
+      <wo:WOString value = "$boletoBean.instrucao2" />
+      <br />
+      <wo:WOString value = "$boletoBean.instrucao3" />
+      <br />
+      <wo:WOString value = "$boletoBean.instrucao4" />
+      <br />
+      <wo:WOString value = "$boletoBean.instrucao5" />
+    </div>
+    <div style = "top:402px; left:25px; position:absolute; font-family:Verdana; font-size:12;"> <wo:WOString value = "$boletoBean.cedente" /> </div>
+    <div style = "top:439px; left:145px; position:absolute; font-family:Verdana; font-size:12;">
+      <wo:WOString value = "$boletoBean.nomeSacado" />&nbsp;<wo:WOString value = "$boletoBean.cpfSacado" />
+      <br />
+      <wo:WOString value = "$boletoBean.enderecoSacado" />
+      <br />
+      <wo:WOString value = "$boletoBean.cepSacado" />&nbsp;<wo:WOString value = "$boletoBean.bairroSacado" />
+      <wo:WOConditional condition = "$mostraTracoCidade">-</wo:WOConditional>
+      <wo:WOString value = "$boletoBean.cidadeSacado" />&nbsp;<wo:WOString value = "$boletoBean.ufSacado" />
+    </div>
+    <!-- Imagem codigo de barras -->
+    <wo:WOImage data = "$codigoBarrasImage" mimeType = "image/gif" style = "top:520px; left:25px; position:absolute;" />
+    <!-- Link para enviar email -->
+    <div class = "hide">
+      <wo:ERXWOConditional condition = "$canSendEmail"> <wo:WOHyperlink action = "$sendEmail" string = "Enviar boleto por email" style = "top:600px; left:15px; position:absolute;" /> </wo:ERXWOConditional>
+    </div>
+  </body>
+</html>

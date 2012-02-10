@@ -1,0 +1,41 @@
+# OGNL
+ognl.active = true
+ognl.helperFunctions=true
+ognl.inlineBindings=true
+ognl.parseStandardTags=true
+
+# EOF
+er.extensions.ERXApplication.useEditingContextUnlocker=true
+er.extensions.ERXEC.defaultAutomaticLockUnlock=true
+er.extensions.ERXEC.useSharedEditingContext=false
+er.extensions.ERXEC.defaultCoalesceAutoLocks=true
+er.extensions.ERXEnterpriseObject.applyRestrictingQualifierOnInsert=true
+er.extensions.ERXRaiseOnMissingEditingContextDelegate=false
+
+
+
+com.webobjects.jdbcadaptor.PostgresqlExpression.disableTypeCasting=true
+
+# Migrations
+er.migration.migrateAtStartup=true
+er.migration.createTablesIfNecessary=true
+er.migration.modelNames=boleto
+
+boleto.MigrationClassPrefix=br.com.doit.boleto.migration.BoletoModel
+
+# Database Connection Configuration
+dbConnectUserGLOBAL=postgres
+dbConnectPasswordGLOBAL=p3pp3R
+dbConnectPluginGLOBAL=PostgresqlPlugIn
+dbConnectDriverGLOBAL=org.postgresql.Driver
+dbEOPrototypesEntityGLOBAL=EOJDBCPostgresqlPrototypes
+
+# Mail
+er.javamail.centralize=false
+er.javamail.adminEmail=equipe@doit.com.br
+er.javamail.debugEnabled=false
+er.javamail.milliSecondsWaitIfSenderOverflowed=6000
+er.javamail.smtpHost=mail.doit.com.br
+er.javamail.smtpAuth=true
+er.javamail.smtpUser=equipe@doit.com.br
+er.javamail.smtpPassword=doit1010
