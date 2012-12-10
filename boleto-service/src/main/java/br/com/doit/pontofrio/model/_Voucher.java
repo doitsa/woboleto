@@ -1,4 +1,4 @@
-// $LastChangedRevision: 5810 $ DO NOT EDIT.  Make changes to Voucher.java instead.
+// $LastChangedRevision$ DO NOT EDIT.  Make changes to Voucher.java instead.
 package br.com.doit.pontofrio.model;
 
 import com.webobjects.eoaccess.*;

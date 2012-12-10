@@ -15,7 +15,7 @@ import com.wounit.rules.MockEditingContext;
 public class TestInvoice {
 	@Rule
 	public final MockEditingContext editingContext = new MockEditingContext(
-			"Store");
+			"Store", "Boleto");
 
 	@Test
 	public void validationKeyForNotNullOrderId() throws Exception {

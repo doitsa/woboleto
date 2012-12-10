@@ -1,4 +1,4 @@
-// $LastChangedRevision: 5810 $ DO NOT EDIT.  Make changes to Invoice.java instead.
+// $LastChangedRevision$ DO NOT EDIT.  Make changes to Invoice.java instead.
 package br.com.doit.pontofrio.model;
 
 import com.webobjects.eoaccess.*;
@@ -52,16 +52,16 @@ public abstract class _Invoice extends  EOGenericRecord {
     takeStoredValueForKey(value, "validationKey");
   }
 
-  public br.com.wobr.boleto.model.EOBoleto boleto() {
-    return (br.com.wobr.boleto.model.EOBoleto)storedValueForKey("boleto");
+  public br.com.woboleto.model.EOBoleto boleto() {
+    return (br.com.woboleto.model.EOBoleto)storedValueForKey("boleto");
   }
 
-  public void setBoletoRelationship(br.com.wobr.boleto.model.EOBoleto value) {
+  public void setBoletoRelationship(br.com.woboleto.model.EOBoleto value) {
     if (_Invoice.LOG.isDebugEnabled()) {
       _Invoice.LOG.debug("updating boleto from " + boleto() + " to " + value);
     }
     if (value == null) {
-    	br.com.wobr.boleto.model.EOBoleto oldValue = boleto();
+    	br.com.woboleto.model.EOBoleto oldValue = boleto();
     	if (oldValue != null) {
     		removeObjectFromBothSidesOfRelationshipWithKey(oldValue, "boleto");
       }
@@ -91,7 +91,7 @@ public abstract class _Invoice extends  EOGenericRecord {
 
   public static Invoice createInvoice(EOEditingContext editingContext, String externalId
 , String validationKey
-, br.com.wobr.boleto.model.EOBoleto boleto) {
+, br.com.woboleto.model.EOBoleto boleto) {
     Invoice eo = (Invoice) EOUtilities.createAndInsertInstance(editingContext, _Invoice.ENTITY_NAME);    
 		eo.setExternalId(externalId);
 		eo.setValidationKey(validationKey);

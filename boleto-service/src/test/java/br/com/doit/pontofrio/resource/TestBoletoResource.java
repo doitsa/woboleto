@@ -16,7 +16,7 @@ import org.mockito.Mockito;
 import br.com.caelum.stella.boleto.Boleto;
 import br.com.caelum.stella.boleto.transformer.BoletoGenerator;
 import br.com.doit.pontofrio.model.Invoice;
-import br.com.wobr.boleto.model.EOBoleto;
+import br.com.woboleto.model.EOBoleto;
 
 import com.wounit.annotations.Dummy;
 import com.wounit.rules.MockEditingContext;

@@ -2,7 +2,7 @@ package br.com.doit.pontofrio.model;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
-import br.com.wobr.boleto.model.EOBoleto;
+import br.com.woboleto.model.EOBoleto;
 
 import com.webobjects.eoaccess.EOUtilities;
 import com.webobjects.eocontrol.EOEditingContext;

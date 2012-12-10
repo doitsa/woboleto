@@ -17,10 +17,10 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import br.com.doit.pontofrio.model.Invoice;
-import br.com.wobr.boleto.model.BancoEnum;
-import br.com.wobr.boleto.model.EOBoleto;
-import br.com.wobr.boleto.model.EOInstrucao;
-import br.com.wobr.boleto.model.EOLocalPagamento;
+import br.com.woboleto.model.BancoEnum;
+import br.com.woboleto.model.EOBoleto;
+import br.com.woboleto.model.EOInstrucao;
+import br.com.woboleto.model.EOLocalPagamento;
 
 import com.webobjects.eocontrol.EOEditingContext;
 import com.webobjects.foundation.NSTimestamp;
