@@ -24,6 +24,7 @@
 	<modules>
 		<module>boleto-service</module>
 		<module>boleto-client</module>
+		<module>boleto-model</module>
 	</modules>
 	
 	<build>

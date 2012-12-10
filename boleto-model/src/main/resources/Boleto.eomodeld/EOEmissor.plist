@@ -1,0 +1,90 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = agencia; 
+            name = agencia; 
+            prototypeName = intNumber; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = carteira; 
+            name = carteira; 
+            prototypeName = intNumber; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = cedente; 
+            name = cedente; 
+            prototypeName = varchar255; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "codigo_fornecido_pela_agencia"; 
+            name = codigoFornecidoPelaAgencia; 
+            prototypeName = intNumber; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "codigo_operacao"; 
+            name = codigoOperacao; 
+            prototypeName = intNumber; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "conta_corrente"; 
+            name = contaCorrente; 
+            prototypeName = longNumber; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "digito_verificador_agencia"; 
+            name = digitoVerificadorAgencia; 
+            prototypeName = charFlag; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "digito_verificador_conta_corrente"; 
+            name = digitoVerificadorContaCorrente; 
+            prototypeName = charFlag; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "digito_verificador_nosso_numero"; 
+            name = digitoVerificadorNossoNumero; 
+            prototypeName = charFlag; 
+        }, 
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {
+            allowsNull = Y; 
+            columnName = "nosso_numero"; 
+            name = nossoNumero; 
+            prototypeName = longNumber; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "numero_convenio"; 
+            name = numeroConvenio; 
+            prototypeName = longNumber; 
+        }
+    ); 
+    attributesUsedForLocking = (id); 
+    className = "br.com.woboleto.model.EOEmissor"; 
+    classProperties = (
+        agencia, 
+        carteira, 
+        cedente, 
+        codigoFornecidoPelaAgencia, 
+        codigoOperacao, 
+        contaCorrente, 
+        digitoVerificadorAgencia, 
+        digitoVerificadorContaCorrente, 
+        digitoVerificadorNossoNumero, 
+        nossoNumero, 
+        numeroConvenio
+    ); 
+    externalName = "boleto_emissor"; 
+    fetchSpecificationDictionary = {}; 
+    name = EOEmissor; 
+    primaryKeyAttributes = (id); 
+}

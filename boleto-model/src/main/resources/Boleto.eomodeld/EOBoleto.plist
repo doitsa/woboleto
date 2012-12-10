@@ -1,0 +1,143 @@
+{
+    attributes = (
+        {allowsNull = N; columnName = aceite; name = aceite; prototypeName = flag; }, 
+        {
+            allowsNull = Y; 
+            columnName = banco; 
+            name = banco; 
+            prototypeName = javaEnum; 
+            valueClassName = "br.com.woboleto.model.BancoEnum"; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "data_documento"; 
+            name = dataDocumento; 
+            prototypeName = date; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "data_processamento"; 
+            name = dataProcessamento; 
+            prototypeName = date; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "data_vencimento"; 
+            name = dataVencimento; 
+            prototypeName = date; 
+        }, 
+        {
+            allowsNull = N; 
+            columnName = "emissor_id"; 
+            name = emissorId; 
+            prototypeName = id; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "especie_documento"; 
+            name = especieDocumento; 
+            prototypeName = varchar16; 
+        }, 
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {
+            allowsNull = Y; 
+            columnName = "numero_documento"; 
+            name = numeroDocumento; 
+            prototypeName = varchar16; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "quantidade_moeda"; 
+            name = quantidadeMoeda; 
+            precision = 30; 
+            prototypeName = amount; 
+        }, 
+        {
+            allowsNull = N; 
+            columnName = "sacado_id"; 
+            name = sacadoId; 
+            prototypeName = id; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = valor; 
+            name = valor; 
+            precision = 30; 
+            prototypeName = amount; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "valor_moeda"; 
+            name = valorMoeda; 
+            precision = 30; 
+            prototypeName = amount; 
+        }
+    ); 
+    attributesUsedForLocking = (emissorId, id, sacadoId); 
+    className = "br.com.woboleto.model.EOBoleto"; 
+    classProperties = (
+        aceite, 
+        banco, 
+        dataDocumento, 
+        dataProcessamento, 
+        dataVencimento, 
+        descricoes, 
+        emissor, 
+        especieDocumento, 
+        instrucoes, 
+        locaisPagamento, 
+        numeroDocumento, 
+        quantidadeMoeda, 
+        sacado, 
+        valor, 
+        valorMoeda
+    ); 
+    externalName = boleto; 
+    fetchSpecificationDictionary = {}; 
+    name = EOBoleto; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            deleteRule = EODeleteRuleCascade; 
+            destination = EODescricao; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = boletoId; sourceAttribute = id; }); 
+            name = descricoes; 
+        }, 
+        {
+            deleteRule = EODeleteRuleCascade; 
+            destination = EOEmissor; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = emissorId; }); 
+            name = emissor; 
+        }, 
+        {
+            deleteRule = EODeleteRuleCascade; 
+            destination = EOInstrucao; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = boletoId; sourceAttribute = id; }); 
+            name = instrucoes; 
+        }, 
+        {
+            deleteRule = EODeleteRuleCascade; 
+            destination = EOLocalPagamento; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = boletoId; sourceAttribute = id; }); 
+            name = locaisPagamento; 
+        }, 
+        {
+            deleteRule = EODeleteRuleCascade; 
+            destination = EOSacado; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = sacadoId; }); 
+            name = sacado; 
+        }
+    ); 
+}

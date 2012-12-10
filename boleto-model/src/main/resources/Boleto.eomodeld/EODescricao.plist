@@ -1,0 +1,27 @@
+{
+    attributes = (
+        {
+            allowsNull = N; 
+            columnName = "boleto_id"; 
+            name = boletoId; 
+            prototypeName = id; 
+        }, 
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {allowsNull = N; columnName = tipo; name = tipo; prototypeName = charFlag; }, 
+        {
+            allowsNull = N; 
+            columnName = valor; 
+            name = valor; 
+            prototypeName = varchar255; 
+        }
+    ); 
+    attributesUsedForLocking = (boletoId, id); 
+    className = "br.com.woboleto.model.EODescricao"; 
+    classProperties = (tipo, valor); 
+    externalName = "boleto_informacao"; 
+    fetchSpecificationDictionary = {}; 
+    name = EODescricao; 
+    parent = AbstractInformacao; 
+    primaryKeyAttributes = (id); 
+    restrictingQualifier = "tipo = '1'"; 
+}
