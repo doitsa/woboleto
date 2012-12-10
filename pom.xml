@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -6,29 +7,200 @@
 		<artifactId>doit-parent</artifactId>
 		<version>1.2.3</version>
 	</parent>
-
-	<groupId>br.com.doit.pontofrio</groupId>
-	<artifactId>ponto-frio-boleto</artifactId>
+	
+	<groupId>br.com.doit</groupId>
+	<artifactId>woboleto</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>Ponto Frio Boleto</name>
-	<description>Integra\u00e7\u00e3o para gera\u00e7\u00e3o de boletos para a loja virtual do Ponto Frio.</description>
-
+	<name>WOBoleto</name>
+	<description>Integra\u00e7\u00e3o para gera\u00e7\u00e3o de boletos.</description>
+	
+	<properties>
+		<webobjects.version>5.4.3</webobjects.version>
+		<wonder.version>5.7.1</wonder.version>
+		<jersey.version>1.1.5.1</jersey.version>
+	</properties>
+	
 	<modules>
 		<module>boleto-service</module>
 		<module>boleto-client</module>
 	</modules>
-
+	
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
+					<source>1.6</source>
+					<target>1.6</target>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>enforce-banned-dependencies</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<bannedDependencies>
+									<excludes>
+										<exclude>com.webobjects:JavaXML</exclude>
+									</excludes>
+								</bannedDependencies>
+							</rules>
+							<fail>true</fail>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
+	
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>wonder.core</groupId>
+				<artifactId>ERExtensions</artifactId>
+				<version>${wonder.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>com.webobjects</groupId>
+						<artifactId>JavaXML</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>wonder.core</groupId>
+				<artifactId>ERPrototypes</artifactId>
+				<version>${wonder.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>wonder.core</groupId>
+				<artifactId>WOOgnl</artifactId>
+				<version>${wonder.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>wonder.core</groupId>
+				<artifactId>ERServlet</artifactId>
+				<version>1.0</version>
+			</dependency>
+			<dependency>
+				<groupId>com.webobjects</groupId>
+				<artifactId>JavaWebObjects</artifactId>
+				<version>${webobjects.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>com.webobjects</groupId>
+						<artifactId>JavaXML</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>com.webobjects</groupId>
+				<artifactId>JavaEOAccess</artifactId>
+				<version>${webobjects.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.webobjects</groupId>
+				<artifactId>JavaEOControl</artifactId>
+				<version>${webobjects.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.webobjects</groupId>
+				<artifactId>JavaFoundation</artifactId>
+				<version>${webobjects.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.webobjects</groupId>
+				<artifactId>JavaJDBCAdaptor</artifactId>
+				<version>${webobjects.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.webobjects</groupId>
+				<artifactId>JavaWOJSPServlet</artifactId>
+				<version>${webobjects.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>boleto-model</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>br.com.wobr</groupId>
+				<artifactId>wobr-base</artifactId>
+				<version>0.2-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.ws.rs</groupId>
+				<artifactId>jsr311-api</artifactId>
+				<version>1.1</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sun.jersey</groupId>
+				<artifactId>jersey-core</artifactId>
+				<version>${jersey.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sun.jersey</groupId>
+				<artifactId>jersey-client</artifactId>
+				<version>${jersey.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sun.jersey</groupId>
+				<artifactId>jersey-server</artifactId>
+				<version>${jersey.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.thoughtworks.xstream</groupId>
+				<artifactId>xstream</artifactId>
+				<version>1.3.1</version>
+			</dependency>
+			<dependency>
+				<groupId>br.com.caelum.stella</groupId>
+				<artifactId>caelum-stella-boleto</artifactId>
+				<version>2.0-beta2-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-codec</groupId>
+				<artifactId>commons-codec</artifactId>
+				<version>1.4</version>
+			</dependency>
+			<!-- Deveria colocar essa dependencia em um profile -->
+			<dependency>
+				<groupId>org.apache.derby</groupId>
+				<artifactId>derby</artifactId>
+				<version>10.5.3.0_1</version>
+			</dependency>
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>1.2.14</version>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit-dep</artifactId>
+				<version>4.8.2</version>
+			</dependency>
+			<dependency>
+				<groupId>joda-time</groupId>
+				<artifactId>joda-time</artifactId>
+				<version>1.6</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-core</artifactId>
+				<version>1.9.5</version>
+			</dependency>
+			<dependency>
+				<groupId>com.wounit</groupId>
+				<artifactId>wounit</artifactId>
+				<version>1.2.1</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>

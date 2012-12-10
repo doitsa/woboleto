@@ -1,22 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
+	
 	<parent>
-		<artifactId>ponto-frio-boleto</artifactId>
-		<groupId>br.com.doit.pontofrio</groupId>
+		<artifactId>woboleto</artifactId>
+		<groupId>br.com.doit</groupId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-
+	
 	<artifactId>boleto-service</artifactId>
 	<packaging>war</packaging>
 	<name>Boleto Service</name>
-
-	<properties>
-		<wonder.version>5.4.2</wonder.version>
-		<webobjects.version>5.4.3</webobjects.version>
-	</properties>
-
+	
 	<build>
 		<resources>
 			<resource>
@@ -30,8 +25,7 @@
 			</resource>
 			<resource>
 				<targetPath>WebServerResources</targetPath>
-				<directory>${basedir}/src/main/webserver-resources
-				</directory>
+				<directory>${basedir}/src/main/webserver-resources</directory>
 			</resource>
 		</resources>
 		<testResources>
@@ -52,162 +46,98 @@
 				<artifactId>maven-jetty-plugin</artifactId>
 				<version>6.1.19</version>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-enforcer-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>enforce-banned-dependencies</id>
-						<goals>
-							<goal>enforce</goal>
-						</goals>
-						<configuration>
-							<rules>
-								<bannedDependencies>
-									<excludes>
-										<exclude>com.webobjects:JavaXML</exclude>
-									</excludes>
-								</bannedDependencies>
-							</rules>
-							<fail>true</fail>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 		</plugins>
 	</build>
-
+	
 	<dependencies>
 		<dependency>
 			<groupId>wonder.core</groupId>
 			<artifactId>ERExtensions</artifactId>
-			<version>${wonder.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>com.webobjects</groupId>
-					<artifactId>JavaXML</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>wonder.core</groupId>
 			<artifactId>ERServlet</artifactId>
-			<version>1.0</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>wonder.core</groupId>
 			<artifactId>WOOgnl</artifactId>
-			<version>${wonder.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>wonder.core</groupId>
 			<artifactId>ERPrototypes</artifactId>
-			<version>${wonder.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.webobjects</groupId>
 			<artifactId>JavaWebObjects</artifactId>
-			<version>${webobjects.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>com.webobjects</groupId>
-					<artifactId>JavaXML</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>com.webobjects</groupId>
 			<artifactId>JavaEOAccess</artifactId>
-			<version>${webobjects.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.webobjects</groupId>
 			<artifactId>JavaEOControl</artifactId>
-			<version>${webobjects.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.webobjects</groupId>
 			<artifactId>JavaWOJSPServlet</artifactId>
-			<version>${webobjects.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.webobjects</groupId>
 			<artifactId>JavaFoundation</artifactId>
-			<version>${webobjects.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-server</artifactId>
-			<version>1.1.5.1</version>
 		</dependency>
 		<dependency>
-			<groupId>br.com.wobr</groupId>
-			<artifactId>wobr-boleto</artifactId>
-			<version>1.0-SNAPSHOT</version>
-			<exclusions>
-				<exclusion>
-					<groupId>wonder.core</groupId>
-					<artifactId>ERExtensions</artifactId>
-				</exclusion>
-				<exclusion>
-					<artifactId>JavaXML</artifactId>
-					<groupId>com.webobjects</groupId>
-				</exclusion>
-			</exclusions>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>boleto-model</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>br.com.wobr</groupId>
 			<artifactId>wobr-base</artifactId>
-			<version>0.2-SNAPSHOT</version>
 			<scope>runtime</scope>
 		</dependency>
 		<!-- Deveria colocar essa dependencia em um profile -->
 		<dependency>
 			<groupId>org.apache.derby</groupId>
 			<artifactId>derby</artifactId>
-			<version>10.5.3.0_1</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>br.com.caelum.stella</groupId>
 			<artifactId>caelum-stella-boleto</artifactId>
-			<version>1.2</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.ws.rs</groupId>
 			<artifactId>jsr311-api</artifactId>
-			<version>1.1</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
-			<version>1.4</version>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<version>1.2.14</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.8.2</version>
+			<artifactId>junit-dep</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.wounit</groupId>
 			<artifactId>wounit</artifactId>
-			<version>1.1.1</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
-			<version>1.8.2</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
