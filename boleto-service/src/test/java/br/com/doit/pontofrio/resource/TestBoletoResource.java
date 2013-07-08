@@ -3,6 +3,8 @@ package br.com.doit.pontofrio.resource;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
@@ -14,7 +16,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import br.com.caelum.stella.boleto.Boleto;
-import br.com.caelum.stella.boleto.transformer.BoletoGenerator;
+import br.com.caelum.stella.boleto.transformer.GeradorDeBoleto;
 import br.com.doit.pontofrio.model.Invoice;
 import br.com.woboleto.model.EOBoleto;
 
@@ -71,15 +73,14 @@ public class TestBoletoResource {
 	public void generateBoletoIfValidationKeyIsCorrect() throws Exception {
 		resource = Mockito.spy(resource);
 
-		BoletoGenerator mockBoletoGenerator = Mockito
-				.mock(BoletoGenerator.class);
+		GeradorDeBoleto mockBoletoGenerator = mock(GeradorDeBoleto.class);
 
-		Mockito.doReturn(mockBoletoGenerator).when(resource)
-				.createBoletoGenerator(Mockito.any(Boleto.class));
+		doReturn(mockBoletoGenerator).when(resource).createBoletoGenerator(
+				Mockito.any(Boleto.class));
 
 		resource.boletoAsPng("1234", "xxx");
 
-		Mockito.verify(mockBoletoGenerator, Mockito.times(1)).toPNG();
+		Mockito.verify(mockBoletoGenerator, Mockito.times(1)).geraPNG();
 	}
 
 	@Before

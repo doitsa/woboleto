@@ -16,7 +16,7 @@ import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
 import br.com.caelum.stella.boleto.Boleto;
-import br.com.caelum.stella.boleto.transformer.BoletoGenerator;
+import br.com.caelum.stella.boleto.transformer.GeradorDeBoleto;
 import br.com.doit.pontofrio.model.Invoice;
 import br.com.doit.pontofrio.model.Voucher;
 
@@ -64,9 +64,9 @@ public class BoletoResource
 
 		Boleto boleto = invoice.boleto().toStellaBoleto();
 
-		BoletoGenerator gerador = createBoletoGenerator(boleto);
+		GeradorDeBoleto gerador = createBoletoGenerator(boleto);
 
-		return gerador.toPNG();
+		return gerador.geraPNG();
 	}
 
 	@GET
@@ -96,9 +96,9 @@ public class BoletoResource
 		return Response.ok(buffer.toString(), MediaType.TEXT_XML_TYPE).build();
 	}
 
-	BoletoGenerator createBoletoGenerator(Boleto boleto)
+	GeradorDeBoleto createBoletoGenerator(Boleto boleto)
 	{
-		return new BoletoGenerator(boleto);
+		return new GeradorDeBoleto(boleto);
 	}
 
 	private Invoice fetchIvoice(final String orderId)

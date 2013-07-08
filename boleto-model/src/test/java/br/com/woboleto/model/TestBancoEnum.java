@@ -16,39 +16,37 @@ import br.com.caelum.stella.boleto.bancos.BancoDoBrasil;
 import br.com.caelum.stella.boleto.bancos.Bradesco;
 import br.com.caelum.stella.boleto.bancos.Caixa;
 import br.com.caelum.stella.boleto.bancos.Itau;
-import br.com.caelum.stella.boleto.bancos.Real;
-import br.com.woboleto.model.BancoEnum;
 
-@RunWith( Parameterized.class )
-public class TestBancoEnum
-{
+@RunWith(Parameterized.class)
+public class TestBancoEnum {
 	@Parameters
-	public static List<Object[]> bancos()
-	{
-		Object[][] data = new Object[][] { { BancoEnum.BANCO_DO_BRASIL, BancoDoBrasil.class }, { BancoEnum.BRADESCO, Bradesco.class }, { BancoEnum.CAIXA_ECONOMICA, Caixa.class }, { BancoEnum.ITAU, Itau.class }, { BancoEnum.REAL, Real.class } };
+	public static List<Object[]> bancos() {
+		Object[][] data = new Object[][] {
+				{ BancoEnum.BANCO_DO_BRASIL, BancoDoBrasil.class },
+				{ BancoEnum.BRADESCO, Bradesco.class },
+				{ BancoEnum.CAIXA_ECONOMICA, Caixa.class },
+				{ BancoEnum.ITAU, Itau.class } };
 
-		return Arrays.asList( data );
+		return Arrays.asList(data);
 	}
 
 	private final BancoEnum banco;
 
 	private final Class<? extends Banco> classeBanco;
 
-	public TestBancoEnum( final BancoEnum banco, final Class<? extends Banco> classeBanco )
-	{
+	public TestBancoEnum(final BancoEnum banco,
+			final Class<? extends Banco> classeBanco) {
 		this.banco = banco;
 		this.classeBanco = classeBanco;
 	}
 
 	@Test
-	public void converteParaStellaBanco() throws Exception
-	{
-		assertThat( banco.toStellaBanco(), instanceOf( classeBanco ) );
+	public void converteParaStellaBanco() throws Exception {
+		assertThat(banco.toStellaBanco(), instanceOf(classeBanco));
 	}
 
-	@Test( expected = UnsupportedOperationException.class )
-	public void excecaoSeBancoNaoImplementadoPeloStella() throws Exception
-	{
+	@Test(expected = UnsupportedOperationException.class)
+	public void excecaoSeBancoNaoImplementadoPeloStella() throws Exception {
 		BancoEnum.OUTRO.toStellaBanco();
 	}
 }

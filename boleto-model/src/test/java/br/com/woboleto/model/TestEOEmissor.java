@@ -48,7 +48,7 @@ public class TestEOEmissor
 		assertThat( result.getContaCorrente(), is( 45678L ) );
 		assertThat( result.getDigitoAgencia(), is( '6' ) );
 		assertThat( result.getDigitoContaCorrente(), is( '7' ) );
-		assertThat( result.getDigitoNossoNumero(), is( '8' ) );
+		assertThat( result.getDigitoNossoNumero(), is( "8" ) );
 		assertThat( result.getNossoNumero(), is( 22222L ) );
 		assertThat( result.getNumeroConvenio(), is( 33333L ) );
 	}

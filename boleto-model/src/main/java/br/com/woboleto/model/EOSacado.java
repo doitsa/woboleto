@@ -9,15 +9,15 @@ public class EOSacado extends _EOSacado
 {
 	public Sacado toStellaSacado()
 	{
-		Sacado sacado = Sacado.newSacado();
+		Sacado sacado = Sacado.novoSacado();
 
-		sacado.withBairro( bairro() );
-		sacado.withCep( cep() );
-		sacado.withCidade( cidade() );
-		sacado.withCpf( cpf() );
-		sacado.withEndereco( endereco() );
-		sacado.withNome( nome() );
-		sacado.withUf( uf() );
+		sacado.comBairro( bairro() );
+		sacado.comCep( cep() );
+		sacado.comCidade( cidade() );
+		sacado.comCpf( cpf() );
+		sacado.comEndereco( endereco() );
+		sacado.comNome( nome() );
+		sacado.comUf( uf() );
 
 		return sacado;
 	}

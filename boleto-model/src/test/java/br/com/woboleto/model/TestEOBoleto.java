@@ -165,7 +165,7 @@ public class TestEOBoleto {
 
 	@Test
 	public void naoSetaValoresQueEstaoNulos() throws Exception {
-		Boleto boletoEsperado = Boleto.newBoleto();
+		Boleto boletoEsperado = Boleto.novoBoleto();
 
 		Boleto resultado = boleto.toStellaBoleto();
 
@@ -178,7 +178,8 @@ public class TestEOBoleto {
 				is(boletoEsperado.getEspecieMoeda()));
 		assertThat(resultado.getNumeroDoDocumento(),
 				is(boletoEsperado.getNumeroDoDocumento()));
-		assertThat(resultado.getQuantidadeDeMoeda(), is(boletoEsperado.getQuantidadeDeMoeda()));
+		assertThat(resultado.getQuantidadeDeMoeda(),
+				is(boletoEsperado.getQuantidadeDeMoeda()));
 		assertThat(resultado.getValorBoleto(),
 				is(boletoEsperado.getValorBoleto()));
 		assertThat(resultado.getValorFormatado(),

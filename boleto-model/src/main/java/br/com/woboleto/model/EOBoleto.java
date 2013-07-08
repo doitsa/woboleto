@@ -63,65 +63,65 @@ public class EOBoleto extends _EOBoleto
 
 	public Boleto toStellaBoleto()
 	{
-		Boleto boleto = Boleto.newBoleto();
+		Boleto boleto = Boleto.novoBoleto();
 
-		Datas datas = Datas.newDatas();
+		Datas datas = Datas.novasDatas();
 
 		if(dataDocumento() != null)
 		{
-			datas.withDocumento(convertDate(dataDocumento()));
+			datas.comDocumento(convertDate(dataDocumento()));
 		}
 
 		if(dataProcessamento() != null)
 		{
-			datas.withProcessamento(convertDate(dataProcessamento()));
+			datas.comProcessamento(convertDate(dataProcessamento()));
 		}
 
 		if(dataVencimento() != null)
 		{
-			datas.withVencimento(convertDate(dataVencimento()));
+			datas.comVencimento(convertDate(dataVencimento()));
 		}
 
-		boleto.withDatas(datas);
-		boleto.withEmissor(emissor().toStellaEmissor());
-		boleto.withSacado(sacado().toStellaSacado());
-		boleto.withDescricoes(stringArrayDe(descricoes()));
-		boleto.withInstrucoes(stringArrayDe(instrucoes()));
-		boleto.withLocaisDePagamento(stringArrayDe(locaisPagamento()));
+		boleto.comDatas(datas);
+		boleto.comEmissor(emissor().toStellaEmissor());
+		boleto.comSacado(sacado().toStellaSacado());
+		boleto.comDescricoes(stringArrayDe(descricoes()));
+		boleto.comInstrucoes(stringArrayDe(instrucoes()));
+		boleto.comLocaisDePagamento(stringArrayDe(locaisPagamento()));
 
 		if(aceite() != null)
 		{
-			boleto.withAceite(aceite());
+			boleto.comAceite(aceite());
 		}
 
 		if(especieDocumento() != null)
 		{
-			boleto.withEspecieDocumento(especieDocumento());
+			boleto.comEspecieDocumento(especieDocumento());
 		}
 
 		if(numeroDocumento() != null)
 		{
-			boleto.withNumeroDoDocumento(numeroDocumento());
+			boleto.comNumeroDoDocumento(numeroDocumento());
 		}
 
 		if(quantidadeMoeda() != null)
 		{
-			boleto.withQuantidadeMoeda(quantidadeMoeda());
+			boleto.comQuantidadeMoeda(quantidadeMoeda());
 		}
 
 		if(valor() != null)
 		{
-			boleto.withValorBoleto(valor());
+			boleto.comValorBoleto(valor());
 		}
 
 		if(valorMoeda() != null)
 		{
-			boleto.withValorMoeda(valorMoeda());
+			boleto.comValorMoeda(valorMoeda());
 		}
 
 		if(banco() != null)
 		{
-			boleto.withBanco(banco().toStellaBanco());
+			boleto.comBanco(banco().toStellaBanco());
 		}
 
 		return boleto;

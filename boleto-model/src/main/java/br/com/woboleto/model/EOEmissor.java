@@ -9,61 +9,61 @@ public class EOEmissor extends _EOEmissor
 {
 	public Emissor toStellaEmissor()
 	{
-		Emissor emissor = Emissor.newEmissor();
+		Emissor emissor = Emissor.novoEmissor();
 
 		if(agencia() != null)
 		{
-			emissor.withAgencia(agencia());
+			emissor.comAgencia(agencia());
 		}
 
 		if(carteira() != null)
 		{
-			emissor.withCarteira(carteira());
+			emissor.comCarteira(carteira());
 		}
 
 		if(cedente() != null)
 		{
-			emissor.withCedente(cedente());
+			emissor.comCedente(cedente());
 		}
 
 		if(codigoFornecidoPelaAgencia() != null)
 		{
-			emissor.withCodigoFornecidoPelaAgencia(codigoFornecidoPelaAgencia());
+			emissor.comCodigoFornecidoPelaAgencia(codigoFornecidoPelaAgencia());
 		}
 
 		if(codigoOperacao() != null)
 		{
-			emissor.withCodigoOperacao(codigoOperacao());
+			emissor.comCodigoOperacao(codigoOperacao());
 		}
 
 		if(contaCorrente() != null)
 		{
-			emissor.withContaCorrente(contaCorrente());
+			emissor.comContaCorrente(contaCorrente());
 		}
 
 		if(digitoVerificadorAgencia() != null)
 		{
-			emissor.withDigitoAgencia(digitoVerificadorAgencia().charAt(0));
+			emissor.comDigitoAgencia(digitoVerificadorAgencia().charAt(0));
 		}
 
 		if(digitoVerificadorContaCorrente() != null)
 		{
-			emissor.withDigitoContaCorrente(digitoVerificadorContaCorrente().charAt(0));
+			emissor.comDigitoContaCorrente(digitoVerificadorContaCorrente().charAt(0));
 		}
 
 		if(digitoVerificadorNossoNumero() != null)
 		{
-			emissor.withDigitoNossoNumero(digitoVerificadorNossoNumero().charAt(0));
+			emissor.comDigitoNossoNumero(digitoVerificadorNossoNumero());
 		}
 
 		if(nossoNumero() != null)
 		{
-			emissor.withNossoNumero(nossoNumero());
+			emissor.comNossoNumero(nossoNumero());
 		}
 
 		if(numeroConvenio() != null)
 		{
-			emissor.withNumeroConvenio(numeroConvenio());
+			emissor.comNumeroConvenio(numeroConvenio());
 		}
 
 		return emissor;
