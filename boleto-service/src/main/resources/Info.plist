@@ -44,6 +44,6 @@
 	<key>NSJavaRoot</key>
 	<string>Resources/Java</string>
 	<key>NSPrincipalClass</key>
-	<string>br.com.doit.pontofrio.app.Application</string>
+	<string>br.com.doit.boleto.app.Application</string>
 </dict>
 </plist>

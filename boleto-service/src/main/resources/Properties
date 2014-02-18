@@ -12,6 +12,13 @@ java.awt.headless=true
 #NSDebugGroup= NSLog.DebugGroupDeployment
 #NSDebugGroup= NSLog.DebugGroupWebObjects
 
+# Database Connection Configuration
+dbConnectUserGLOBAL=postgres
+dbConnectPasswordGLOBAL=p3pp3R
+dbConnectPluginGLOBAL=PostgresqlPlugIn
+dbConnectDriverGLOBAL=org.postgresql.Driver
+dbEOPrototypesEntityGLOBAL=EOJDBCPostgresqlPrototypes
+dbConnectURLGLOBAL=jdbc:postgresql://localhost/woboleto
 
 WOAutoOpenInBrowser=true
 #WOAutoOpenClientApplication=true
@@ -49,9 +56,6 @@ er.extensions.ERXEnterpriseObject.updateInverseRelationships=true
 #========================================================================
 er.migration.migrateAtStartup=true
 er.migration.createTablesIfNecessary=true
-er.migration.modelNames=Store
-
-Store.MigrationClassPrefix=br.com.doit.pontofrio.migrations.Store
 
 #========================================================================
 # Misc Components
