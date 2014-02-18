@@ -5,13 +5,14 @@ import br.com.caelum.stella.boleto.bancos.BancoDoBrasil;
 import br.com.caelum.stella.boleto.bancos.Bradesco;
 import br.com.caelum.stella.boleto.bancos.Caixa;
 import br.com.caelum.stella.boleto.bancos.Itau;
+import br.com.caelum.stella.boleto.bancos.Santander;
 
 /**
  * @author <a href="mailto:hprange@gmail.com">Henrique Prange</a>
  */
 public enum BancoEnum
 {
-	BANCO_DO_BRASIL( new BancoDoBrasil() ), BRADESCO( new Bradesco() ), CAIXA_ECONOMICA( new Caixa() ), ITAU( new Itau() ), OUTRO( null );
+	BANCO_DO_BRASIL( new BancoDoBrasil() ), BRADESCO( new Bradesco() ), CAIXA_ECONOMICA( new Caixa() ), ITAU( new Itau() ), SANTANDER( new Santander() ), OUTRO( null );
 
 	private final Banco banco;
 
