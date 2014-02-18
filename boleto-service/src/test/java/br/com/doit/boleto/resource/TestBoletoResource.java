@@ -6,9 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.ByteArrayInputStream;
-import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -18,6 +16,7 @@ import javax.ws.rs.core.Response;
 import org.apache.commons.io.IOUtils;
 import org.joda.time.DateTime;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -80,22 +79,26 @@ public class TestBoletoResource {
 		}
 	}
 
-	/*
-	 * @Test public void throwsExceptionWhenBoletoDoesNotExist() throws
-	 * Exception { try { resource.gerarBoletoPDF(null);
-	 * fail("Deveria ter dado uma exceção"); } catch (WebApplicationException
-	 * exception) { assertThat(exception.getResponse().getStatus(), is(404));
-	 * assertThat(exception.getCause().getMessage(),
-	 * is("Não há boleto com o ID informado")); } }
-	 */
+	@Test
+	public void throwsExceptionWhenBoletoDoesNotExist() throws Exception {
+		try {
+			resource.gerarBoletoPDF(null);
+			fail("Deveria ter dado uma exceção");
+		} catch (WebApplicationException exception) {
+			assertThat(exception.getResponse().getStatus(), is(404));
+			assertThat(exception.getCause().getMessage(),
+					is("Não há boleto com o ID informado"));
+		}
+	}
 
 	@Test
 	public void returnBoletoPNGWhenOrderIsValid() throws Exception {
-		byte[] resultado = resource.gerarBoletoPNG(123);  
-		
-		OutputStream out = new FileOutputStream("/Users/rdskill/Documents/workspace/woboleto/boleto-service/src/test/resources/boleto.png");  
-		out.write(resultado);  
-		out.close();
+		byte[] resultado = resource.gerarBoletoPNG(123);
+
+		// OutputStream out = new
+		// FileOutputStream("/Users/rdskill/Documents/workspace/woboleto/boleto-service/src/test/resources/boleto.png");
+
+		// IOUtils.write(resultado, out);
 
 		InputStream expectedInput = getClass().getResourceAsStream(
 				"/boleto.png");
@@ -106,12 +109,9 @@ public class TestBoletoResource {
 	}
 
 	@Test
+	@Ignore("Ignora esse teste pois não é possível gerar um PDF idêntico a cada execução dos testes")
 	public void returnBoletoPDFWhenOrderIsValid() throws Exception {
 		byte[] resultado = resource.gerarBoletoPDF(123);
-		
-		OutputStream out = new FileOutputStream("/Users/rdskill/Documents/workspace/woboleto/boleto-service/src/test/resources/boleto.pdf");  
-		out.write(resultado);  
-		out.close();
 
 		InputStream expectedInput = getClass().getResourceAsStream(
 				"/boleto.pdf");
@@ -130,10 +130,10 @@ public class TestBoletoResource {
 		eoEmissor.setContaCorrente(3903125L);
 		eoEmissor.setCarteira(102);
 		eoEmissor.setNossoNumero(3827130004722L);
-		
-		DateTime dataDoc = new DateTime(2014,2,1,0,0,0,0);
-		DateTime dataVenc = new DateTime(2014,2,10,0,0,0,0);
-		
+
+		DateTime dataDoc = new DateTime(2014, 2, 1, 0, 0, 0, 0);
+		DateTime dataVenc = new DateTime(2014, 2, 10, 0, 0, 0, 0);
+
 		Date dataDocumentoDate = dataDoc.toDate();
 		Date dataVencimentoDate = dataVenc.toDate();
 

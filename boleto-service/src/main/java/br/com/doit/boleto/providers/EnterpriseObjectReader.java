@@ -49,17 +49,14 @@ public class EnterpriseObjectReader<T extends EOEnterpriseObject> implements
 	}
 
 	@Override
-	public boolean isReadable(Class<?> arg0, Type arg1, Annotation[] arg2,
-			MediaType arg3) {
-		// TODO Auto-generated method stub
-		
-		// Se for um EOEnterpriseObject retorna true
-		return false;
+	public boolean isReadable(Class<?> clazz, Type type, Annotation[] annotations,
+			MediaType mediaType) {
+		return mediaType == MediaType.APPLICATION_JSON_TYPE && EOEnterpriseObject.class.isAssignableFrom(clazz);
 	}
 
 	@Override
-	public T readFrom(Class<T> clazz, Type arg1, Annotation[] arg2,
-			MediaType arg3, MultivaluedMap<String, String> map,
+	public T readFrom(Class<T> clazz, Type type, Annotation[] annotations,
+			MediaType mediaType, MultivaluedMap<String, String> map,
 			InputStream input) throws IOException, WebApplicationException {
 		ObjectMapper mapper = new ObjectMapper();
 

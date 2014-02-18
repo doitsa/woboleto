@@ -4,9 +4,12 @@ import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertThat;
 
 import java.math.BigDecimal;
+
+import javax.ws.rs.core.MediaType;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -23,6 +26,11 @@ import com.wounit.rules.MockEditingContext;
 import er.extensions.eof.ERXEC;
 import er.extensions.eof.ERXEC.Factory;
 
+/**
+ * TODO: retorna false se MediaType diferente de JSON
+ * 
+ * @author rdskill
+ */
 public class TestEnterpriseObjectReader {
 
 	@Rule
@@ -37,6 +45,32 @@ public class TestEnterpriseObjectReader {
 		assertThat(result, notNullValue());
 		assertThat(result, instanceOf(EOBoleto.class));
 		assertThat(editingContext.insertedObjects(), hasItem(result));
+	}
+
+	@Test
+	public void objectIsReadableWhenObjectTypeIsEnterpriseObjectAndMediaTypeJSON()
+			throws Exception {
+		boolean result = reader.isReadable(EOBoleto.class, null, null,
+				MediaType.APPLICATION_JSON_TYPE);
+
+		assertThat(result, is(true));
+	}
+
+	@Test
+	public void objectIsNotReadableWhenTypeIsNotAnEnterpriseObject()
+			throws Exception {
+		boolean result = reader.isReadable(String.class, null, null,
+				MediaType.APPLICATION_JSON_TYPE);
+
+		assertThat(result, is(false));
+	}
+	
+	@Test
+	public void objectIsNotReadableWhenMediaTypeIsNotJSON() throws Exception {
+		boolean result = reader.isReadable(EOBoleto.class, null, null,
+				MediaType.APPLICATION_XML_TYPE);
+
+		assertThat(result, is(false));
 	}
 
 	@Test
@@ -55,7 +89,7 @@ public class TestEnterpriseObjectReader {
 
 		assertThat(result.banco(), is(BancoEnum.ITAU));
 	}
-	
+
 	@Test
 	public void setBigDecimalFieldWhenParsingJson() throws Exception {
 		EOBoleto result = reader.readFrom(EOBoleto.class, null, null, null,
@@ -73,7 +107,7 @@ public class TestEnterpriseObjectReader {
 		assertThat(result.emissor().agencia(), is(1));
 		assertThat(editingContext.insertedObjects(), hasItem(result.emissor()));
 	}
-	
+
 	@Test
 	public void setToManyRelationshipWhenParsingJson() throws Exception {
 		EOBoleto result = reader.readFrom(EOBoleto.class, null, null, null,
@@ -133,7 +167,7 @@ public class TestEnterpriseObjectReader {
 				return editingContext;
 			}
 		});
-		
+
 		reader = new EnterpriseObjectReader<EOBoleto>();
 	}
 }
