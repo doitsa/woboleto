@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
 	<parent>
 		<artifactId>woboleto</artifactId>
 		<groupId>br.com.doit</groupId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-	
 	<artifactId>boleto-service</artifactId>
 	<packaging>war</packaging>
 	<name>Boleto Service</name>
-	
 	<build>
 		<resources>
 			<resource>
@@ -32,6 +30,9 @@
 			<testResource>
 				<directory>${basedir}/src/main/resources</directory>
 			</testResource>
+			<testResource>
+				<directory>${basedir}/src/test/resources</directory>
+			</testResource>
 		</testResources>
 		<plugins>
 			<plugin>
@@ -44,11 +45,10 @@
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>maven-jetty-plugin</artifactId>
-				<version>6.1.19</version>
+				<version>6.1.26</version>
 			</plugin>
 		</plugins>
 	</build>
-	
 	<dependencies>
 		<dependency>
 			<groupId>wonder.core</groupId>
@@ -58,6 +58,14 @@
 			<groupId>wonder.core</groupId>
 			<artifactId>ERServlet</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-json-jackson</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-servlet</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>wonder.core</groupId>
@@ -91,7 +99,7 @@
 			<artifactId>JavaFoundation</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.sun.jersey</groupId>
+			<groupId>org.glassfish.jersey.core</groupId>
 			<artifactId>jersey-server</artifactId>
 		</dependency>
 		<dependency>
@@ -127,13 +135,21 @@
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
-			<artifactId>junit-dep</artifactId>
+			<artifactId>junit</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.wounit</groupId>
 			<artifactId>wounit</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
