@@ -11,6 +11,7 @@
 	<packaging>war</packaging>
 	<name>Boleto Service</name>
 	<build>
+		<finalName>${project.artifactId}</finalName>
 		<resources>
 			<resource>
 				<targetPath>Resources</targetPath>
@@ -40,6 +41,7 @@
 				<configuration>
 					<archiveClasses>true</archiveClasses>
 					<filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
+					<outputFileNameMapping>@{artifactId}@.@{extension}@</outputFileNameMapping>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -78,6 +80,11 @@
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
+			<groupId>wonder.plugins</groupId>
+			<artifactId>PostgresqlPlugIn</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
 			<groupId>com.webobjects</groupId>
 			<artifactId>JavaWebObjects</artifactId>
 		</dependency>
@@ -111,10 +118,9 @@
 			<artifactId>wobr-base</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		<!-- Deveria colocar essa dependencia em um profile -->
 		<dependency>
-			<groupId>org.apache.derby</groupId>
-			<artifactId>derby</artifactId>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>

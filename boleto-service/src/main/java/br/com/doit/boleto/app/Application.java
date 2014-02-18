@@ -8,7 +8,8 @@ import com.webobjects.foundation.NSLog;
 
 import er.extensions.appserver.ERXApplication;
 import er.extensions.foundation.ERXPatcher;
-import er.extensions.foundation.ERXProperties;
+import er.extensions.migration.ERXMigration;
+import er.extensions.migration.ERXMigrator;
 
 public class Application extends ERXApplication
 {
@@ -22,11 +23,6 @@ public class Application extends ERXApplication
 		super();
 
 		NSLog.out.appendln( "Welcome to " + name() + " !" );
-
-		ERXProperties.setStringForKey( "jdbc:derby:target/boleto;create=true", "dbConnectURLGLOBAL" );
-		ERXProperties.setStringForKey( "WOBRDerbyPlugIn", "dbConnectPluginGLOBAL" );
-		ERXProperties.setStringForKey( "EOJDBCDerbyPrototypes", "dbEOPrototypesEntityGLOBAL" );
-		ERXProperties.setStringForKey( "org.apache.derby.jdbc.EmbeddedDriver", "dbConnectDriverGLOBAL" );
 	}
 
 	/**
@@ -39,7 +35,7 @@ public class Application extends ERXApplication
 	{
 		return Session.class;
 	}
-
+	
 	/**
 	 * Install patches including ensuring that Main is correctly resolved at
 	 * runtime.

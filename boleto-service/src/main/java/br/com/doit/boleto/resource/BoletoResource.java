@@ -22,7 +22,7 @@ import com.webobjects.eocontrol.EOEditingContext;
 
 import er.extensions.eof.ERXEC;
 
-@Path("/boletos")
+@Path("/boletos/{order_id}")
 public class BoletoResource {
 
 	@POST

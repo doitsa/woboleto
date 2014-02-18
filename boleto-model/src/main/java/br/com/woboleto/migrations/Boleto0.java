@@ -72,6 +72,16 @@ public class Boleto0 extends ERXMigrationDatabase.Migration
 		informacaoTable.newStringColumn("valor", 255, false);
 		informacaoTable.create();
 		informacaoTable.setPrimaryKey("id");
+		
+		ERXMigrationTable eoRequisicaoTable = database.newTableNamed("boleto_eo_requisicao");
+		eoRequisicaoTable.newIntegerColumn("boleto_id", false);
+		eoRequisicaoTable.newIntegerColumn("id", false);
+		eoRequisicaoTable.newIntegerColumn("sequential", false);
+		eoRequisicaoTable.create();
+	 	eoRequisicaoTable.setPrimaryKey("id");
+
+		eoRequisicaoTable.addForeignKey("boleto_id", "boleto", "id");
+
 
 		// boletoTable.addForeignKey( "emissor_id", "boleto_emissor", "id" );
 		// boletoTable.addForeignKey( "sacado_id", "boleto_sacado", "id" );
