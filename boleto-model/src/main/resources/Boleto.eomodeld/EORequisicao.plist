@@ -1,0 +1,30 @@
+{
+    attributes = (
+        {
+            allowsNull = N; 
+            columnName = "boleto_id"; 
+            name = boletoId; 
+            prototypeName = id; 
+        }, 
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {columnName = sequential; name = sequential; prototypeName = id; }
+    ); 
+    attributesUsedForLocking = (boletoId, id); 
+    className = "br.com.woboleto.model.EORequisicao"; 
+    classProperties = (boleto, sequential); 
+    externalName = "boleto_eo_requisicao"; 
+    fetchSpecificationDictionary = {}; 
+    internalInfo = {"_javaClientClassName" = EORequisicao; }; 
+    name = EORequisicao; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            destination = EOBoleto; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = boletoId; }); 
+            name = boleto; 
+        }
+    ); 
+}

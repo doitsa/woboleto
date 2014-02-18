@@ -24,6 +24,7 @@
             name = EOLocalPagamento; 
             parent = AbstractInformacao; 
         }, 
+        {className = "br.com.woboleto.model.EORequisicao"; name = EORequisicao; }, 
         {className = "br.com.woboleto.model.EOSacado"; name = EOSacado; }
     ); 
     userInfo = {
