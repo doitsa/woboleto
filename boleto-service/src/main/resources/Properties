@@ -12,14 +12,6 @@ java.awt.headless=true
 #NSDebugGroup= NSLog.DebugGroupDeployment
 #NSDebugGroup= NSLog.DebugGroupWebObjects
 
-# Database Connection Configuration
-dbConnectUserGLOBAL=postgres
-dbConnectPasswordGLOBAL=p3pp3R
-dbConnectPluginGLOBAL=PostgresqlPlugIn
-dbConnectDriverGLOBAL=org.postgresql.Driver
-dbEOPrototypesEntityGLOBAL=EOJDBCPostgresqlPrototypes
-dbConnectURLGLOBAL=jdbc:postgresql://localhost/woboleto
-
 WOAutoOpenInBrowser=true
 #WOAutoOpenClientApplication=true
 #WOPort=55555
@@ -47,9 +39,14 @@ er.extensions.ERXEC.safeLocking=true
 er.extensions.ERXEC.useSharedEditingContext=false
 er.extensions.ERXEnterpriseObject.applyRestrictingQualifierOnInsert=true
 er.extensions.ERXEnterpriseObject.updateInverseRelationships=true
-#dbConnectURLGLOBAL=
-#dbConnectUserGLOBAL=
-#dbConnectPasswordGLOBAL=
+
+# Database Connection Configuration
+dbConnectUserGLOBAL=postgres
+dbConnectPasswordGLOBAL=p3pp3R
+dbConnectPluginGLOBAL=PostgresqlPlugIn
+dbConnectDriverGLOBAL=org.postgresql.Driver
+dbEOPrototypesEntityGLOBAL=EOJDBCPostgresqlPrototypes
+dbConnectURLGLOBAL=jdbc:postgresql://localhost/woboleto
 
 #========================================================================
 # Migrations

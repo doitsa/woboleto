@@ -8,8 +8,6 @@ import com.webobjects.foundation.NSLog;
 
 import er.extensions.appserver.ERXApplication;
 import er.extensions.foundation.ERXPatcher;
-import er.extensions.migration.ERXMigration;
-import er.extensions.migration.ERXMigrator;
 
 public class Application extends ERXApplication
 {
