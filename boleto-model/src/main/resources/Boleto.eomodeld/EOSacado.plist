@@ -33,7 +33,7 @@
     attributesUsedForLocking = (id); 
     className = "br.com.woboleto.model.EOSacado"; 
     classProperties = (bairro, cep, cidade, cpf, endereco, nome, uf); 
-    externalName = "boleto_sacado"; 
+    externalName = sacado; 
     fetchSpecificationDictionary = {}; 
     name = EOSacado; 
     primaryKeyAttributes = (id); 

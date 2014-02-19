@@ -83,7 +83,7 @@
         nossoNumero, 
         numeroConvenio
     ); 
-    externalName = "boleto_emissor"; 
+    externalName = emissor; 
     fetchSpecificationDictionary = {}; 
     name = EOEmissor; 
     primaryKeyAttributes = (id); 

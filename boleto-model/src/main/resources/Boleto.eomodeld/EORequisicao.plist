@@ -12,7 +12,7 @@
     attributesUsedForLocking = (boletoId, id); 
     className = "br.com.woboleto.model.EORequisicao"; 
     classProperties = (boleto, sequential); 
-    externalName = "boleto_eo_requisicao"; 
+    externalName = requisicao; 
     fetchSpecificationDictionary = {}; 
     internalInfo = {"_javaClientClassName" = EORequisicao; }; 
     name = EORequisicao; 

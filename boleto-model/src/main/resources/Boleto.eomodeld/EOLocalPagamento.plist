@@ -18,7 +18,7 @@
     attributesUsedForLocking = (boletoId, id); 
     className = "br.com.woboleto.model.EOLocalPagamento"; 
     classProperties = (tipo, valor); 
-    externalName = "boleto_informacao"; 
+    externalName = informacao; 
     fetchSpecificationDictionary = {}; 
     name = EOLocalPagamento; 
     parent = AbstractInformacao; 
