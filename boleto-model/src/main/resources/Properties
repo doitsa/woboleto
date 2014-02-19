@@ -1,4 +1,4 @@
 # Migrations
 er.migration.modelNames=Boleto
 
-Boleto.MigrationClassPrefix=br.com.wobr.boleto.migrations.Boleto
+Boleto.MigrationClassPrefix=br.com.woboleto.migrations.Boleto
