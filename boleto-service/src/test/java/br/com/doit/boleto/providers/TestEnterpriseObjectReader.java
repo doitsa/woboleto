@@ -4,13 +4,14 @@ import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertThat;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.ws.rs.core.MediaType;
 
+import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -21,14 +22,13 @@ import br.com.woboleto.model.EOBoleto;
 import com.webobjects.eocontrol.EOEditingContext;
 import com.webobjects.eocontrol.EOEnterpriseObject;
 import com.webobjects.eocontrol.EOObjectStore;
+import com.webobjects.foundation.NSTimestamp;
 import com.wounit.rules.MockEditingContext;
 
 import er.extensions.eof.ERXEC;
 import er.extensions.eof.ERXEC.Factory;
 
 /**
- * TODO: retorna false se MediaType diferente de JSON
- * 
  * @author rdskill
  */
 public class TestEnterpriseObjectReader {
@@ -64,7 +64,7 @@ public class TestEnterpriseObjectReader {
 
 		assertThat(result, is(false));
 	}
-	
+
 	@Test
 	public void objectIsNotReadableWhenMediaTypeIsNotJSON() throws Exception {
 		boolean result = reader.isReadable(EOBoleto.class, null, null,
@@ -83,8 +83,20 @@ public class TestEnterpriseObjectReader {
 	}
 
 	@Test
-	public void setEnumFieldWhenParsingJson() throws Exception {
+	public void setDataFieldWhenParsingJson() throws Exception {
 		EOBoleto result = reader.readFrom(EOBoleto.class, null, null, null,
+				null, getClass().getResourceAsStream("/boleto7.json"));
+		
+		DateTime dataDoc = new DateTime(2014, 2, 1, 0, 0, 0, 0);
+		Date dataDocumentoDate = dataDoc.toDate();
+		NSTimestamp dataDocumento = new NSTimestamp(dataDocumentoDate);
+		
+		assertThat(result.dataDocumento(), is(dataDocumento));
+	}
+
+	@Test
+	public void setEnumFieldWhenParsingJson() throws Exception {
+		EOBoleto result = reader.readFrom(EOBoleto.class, null,  null, null,
 				null, getClass().getResourceAsStream("/boleto3.json"));
 
 		assertThat(result.banco(), is(BancoEnum.ITAU));

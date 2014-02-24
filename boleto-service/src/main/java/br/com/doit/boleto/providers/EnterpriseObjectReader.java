@@ -36,7 +36,8 @@ public class EnterpriseObjectReader<T extends EOEnterpriseObject> implements
 
 	static {
 		FORMATTERS.add(new EnumJsonFormatter());
-		FORMATTERS.add(new BigDecimalJsonFormatter());
+		FORMATTERS.add(new NumberJsonFormatter());
+		FORMATTERS.add(new DateJsonFormatter());
 		FORMATTERS.add(new AnyObjectJsonFormatter());
 	}
 
@@ -51,7 +52,8 @@ public class EnterpriseObjectReader<T extends EOEnterpriseObject> implements
 	@Override
 	public boolean isReadable(Class<?> clazz, Type type, Annotation[] annotations,
 			MediaType mediaType) {
-		return mediaType == MediaType.APPLICATION_JSON_TYPE && EOEnterpriseObject.class.isAssignableFrom(clazz);
+		String tipo = mediaType.getType()+"/"+mediaType.getSubtype();
+		return tipo.equals(MediaType.APPLICATION_JSON) && EOEnterpriseObject.class.isAssignableFrom(clazz);
 	}
 
 	@Override
