@@ -1,6 +1,6 @@
 {
     attributes = (
-        {allowsNull = N; columnName = aceite; name = aceite; prototypeName = flag; }, 
+        {columnName = aceite; name = aceite; prototypeName = flag; }, 
         {
             allowsNull = Y; 
             columnName = banco; 
@@ -83,8 +83,6 @@
         dataVencimento, 
         descricoes, 
         emissor, 
-        eoRequisicaos, 
-        eoRequisicaos1, 
         especieDocumento, 
         instrucoes, 
         locaisPagamento, 
@@ -115,20 +113,6 @@
             joinSemantic = EOInnerJoin; 
             joins = ({destinationAttribute = id; sourceAttribute = emissorId; }); 
             name = emissor; 
-        }, 
-        {
-            destination = EORequisicao; 
-            isToMany = Y; 
-            joinSemantic = EOInnerJoin; 
-            joins = ({destinationAttribute = sequential; sourceAttribute = id; }); 
-            name = eoRequisicaos; 
-        }, 
-        {
-            destination = EORequisicao; 
-            isToMany = Y; 
-            joinSemantic = EOInnerJoin; 
-            joins = ({destinationAttribute = sequential; sourceAttribute = id; }); 
-            name = eoRequisicaos1; 
         }, 
         {
             deleteRule = EODeleteRuleCascade; 

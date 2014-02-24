@@ -28,8 +28,6 @@ public abstract class _EOBoleto extends  ERXGenericRecord {
   // Relationship Keys
   public static final ERXKey<br.com.woboleto.model.EODescricao> DESCRICOES = new ERXKey<br.com.woboleto.model.EODescricao>("descricoes");
   public static final ERXKey<br.com.woboleto.model.EOEmissor> EMISSOR = new ERXKey<br.com.woboleto.model.EOEmissor>("emissor");
-  public static final ERXKey<br.com.woboleto.model.EORequisicao> EO_REQUISICAOS = new ERXKey<br.com.woboleto.model.EORequisicao>("eoRequisicaos");
-  public static final ERXKey<br.com.woboleto.model.EORequisicao> EO_REQUISICAOS1 = new ERXKey<br.com.woboleto.model.EORequisicao>("eoRequisicaos1");
   public static final ERXKey<br.com.woboleto.model.EOInstrucao> INSTRUCOES = new ERXKey<br.com.woboleto.model.EOInstrucao>("instrucoes");
   public static final ERXKey<br.com.woboleto.model.EOLocalPagamento> LOCAIS_PAGAMENTO = new ERXKey<br.com.woboleto.model.EOLocalPagamento>("locaisPagamento");
   public static final ERXKey<br.com.woboleto.model.EOSacado> SACADO = new ERXKey<br.com.woboleto.model.EOSacado>("sacado");
@@ -49,8 +47,6 @@ public abstract class _EOBoleto extends  ERXGenericRecord {
 	// Relationships
 	public static final String DESCRICOES_KEY = "descricoes";
 	public static final String EMISSOR_KEY = "emissor";
-	public static final String EO_REQUISICAOS_KEY = "eoRequisicaos";
-	public static final String EO_REQUISICAOS1_KEY = "eoRequisicaos1";
 	public static final String INSTRUCOES_KEY = "instrucoes";
 	public static final String LOCAIS_PAGAMENTO_KEY = "locaisPagamento";
 	public static final String SACADO_KEY = "sacado";
@@ -270,114 +266,6 @@ public abstract class _EOBoleto extends  ERXGenericRecord {
     Enumeration objects = descricoes().immutableClone().objectEnumerator();
     while (objects.hasMoreElements()) {
       deleteDescricoesRelationship((br.com.woboleto.model.EODescricao)objects.nextElement());
-    }
-  }
-
-  public NSArray<br.com.woboleto.model.EORequisicao> eoRequisicaos() {
-    return (NSArray<br.com.woboleto.model.EORequisicao>)storedValueForKey("eoRequisicaos");
-  }
-
-  public NSArray<br.com.woboleto.model.EORequisicao> eoRequisicaos(EOQualifier qualifier) {
-    return eoRequisicaos(qualifier, null);
-  }
-
-  public NSArray<br.com.woboleto.model.EORequisicao> eoRequisicaos(EOQualifier qualifier, NSArray<EOSortOrdering> sortOrderings) {
-    NSArray<br.com.woboleto.model.EORequisicao> results;
-      results = eoRequisicaos();
-      if (qualifier != null) {
-        results = (NSArray<br.com.woboleto.model.EORequisicao>)EOQualifier.filteredArrayWithQualifier(results, qualifier);
-      }
-      if (sortOrderings != null) {
-        results = (NSArray<br.com.woboleto.model.EORequisicao>)EOSortOrdering.sortedArrayUsingKeyOrderArray(results, sortOrderings);
-      }
-    return results;
-  }
-
-  public void addToEoRequisicaosRelationship(br.com.woboleto.model.EORequisicao object) {
-    if (_EOBoleto.logger.isDebugEnabled()) {
-      _EOBoleto.logger.debug("adding " + object + " to eoRequisicaos relationship");
-    }
-    addObjectToBothSidesOfRelationshipWithKey(object, "eoRequisicaos");
-  }
-
-  public void removeFromEoRequisicaosRelationship(br.com.woboleto.model.EORequisicao object) {
-    if (_EOBoleto.logger.isDebugEnabled()) {
-      _EOBoleto.logger.debug("removing " + object + " from eoRequisicaos relationship");
-    }
-    removeObjectFromBothSidesOfRelationshipWithKey(object, "eoRequisicaos");
-  }
-
-  public br.com.woboleto.model.EORequisicao createEoRequisicaosRelationship() {
-    EOClassDescription eoClassDesc = EOClassDescription.classDescriptionForEntityName("EORequisicao");
-    EOEnterpriseObject eo = eoClassDesc.createInstanceWithEditingContext(editingContext(), null);
-    editingContext().insertObject(eo);
-    addObjectToBothSidesOfRelationshipWithKey(eo, "eoRequisicaos");
-    return (br.com.woboleto.model.EORequisicao) eo;
-  }
-
-  public void deleteEoRequisicaosRelationship(br.com.woboleto.model.EORequisicao object) {
-    removeObjectFromBothSidesOfRelationshipWithKey(object, "eoRequisicaos");
-    editingContext().deleteObject(object);
-  }
-
-  public void deleteAllEoRequisicaosRelationships() {
-    Enumeration objects = eoRequisicaos().immutableClone().objectEnumerator();
-    while (objects.hasMoreElements()) {
-      deleteEoRequisicaosRelationship((br.com.woboleto.model.EORequisicao)objects.nextElement());
-    }
-  }
-
-  public NSArray<br.com.woboleto.model.EORequisicao> eoRequisicaos1() {
-    return (NSArray<br.com.woboleto.model.EORequisicao>)storedValueForKey("eoRequisicaos1");
-  }
-
-  public NSArray<br.com.woboleto.model.EORequisicao> eoRequisicaos1(EOQualifier qualifier) {
-    return eoRequisicaos1(qualifier, null);
-  }
-
-  public NSArray<br.com.woboleto.model.EORequisicao> eoRequisicaos1(EOQualifier qualifier, NSArray<EOSortOrdering> sortOrderings) {
-    NSArray<br.com.woboleto.model.EORequisicao> results;
-      results = eoRequisicaos1();
-      if (qualifier != null) {
-        results = (NSArray<br.com.woboleto.model.EORequisicao>)EOQualifier.filteredArrayWithQualifier(results, qualifier);
-      }
-      if (sortOrderings != null) {
-        results = (NSArray<br.com.woboleto.model.EORequisicao>)EOSortOrdering.sortedArrayUsingKeyOrderArray(results, sortOrderings);
-      }
-    return results;
-  }
-
-  public void addToEoRequisicaos1Relationship(br.com.woboleto.model.EORequisicao object) {
-    if (_EOBoleto.logger.isDebugEnabled()) {
-      _EOBoleto.logger.debug("adding " + object + " to eoRequisicaos1 relationship");
-    }
-    addObjectToBothSidesOfRelationshipWithKey(object, "eoRequisicaos1");
-  }
-
-  public void removeFromEoRequisicaos1Relationship(br.com.woboleto.model.EORequisicao object) {
-    if (_EOBoleto.logger.isDebugEnabled()) {
-      _EOBoleto.logger.debug("removing " + object + " from eoRequisicaos1 relationship");
-    }
-    removeObjectFromBothSidesOfRelationshipWithKey(object, "eoRequisicaos1");
-  }
-
-  public br.com.woboleto.model.EORequisicao createEoRequisicaos1Relationship() {
-    EOClassDescription eoClassDesc = EOClassDescription.classDescriptionForEntityName("EORequisicao");
-    EOEnterpriseObject eo = eoClassDesc.createInstanceWithEditingContext(editingContext(), null);
-    editingContext().insertObject(eo);
-    addObjectToBothSidesOfRelationshipWithKey(eo, "eoRequisicaos1");
-    return (br.com.woboleto.model.EORequisicao) eo;
-  }
-
-  public void deleteEoRequisicaos1Relationship(br.com.woboleto.model.EORequisicao object) {
-    removeObjectFromBothSidesOfRelationshipWithKey(object, "eoRequisicaos1");
-    editingContext().deleteObject(object);
-  }
-
-  public void deleteAllEoRequisicaos1Relationships() {
-    Enumeration objects = eoRequisicaos1().immutableClone().objectEnumerator();
-    while (objects.hasMoreElements()) {
-      deleteEoRequisicaos1Relationship((br.com.woboleto.model.EORequisicao)objects.nextElement());
     }
   }
 

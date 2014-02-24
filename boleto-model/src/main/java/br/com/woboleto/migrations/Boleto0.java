@@ -25,7 +25,7 @@ public class Boleto0 extends ERXMigrationDatabase.Migration
         abstractInformacaoTable.setPrimaryKey("id");
 
         ERXMigrationTable eoBoletoTable = database.newTableNamed("boleto");
-        eoBoletoTable.newIntBooleanColumn("aceite", false);
+        eoBoletoTable.newFlagBooleanColumn("aceite", false);
         eoBoletoTable.newStringColumn("banco", 50, true);
         eoBoletoTable.newDateColumn("data_documento", true);
         eoBoletoTable.newDateColumn("data_processamento", true);
