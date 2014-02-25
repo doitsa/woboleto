@@ -68,7 +68,7 @@ public class TestBoletoResource {
 	}
 
 	@Test
-	public void throwsExceptionWhenBoletoIsNull() throws Exception {
+	public void lancarExcecaoQuandoBoletoEstaNull() throws Exception {
 		try {
 			resource.salvarBoleto(null);
 			fail("Deveria ter dado uma exceção");
@@ -80,9 +80,39 @@ public class TestBoletoResource {
 	}
 
 	@Test
-	public void throwsExceptionWhenBoletoDoesNotExist() throws Exception {
+	public void lancarExcecaoQuandoHashEstiverNulo() throws Exception {
 		try {
-			resource.gerarBoletoPDF(null);
+			boleto = null;
+
+			resource.gerarBoletoPDF(1, null);
+			fail("Deveria ter dado uma exceção");
+		} catch (WebApplicationException exception) {
+			assertThat(exception.getResponse().getStatus(), is(400));
+			assertThat(exception.getCause().getMessage(),
+					is("É necessário informar o número da requisição e o hash"));
+		}
+	}
+
+	@Test
+	public void lancarExcecaoQuandoSequencialEstiverNulo() throws Exception {
+		try {
+			boleto = null;
+
+			resource.gerarBoletoPDF(null, "634df2662567459339a52706b718340b");
+			fail("Deveria ter dado uma exceção");
+		} catch (WebApplicationException exception) {
+			assertThat(exception.getResponse().getStatus(), is(400));
+			assertThat(exception.getCause().getMessage(),
+					is("É necessário informar o número da requisição e o hash"));
+		}
+	}
+
+	@Test
+	public void lancarExcecaoQuandoBoletoNaoExistir() throws Exception {
+		try {
+			boleto = null;
+
+			resource.gerarBoletoPDF(1, "634df2662567459339a52706b718340b");
 			fail("Deveria ter dado uma exceção");
 		} catch (WebApplicationException exception) {
 			assertThat(exception.getResponse().getStatus(), is(404));
@@ -92,8 +122,10 @@ public class TestBoletoResource {
 	}
 
 	@Test
-	public void returnBoletoPNGWhenOrderIsValid() throws Exception {
-		byte[] resultado = resource.gerarBoletoPNG(123);
+	public void retornarBoletoPNGQuandoRequisicaoExistir() throws Exception {
+
+		byte[] resultado = resource.gerarBoletoPNG(123,
+				"634df2662567459339a52706b718340b");
 
 		// OutputStream out = new
 		// FileOutputStream("/Users/rdskill/Documents/workspace/woboleto/boleto-service/src/test/resources/boleto.png");
@@ -110,8 +142,9 @@ public class TestBoletoResource {
 
 	@Test
 	@Ignore("Ignora esse teste pois não é possível gerar um PDF idêntico a cada execução dos testes")
-	public void returnBoletoPDFWhenOrderIsValid() throws Exception {
-		byte[] resultado = resource.gerarBoletoPDF(123);
+	public void retornarBoletoPDFQuandoRequisicaoExistir() throws Exception {
+		byte[] resultado = resource.gerarBoletoPDF(123,
+				"634df2662567459339a52706b718340b");
 
 		InputStream expectedInput = getClass().getResourceAsStream(
 				"/boleto.pdf");

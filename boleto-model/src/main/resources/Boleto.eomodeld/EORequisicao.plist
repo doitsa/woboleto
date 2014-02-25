@@ -6,12 +6,13 @@
             name = boletoId; 
             prototypeName = id; 
         }, 
+        {columnName = hash; name = hash; prototypeName = longText; }, 
         {allowsNull = N; name = id; prototypeName = id; }, 
         {columnName = sequential; name = sequential; prototypeName = id; }
     ); 
     attributesUsedForLocking = (boletoId, id); 
     className = "br.com.woboleto.model.EORequisicao"; 
-    classProperties = (boleto, sequential); 
+    classProperties = (boleto, hash, sequential); 
     externalName = requisicao; 
     fetchSpecificationDictionary = {}; 
     internalInfo = {"_javaClientClassName" = EORequisicao; }; 

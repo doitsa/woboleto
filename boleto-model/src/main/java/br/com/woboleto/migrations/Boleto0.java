@@ -60,6 +60,7 @@ public class Boleto0 extends ERXMigrationDatabase.Migration
         ERXMigrationTable eoRequisicaoTable = database.newTableNamed("requisicao");
         eoRequisicaoTable.newIntegerColumn("boleto_id", false);
         eoRequisicaoTable.newIntegerColumn("id", false);
+        eoRequisicaoTable.newLargeStringColumn("hash", false);
         eoRequisicaoTable.newIntegerColumn("sequential", false);
         eoRequisicaoTable.create();
         eoRequisicaoTable.setPrimaryKey("id");

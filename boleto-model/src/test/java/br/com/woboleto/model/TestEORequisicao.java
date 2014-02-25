@@ -55,5 +55,16 @@ public class TestEORequisicao {
 		
 		assertThat(requisicao.sequential(), is(21));
 	}
+	
+	@Test
+	public void criarHashQuandoRequisicaoForSalva() throws Exception {
+		requisicao.setBoleto(boleto);
+		
+		doReturn(null).when(requisicao).maiorSequencial();
+		
+		mockEditingContext.saveChanges();
+		
+		assertThat(requisicao.hash(), is("634df2662567459339a52706b718340b"));
+	}
 
 }

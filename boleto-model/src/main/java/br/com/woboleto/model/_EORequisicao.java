@@ -15,11 +15,13 @@ public abstract class _EORequisicao extends  ERXGenericRecord {
 	public static final String ENTITY_NAME = "EORequisicao";
 
 // Attribute Keys
+  public static final ERXKey<String> HASH = new ERXKey<String>("hash");
   public static final ERXKey<Integer> SEQUENTIAL = new ERXKey<Integer>("sequential");
   // Relationship Keys
   public static final ERXKey<br.com.woboleto.model.EOBoleto> BOLETO = new ERXKey<br.com.woboleto.model.EOBoleto>("boleto");
 
 	// Attributes
+	public static final String HASH_KEY = "hash";
 	public static final String SEQUENTIAL_KEY = "sequential";
 
 	// Relationships
@@ -33,6 +35,17 @@ public abstract class _EORequisicao extends  ERXGenericRecord {
       throw new IllegalStateException("You attempted to localInstance " + this + ", which has not yet committed.");
     }
     return localInstance;
+  }
+
+  public String hash() {
+    return (String) storedValueForKey("hash");
+  }
+
+  public void setHash(String value) {
+    if (_EORequisicao.logger.isDebugEnabled()) {
+    	_EORequisicao.logger.debug( "updating hash from " + hash() + " to " + value);
+    }
+    takeStoredValueForKey(value, "hash");
   }
 
   public Integer sequential() {
@@ -69,9 +82,11 @@ public abstract class _EORequisicao extends  ERXGenericRecord {
   }
 
 
-  public static EORequisicao createEORequisicao(EOEditingContext editingContext, Integer sequential
+  public static EORequisicao createEORequisicao(EOEditingContext editingContext, String hash
+, Integer sequential
 , br.com.woboleto.model.EOBoleto boleto) {
     EORequisicao eo = (EORequisicao) EOUtilities.createAndInsertInstance(editingContext, _EORequisicao.ENTITY_NAME);
+		eo.setHash(hash);
 		eo.setSequential(sequential);
     eo.setBoletoRelationship(boleto);
     return eo;
