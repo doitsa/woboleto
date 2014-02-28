@@ -114,7 +114,7 @@ public class EnterpriseObjectReader<T extends EOEnterpriseObject> implements
 				continue;
 			}
 
-			String className = attribute.className();
+			String className = attribute.valueTypeClassName();
 
 			try {
 				Class<?> attributeClass = Class.forName(className);

@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertThat;
 
 import java.math.BigDecimal;
@@ -96,10 +97,18 @@ public class TestEnterpriseObjectReader {
 
 	@Test
 	public void setEnumFieldWhenParsingJson() throws Exception {
-		EOBoleto result = reader.readFrom(EOBoleto.class, null,  null, null,
+		EOBoleto result = reader.readFrom(EOBoleto.class, null, null, null,
 				null, getClass().getResourceAsStream("/boleto3.json"));
 
 		assertThat(result.banco(), is(BancoEnum.ITAU));
+	}
+
+	@Test
+	public void setBooleanFieldWhenParsingJson() throws Exception {
+		EOBoleto result = reader.readFrom(EOBoleto.class, null, null, null,
+				null, getClass().getResourceAsStream("/boleto8.json"));
+
+		assertThat(result.aceite(), is(false));
 	}
 
 	@Test
@@ -118,6 +127,14 @@ public class TestEnterpriseObjectReader {
 		assertThat(result.emissor(), notNullValue());
 		assertThat(result.emissor().agencia(), is(1));
 		assertThat(editingContext.insertedObjects(), hasItem(result.emissor()));
+	}
+
+	@Test
+	public void returnBigDecimalNullWhenNumberIsNull() throws Exception {
+		EOBoleto result = reader.readFrom(EOBoleto.class, null, null, null,
+				null, getClass().getResourceAsStream("/boleto9.json"));
+
+		assertThat(result.valor(), is(new BigDecimal("0")));
 	}
 
 	@Test
