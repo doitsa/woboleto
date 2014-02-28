@@ -5,16 +5,11 @@ import com.webobjects.eocontrol.EOEditingContext;
 /**
  * @author <a href="mailto:hprange@gmail.com">Henrique Prange</a>
  */
-public class EOLocalPagamento extends _EOLocalPagamento
-{
+public class EOLocalPagamento extends _EOLocalPagamento {
 	@Override
-	public void awakeFromInsertion( final EOEditingContext ec )
-	{
-		super.awakeFromInsertion( ec );
+	protected void init(EOEditingContext ec) {
+		super.init(ec);
 
-		if( tipo() == null )
-		{
-			setTipo( "3" );
-		}
+		setTipo("3");
 	}
 }

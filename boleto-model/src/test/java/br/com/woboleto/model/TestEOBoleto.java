@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 
 import org.joda.time.LocalDate;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -146,8 +147,6 @@ public class TestEOBoleto {
 		EOBoleto boleto = EOBoleto.createEOBoleto(editingContext);
 
 		assertThat(boleto.aceite(), is(false));
-		assertThat(boleto.emissor(), notNullValue());
-		assertThat(boleto.sacado(), notNullValue());
 	}
 
 	@Test
@@ -161,6 +160,12 @@ public class TestEOBoleto {
 
 		confirm(boleto,
 				cannotBeSavedBecause("O boleto pode conter no m\u00e1ximo 2 locais de pagamento"));
+	}
+	
+	@Before
+	public void setup() {
+		boleto.setSacado(EOSacado.createEOSacado(editingContext));
+		boleto.setEmissor(EOEmissor.createEOEmissor(editingContext));
 	}
 
 	@Test

@@ -29,16 +29,6 @@ public class EOBoleto extends _EOBoleto
 		{
 			setAceite(Boolean.FALSE);
 		}
-
-		if(emissor() == null)
-		{
-			setEmissorRelationship(EOEmissor.createEOEmissor(editingContext));
-		}
-
-		if(sacado() == null)
-		{
-			setSacadoRelationship(EOSacado.createEOSacado(editingContext));
-		}
 	}
 
 	private Calendar convertDate(final NSTimestamp date)

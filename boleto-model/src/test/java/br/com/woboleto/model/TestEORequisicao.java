@@ -1,9 +1,8 @@
 package br.com.woboleto.model;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.when;
 
 import org.junit.Rule;
 import org.junit.Test;

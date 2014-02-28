@@ -8,13 +8,9 @@ import com.webobjects.eocontrol.EOEditingContext;
 public class EODescricao extends _EODescricao
 {
 	@Override
-	public void awakeFromInsertion( final EOEditingContext ec )
-	{
-		super.awakeFromInsertion( ec );
-
-		if( tipo() == null )
-		{
-			setTipo( "1" );
-		}
+	protected void init(EOEditingContext ec) {
+		super.init(ec);
+		
+		setTipo("1");
 	}
 }
