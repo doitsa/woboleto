@@ -14,8 +14,6 @@ import javax.ws.rs.core.Response;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 
-import br.com.woboleto.model.EOBoleto;
-
 @Path("/boletos")
 public class BoletoResource {
 
