@@ -44,7 +44,7 @@ public class BoletoResource {
 		}
 		EOEditingContext editingContext = eoBoleto.editingContext();
 		
-		EORequisicao eoRequisicao = EORequisicao.createEORequisicao(editingContext, null, null, eoBoleto);
+		EORequisicao eoRequisicao = criarRequisicao(editingContext, eoBoleto);
 		
 		editingContext.saveChanges();
 		
@@ -55,6 +55,10 @@ public class BoletoResource {
 		String mapAsJson = mapper.writeValueAsString(dictionary);
 		
 		return Response.created(new URI("boletos/"+eoRequisicao.sequential().toString()+"?hash="+eoRequisicao.hash())).entity(mapAsJson).build();
+	}
+
+	EORequisicao criarRequisicao(EOEditingContext editingContext, EOBoleto boleto) {
+		return EORequisicao.createEORequisicao(editingContext, null, null, boleto);
 	}
 	
 	@Path("/{sequencial}.pdf")

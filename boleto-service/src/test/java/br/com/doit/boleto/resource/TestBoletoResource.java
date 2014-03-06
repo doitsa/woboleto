@@ -4,6 +4,9 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -20,6 +23,7 @@ import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import br.com.woboleto.model.BancoEnum;
@@ -46,7 +50,7 @@ import er.extensions.eof.ERXEC.Factory;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class TestBoletoResource {
-	private BoletoResource resource = new BoletoResource();
+	private BoletoResource resource;
 
 	@Rule
 	public MockEditingContext editingContext = new MockEditingContext("Boleto");
@@ -60,11 +64,16 @@ public class TestBoletoResource {
 	@Dummy(size = 1)
 	NSArray<EOLocalPagamento> locais;
 
+	@Spy
+	@Dummy
+	private EORequisicao novaRequisicao;
+
 	@Test
 	public void saveBoletoIfDataIsCorrect() throws Exception {
 		Response response = resource.salvarBoleto(boleto);
 
 		assertThat(response.getStatus(), is(201));
+		assertThat(response.getEntity(), is((Object)"{\"hash\":\"abcd1234\",\"sequential\":1}"));
 	}
 
 	@Test
@@ -196,7 +205,17 @@ public class TestBoletoResource {
 
 		requisicao.setBoleto(boleto);
 		requisicao.setSequential(123);
-
+		requisicao.setHash("634df2662567459339a52706b718340b");
+		
+		doNothing().when(novaRequisicao).willInsert();
+		
+		novaRequisicao.setSequential(1);
+		novaRequisicao.setHash("abcd1234");
+		
+		resource = spy(new BoletoResource());
+		
+		doReturn(novaRequisicao).when(resource).criarRequisicao(editingContext, boleto);
+		
 		// TODO: Utilizar factory do WOUnit quando ela existir
 		ERXEC.setFactory(new Factory() {
 			public boolean useSharedEditingContext() {
