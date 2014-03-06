@@ -52,6 +52,11 @@
 				<version>${wonder.version}</version>
 			</dependency>
 			<dependency>
+				<groupId>org.glassfish.jersey.test-framework.providers</groupId>
+				<artifactId>jersey-test-framework-provider-inmemory</artifactId>
+				<version>${jersey.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>wonder.core</groupId>
 				<artifactId>ERServlet</artifactId>
 				<version>1.0</version>
@@ -128,6 +133,11 @@
 				<version>${jersey.version}</version>
 			</dependency>
 			<dependency>
+				<groupId>org.glassfish.jersey.media</groupId>
+				<artifactId>jersey-media-json-processing</artifactId>
+				<version>${jersey.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>org.glassfish.jersey.containers</groupId>
 				<artifactId>jersey-container-servlet</artifactId>
 				<version>${jersey.version}</version>
@@ -148,6 +158,12 @@
 				<artifactId>caelum-stella-boleto</artifactId>
 				<version>2.0.5-SNAPSHOT</version>
 			</dependency>
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-mapper-asl</artifactId>
+				<version>1.9.13</version>
+			</dependency>
+
 			<dependency>
 				<groupId>org.postgresql</groupId>
 				<artifactId>postgresql</artifactId>
