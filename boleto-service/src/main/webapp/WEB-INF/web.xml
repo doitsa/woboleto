@@ -48,6 +48,7 @@
 			<param-name>jersey.config.server.provider.packages</param-name>
 			<param-value>
 				br.com.doit.boleto.resource
+				br.com.doit.boleto.providers
 			</param-value>
 		</init-param>
 	</filter>
