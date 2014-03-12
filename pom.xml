@@ -11,7 +11,7 @@
 
 	<groupId>br.com.doit</groupId>
 	<artifactId>woboleto</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>2.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>WOBoleto</name>
 	<description>Integra\u00e7\u00e3o para gera\u00e7\u00e3o de boletos.</description>
@@ -23,9 +23,9 @@
 	</properties>
 
 	<modules>
-		<module>boleto-service</module>
-		<module>boleto-client</module>
-		<module>boleto-model</module>
+		<module>woboleto-service</module>
+		<module>woboleto-client</module>
+		<module>woboleto-model</module>
 	</modules>
 
 	<dependencyManagement>
@@ -104,7 +104,7 @@
 			</dependency>
 			<dependency>
 				<groupId>${project.groupId}</groupId>
-				<artifactId>boleto-model</artifactId>
+				<artifactId>woboleto-model</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
