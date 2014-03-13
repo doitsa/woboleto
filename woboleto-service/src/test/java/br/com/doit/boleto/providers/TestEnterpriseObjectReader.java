@@ -124,7 +124,7 @@ public class TestEnterpriseObjectReader {
 				null, getClass().getResourceAsStream("/boleto4.json"));
 
 		assertThat(result.emissor(), notNullValue());
-		assertThat(result.emissor().agencia(), is(1));
+		assertThat(result.emissor().agencia(), is("1"));
 		assertThat(editingContext.insertedObjects(), hasItem(result.emissor()));
 	}
 

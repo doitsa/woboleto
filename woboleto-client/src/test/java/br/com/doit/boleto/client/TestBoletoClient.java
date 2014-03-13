@@ -79,9 +79,9 @@ public class TestBoletoClient extends JerseyTest {
 
 		Emissor emissor = new Emissor();
 		emissor.setCedente("Instituto Qualisa");
-		emissor.setContaCorrente(3903125L);
-		emissor.setCarteira(102);
-		emissor.setNossoNumero(3827130004722L);
+		emissor.setContaCorrente("3903125");
+		emissor.setCarteira("102");
+		emissor.setNossoNumero("3827130004722");
 
 		Sacado sacado = new Sacado();
 		sacado.setNome("Boleto Client");

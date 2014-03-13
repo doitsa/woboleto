@@ -15,17 +15,17 @@ public abstract class _EOEmissor extends  ERXGenericRecord {
 	public static final String ENTITY_NAME = "EOEmissor";
 
 // Attribute Keys
-  public static final ERXKey<Integer> AGENCIA = new ERXKey<Integer>("agencia");
-  public static final ERXKey<Integer> CARTEIRA = new ERXKey<Integer>("carteira");
+  public static final ERXKey<String> AGENCIA = new ERXKey<String>("agencia");
+  public static final ERXKey<String> CARTEIRA = new ERXKey<String>("carteira");
   public static final ERXKey<String> CEDENTE = new ERXKey<String>("cedente");
-  public static final ERXKey<Integer> CODIGO_FORNECIDO_PELA_AGENCIA = new ERXKey<Integer>("codigoFornecidoPelaAgencia");
-  public static final ERXKey<Integer> CODIGO_OPERACAO = new ERXKey<Integer>("codigoOperacao");
-  public static final ERXKey<Long> CONTA_CORRENTE = new ERXKey<Long>("contaCorrente");
+  public static final ERXKey<String> CODIGO_FORNECIDO_PELA_AGENCIA = new ERXKey<String>("codigoFornecidoPelaAgencia");
+  public static final ERXKey<String> CODIGO_OPERACAO = new ERXKey<String>("codigoOperacao");
+  public static final ERXKey<String> CONTA_CORRENTE = new ERXKey<String>("contaCorrente");
   public static final ERXKey<String> DIGITO_VERIFICADOR_AGENCIA = new ERXKey<String>("digitoVerificadorAgencia");
   public static final ERXKey<String> DIGITO_VERIFICADOR_CONTA_CORRENTE = new ERXKey<String>("digitoVerificadorContaCorrente");
   public static final ERXKey<String> DIGITO_VERIFICADOR_NOSSO_NUMERO = new ERXKey<String>("digitoVerificadorNossoNumero");
-  public static final ERXKey<Long> NOSSO_NUMERO = new ERXKey<Long>("nossoNumero");
-  public static final ERXKey<Long> NUMERO_CONVENIO = new ERXKey<Long>("numeroConvenio");
+  public static final ERXKey<String> NOSSO_NUMERO = new ERXKey<String>("nossoNumero");
+  public static final ERXKey<String> NUMERO_CONVENIO = new ERXKey<String>("numeroConvenio");
   // Relationship Keys
 
 	// Attributes
@@ -53,22 +53,22 @@ public abstract class _EOEmissor extends  ERXGenericRecord {
     return localInstance;
   }
 
-  public Integer agencia() {
-    return (Integer) storedValueForKey("agencia");
+  public String agencia() {
+    return (String) storedValueForKey("agencia");
   }
 
-  public void setAgencia(Integer value) {
+  public void setAgencia(String value) {
     if (_EOEmissor.logger.isDebugEnabled()) {
     	_EOEmissor.logger.debug( "updating agencia from " + agencia() + " to " + value);
     }
     takeStoredValueForKey(value, "agencia");
   }
 
-  public Integer carteira() {
-    return (Integer) storedValueForKey("carteira");
+  public String carteira() {
+    return (String) storedValueForKey("carteira");
   }
 
-  public void setCarteira(Integer value) {
+  public void setCarteira(String value) {
     if (_EOEmissor.logger.isDebugEnabled()) {
     	_EOEmissor.logger.debug( "updating carteira from " + carteira() + " to " + value);
     }
@@ -86,33 +86,33 @@ public abstract class _EOEmissor extends  ERXGenericRecord {
     takeStoredValueForKey(value, "cedente");
   }
 
-  public Integer codigoFornecidoPelaAgencia() {
-    return (Integer) storedValueForKey("codigoFornecidoPelaAgencia");
+  public String codigoFornecidoPelaAgencia() {
+    return (String) storedValueForKey("codigoFornecidoPelaAgencia");
   }
 
-  public void setCodigoFornecidoPelaAgencia(Integer value) {
+  public void setCodigoFornecidoPelaAgencia(String value) {
     if (_EOEmissor.logger.isDebugEnabled()) {
     	_EOEmissor.logger.debug( "updating codigoFornecidoPelaAgencia from " + codigoFornecidoPelaAgencia() + " to " + value);
     }
     takeStoredValueForKey(value, "codigoFornecidoPelaAgencia");
   }
 
-  public Integer codigoOperacao() {
-    return (Integer) storedValueForKey("codigoOperacao");
+  public String codigoOperacao() {
+    return (String) storedValueForKey("codigoOperacao");
   }
 
-  public void setCodigoOperacao(Integer value) {
+  public void setCodigoOperacao(String value) {
     if (_EOEmissor.logger.isDebugEnabled()) {
     	_EOEmissor.logger.debug( "updating codigoOperacao from " + codigoOperacao() + " to " + value);
     }
     takeStoredValueForKey(value, "codigoOperacao");
   }
 
-  public Long contaCorrente() {
-    return (Long) storedValueForKey("contaCorrente");
+  public String contaCorrente() {
+    return (String) storedValueForKey("contaCorrente");
   }
 
-  public void setContaCorrente(Long value) {
+  public void setContaCorrente(String value) {
     if (_EOEmissor.logger.isDebugEnabled()) {
     	_EOEmissor.logger.debug( "updating contaCorrente from " + contaCorrente() + " to " + value);
     }
@@ -152,22 +152,22 @@ public abstract class _EOEmissor extends  ERXGenericRecord {
     takeStoredValueForKey(value, "digitoVerificadorNossoNumero");
   }
 
-  public Long nossoNumero() {
-    return (Long) storedValueForKey("nossoNumero");
+  public String nossoNumero() {
+    return (String) storedValueForKey("nossoNumero");
   }
 
-  public void setNossoNumero(Long value) {
+  public void setNossoNumero(String value) {
     if (_EOEmissor.logger.isDebugEnabled()) {
     	_EOEmissor.logger.debug( "updating nossoNumero from " + nossoNumero() + " to " + value);
     }
     takeStoredValueForKey(value, "nossoNumero");
   }
 
-  public Long numeroConvenio() {
-    return (Long) storedValueForKey("numeroConvenio");
+  public String numeroConvenio() {
+    return (String) storedValueForKey("numeroConvenio");
   }
 
-  public void setNumeroConvenio(Long value) {
+  public void setNumeroConvenio(String value) {
     if (_EOEmissor.logger.isDebugEnabled()) {
     	_EOEmissor.logger.debug( "updating numeroConvenio from " + numeroConvenio() + " to " + value);
     }

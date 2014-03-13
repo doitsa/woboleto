@@ -26,17 +26,17 @@ public class TestEOEmissor
 	@Test
 	public void converteEmissorParaEmissorStella() throws Exception
 	{
-		emissor.setAgencia( 1234 );
-		emissor.setCarteira( 175 );
+		emissor.setAgencia("1234");
+		emissor.setCarteira("175");
 		emissor.setCedente( "Teste" );
-		emissor.setCodigoFornecidoPelaAgencia( 10 );
-		emissor.setCodigoOperacao( 50 );
-		emissor.setContaCorrente( 45678L );
+		emissor.setCodigoFornecidoPelaAgencia("10");
+		emissor.setCodigoOperacao("50");
+		emissor.setContaCorrente("45678");
 		emissor.setDigitoVerificadorAgencia( "6" );
 		emissor.setDigitoVerificadorContaCorrente( "7" );
 		emissor.setDigitoVerificadorNossoNumero( "8" );
-		emissor.setNossoNumero( 22222L );
-		emissor.setNumeroConvenio( 33333L );
+		emissor.setNossoNumero("22222");
+		emissor.setNumeroConvenio("33333");
 
 		br.com.caelum.stella.boleto.Emissor result = emissor.toStellaEmissor();
 

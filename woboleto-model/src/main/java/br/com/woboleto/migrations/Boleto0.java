@@ -42,20 +42,20 @@ public class Boleto0 extends ERXMigrationDatabase.Migration
         eoBoletoTable.setPrimaryKey("id");
 
         ERXMigrationTable eoEmissorTable = database.newTableNamed("emissor");
-        eoEmissorTable.newIntegerColumn("agencia", true);
-        eoEmissorTable.newIntegerColumn("carteira", true);
-        eoEmissorTable.newStringColumn("cedente", 255, true);
-        eoEmissorTable.newIntegerColumn("codigo_fornecido_pela_agencia", true);
-        eoEmissorTable.newIntegerColumn("codigo_operacao", true);
-        eoEmissorTable.newBigIntegerColumn("conta_corrente", true);
-        eoEmissorTable.newStringColumn("digito_verificador_agencia", 1, true);
-        eoEmissorTable.newStringColumn("digito_verificador_conta_corrente", 1, true);
-        eoEmissorTable.newStringColumn("digito_verificador_nosso_numero", 1, true);
-        eoEmissorTable.newIntegerColumn("id", false);
-        eoEmissorTable.newBigIntegerColumn("nosso_numero", true);
-        eoEmissorTable.newBigIntegerColumn("numero_convenio", true);
-        eoEmissorTable.create();
-        eoEmissorTable.setPrimaryKey("id");
+        eoEmissorTable.newStringColumn("agencia", 255, true);
+		eoEmissorTable.newStringColumn("carteira", 255, true);
+		eoEmissorTable.newStringColumn("cedente", 255, true);
+		eoEmissorTable.newStringColumn("codigo_fornecido_pela_agencia", 255, true);
+		eoEmissorTable.newStringColumn("codigo_operacao", 255, true);
+		eoEmissorTable.newStringColumn("conta_corrente", 255, true);
+		eoEmissorTable.newStringColumn("digito_verificador_agencia", 10, true);
+		eoEmissorTable.newStringColumn("digito_verificador_conta_corrente", 10, true);
+		eoEmissorTable.newStringColumn("digito_verificador_nosso_numero", 10, true);
+		eoEmissorTable.newIntegerColumn("id", false);
+		eoEmissorTable.newStringColumn("nosso_numero", 255, true);
+		eoEmissorTable.newStringColumn("numero_convenio", 255, true);
+		eoEmissorTable.create();
+	 	eoEmissorTable.setPrimaryKey("id");
 
         ERXMigrationTable eoRequisicaoTable = database.newTableNamed("requisicao");
         eoRequisicaoTable.newIntegerColumn("boleto_id", false);

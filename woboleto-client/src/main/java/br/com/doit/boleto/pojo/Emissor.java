@@ -1,31 +1,31 @@
 package br.com.doit.boleto.pojo;
 
 public class Emissor {
-	private Integer agencia;
-	private Integer carteira;
+	private String agencia;
+	private String carteira;
 	private String cedente;
-	private Integer codigoFornecidoPelaAgencia;
-	private Integer codigoOperacao;
-	private Long contaCorrente;
+	private String codigoFornecidoPelaAgencia;
+	private String codigoOperacao;
+	private String contaCorrente;
 	private String digitoVerificadorAgencia;
 	private String digitoVerificadorContaCorrente;
 	private String digitoVerificadorNossoNumero;
-	private Long nossoNumero;
-	private Long numeroConvenio;
+	private String nossoNumero;
+	private String numeroConvenio;
 
-	public Integer getAgencia() {
+	public String getAgencia() {
 		return agencia;
 	}
 
-	public void setAgencia(Integer agencia) {
+	public void setAgencia(String agencia) {
 		this.agencia = agencia;
 	}
 
-	public Integer getCarteira() {
+	public String getCarteira() {
 		return carteira;
 	}
 
-	public void setCarteira(Integer carteira) {
+	public void setCarteira(String carteira) {
 		this.carteira = carteira;
 	}
 
@@ -37,27 +37,27 @@ public class Emissor {
 		this.cedente = cedente;
 	}
 
-	public Integer getCodigoFornecidoPelaAgencia() {
+	public String getCodigoFornecidoPelaAgencia() {
 		return codigoFornecidoPelaAgencia;
 	}
 
-	public void setCodigoFornecidoPelaAgencia(Integer codigoFornecidoPelaAgencia) {
+	public void setCodigoFornecidoPelaAgencia(String codigoFornecidoPelaAgencia) {
 		this.codigoFornecidoPelaAgencia = codigoFornecidoPelaAgencia;
 	}
 
-	public Integer getCodigoOperacao() {
+	public String getCodigoOperacao() {
 		return codigoOperacao;
 	}
 
-	public void setCodigoOperacao(Integer codigoOperacao) {
+	public void setCodigoOperacao(String codigoOperacao) {
 		this.codigoOperacao = codigoOperacao;
 	}
 
-	public Long getContaCorrente() {
+	public String getContaCorrente() {
 		return contaCorrente;
 	}
 
-	public void setContaCorrente(Long contaCorrente) {
+	public void setContaCorrente(String contaCorrente) {
 		this.contaCorrente = contaCorrente;
 	}
 
@@ -87,19 +87,19 @@ public class Emissor {
 		this.digitoVerificadorNossoNumero = digitoVerificadorNossoNumero;
 	}
 
-	public Long getNossoNumero() {
+	public String getNossoNumero() {
 		return nossoNumero;
 	}
 
-	public void setNossoNumero(Long nossoNumero) {
+	public void setNossoNumero(String nossoNumero) {
 		this.nossoNumero = nossoNumero;
 	}
 
-	public Long getNumeroConvenio() {
+	public String getNumeroConvenio() {
 		return numeroConvenio;
 	}
 
-	public void setNumeroConvenio(Long numeroConvenio) {
+	public void setNumeroConvenio(String numeroConvenio) {
 		this.numeroConvenio = numeroConvenio;
 	}
 }

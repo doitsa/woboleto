@@ -4,13 +4,13 @@
             allowsNull = Y; 
             columnName = agencia; 
             name = agencia; 
-            prototypeName = intNumber; 
+            prototypeName = varchar255; 
         }, 
         {
             allowsNull = Y; 
             columnName = carteira; 
             name = carteira; 
-            prototypeName = intNumber; 
+            prototypeName = varchar255; 
         }, 
         {
             allowsNull = Y; 
@@ -22,50 +22,50 @@
             allowsNull = Y; 
             columnName = "codigo_fornecido_pela_agencia"; 
             name = codigoFornecidoPelaAgencia; 
-            prototypeName = intNumber; 
+            prototypeName = varchar255; 
         }, 
         {
             allowsNull = Y; 
             columnName = "codigo_operacao"; 
             name = codigoOperacao; 
-            prototypeName = intNumber; 
+            prototypeName = varchar255; 
         }, 
         {
             allowsNull = Y; 
             columnName = "conta_corrente"; 
             name = contaCorrente; 
-            prototypeName = longNumber; 
+            prototypeName = varchar255; 
         }, 
         {
             allowsNull = Y; 
             columnName = "digito_verificador_agencia"; 
             name = digitoVerificadorAgencia; 
-            prototypeName = charFlag; 
+            prototypeName = varchar10; 
         }, 
         {
             allowsNull = Y; 
             columnName = "digito_verificador_conta_corrente"; 
             name = digitoVerificadorContaCorrente; 
-            prototypeName = charFlag; 
+            prototypeName = varchar10; 
         }, 
         {
             allowsNull = Y; 
             columnName = "digito_verificador_nosso_numero"; 
             name = digitoVerificadorNossoNumero; 
-            prototypeName = charFlag; 
+            prototypeName = varchar10; 
         }, 
         {allowsNull = N; name = id; prototypeName = id; }, 
         {
             allowsNull = Y; 
             columnName = "nosso_numero"; 
             name = nossoNumero; 
-            prototypeName = longNumber; 
+            prototypeName = varchar255; 
         }, 
         {
             allowsNull = Y; 
             columnName = "numero_convenio"; 
             name = numeroConvenio; 
-            prototypeName = longNumber; 
+            prototypeName = varchar255; 
         }
     ); 
     attributesUsedForLocking = (id); 
