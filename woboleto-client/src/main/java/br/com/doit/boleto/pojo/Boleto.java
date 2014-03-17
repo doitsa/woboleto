@@ -13,7 +13,7 @@ import br.com.doit.boleto.client.JsonDateSerializer;
 @XmlRootElement
 public class Boleto {
 	private boolean aceite;
-	private BancoEnum banco;
+	private Banco banco;
 	private Date dataDocumento;
 	private Date dataProcessamento;
 	private Date dataVencimento;
@@ -36,11 +36,11 @@ public class Boleto {
 		this.aceite = aceite;
 	}
 
-	public BancoEnum getBanco() {
+	public Banco getBanco() {
 		return banco;
 	}
 
-	public void setBanco(BancoEnum banco) {
+	public void setBanco(Banco banco) {
 		this.banco = banco;
 	}
 
