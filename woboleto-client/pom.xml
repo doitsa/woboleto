@@ -7,24 +7,30 @@
 		<groupId>br.com.doit</groupId>
 		<version>2.0-SNAPSHOT</version>
 	</parent>
-
+	
 	<artifactId>woboleto-client</artifactId>
 	<packaging>jar</packaging>
 	<name>WOBoleto Client</name>
 	<description>Cliente para consumir os serviços do Boleto Service</description>
+	
+	<properties>
+		<jersey.version>1.18</jersey.version>
+	</properties>
 
 	<dependencies>
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.glassfish.jersey.core</groupId>
 			<artifactId>jersey-server</artifactId>
-		</dependency>
+		</dependency> -->
 		<dependency>
-			<groupId>org.glassfish.jersey.core</groupId>
+			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-client</artifactId>
+			<version>${jersey.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.glassfish.jersey.test-framework.providers</groupId>
-			<artifactId>jersey-test-framework-provider-inmemory</artifactId>
+			<groupId>com.sun.jersey.jersey-test-framework</groupId>
+			<artifactId>jersey-test-framework-inmemory</artifactId>
+			<version>${jersey.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -32,8 +38,9 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.glassfish.jersey.media</groupId>
-			<artifactId>jersey-media-json-processing</artifactId>
+    		<groupId>com.sun.jersey</groupId>
+    		<artifactId>jersey-json</artifactId>
+    		<version>${jersey.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
