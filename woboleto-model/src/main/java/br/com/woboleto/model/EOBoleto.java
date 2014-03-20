@@ -79,8 +79,6 @@ public class EOBoleto extends _EOBoleto
 		boleto.comInstrucoes(stringArrayDe(instrucoes()));
 		boleto.comLocaisDePagamento(stringArrayDe(locaisPagamento()));
 
-		System.out.println("---- Descricoes: " + boleto.getDescricoes());
-		
 		if(aceite() != null)
 		{
 			boleto.comAceite(aceite());
