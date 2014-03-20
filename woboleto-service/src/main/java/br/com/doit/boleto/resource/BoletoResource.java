@@ -21,7 +21,11 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import br.com.caelum.stella.boleto.Boleto;
+import br.com.caelum.stella.boleto.Emissor;
+import br.com.caelum.stella.boleto.bancos.Santander;
 import br.com.caelum.stella.boleto.transformer.GeradorDeBoleto;
+import br.com.caelum.stella.boleto.utils.StellaStringUtils;
+import br.com.woboleto.model.BancoEnum;
 import br.com.woboleto.model.EOBoleto;
 import br.com.woboleto.model.EORequisicao;
 
@@ -45,6 +49,11 @@ public class BoletoResource {
 		EOEditingContext editingContext = eoBoleto.editingContext();
 		
 		EORequisicao eoRequisicao = criarRequisicao(editingContext, eoBoleto);
+		
+		if (eoBoleto.banco() == BancoEnum.SANTANDER) {
+			String nossoNumero = colocarDigitoNossoNumeroSantander(eoBoleto.emissor().nossoNumero());
+			eoBoleto.emissor().setNossoNumero(nossoNumero);
+		}
 		
 		editingContext.saveChanges();
 		
@@ -100,5 +109,16 @@ public class BoletoResource {
 		GeradorDeBoleto gerador = new GeradorDeBoleto(boleto);
 
 		return gerador;
+	}
+	
+	String colocarDigitoNossoNumeroSantander(String nossoNumero) {
+		//TODO: melhorar
+	
+		Santander santander = new Santander();
+		Emissor emissor = Emissor.novoEmissor();
+		emissor.comNossoNumero(nossoNumero);
+		String digito = santander.calcularDigitoVerificadorNossoNumero(emissor);
+		
+		return StellaStringUtils.leftPadWithZeros(nossoNumero+digito, 13);
 	}
 }

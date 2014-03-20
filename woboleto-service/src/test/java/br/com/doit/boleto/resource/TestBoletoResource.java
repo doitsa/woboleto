@@ -160,6 +160,13 @@ public class TestBoletoResource {
 
 		assertTrue(IOUtils.contentEquals(result, expectedInput));
 	}
+	
+	@Test
+	public void colocarDigitoVerificadorNossoNumeroQuandoBancoForSantander() throws Exception {
+		String nossoNumero = resource.colocarDigitoNossoNumeroSantander("12");
+		
+		assertThat(nossoNumero, is("0000000000124"));
+	}
 
 	@Before
 	public void setup() {
