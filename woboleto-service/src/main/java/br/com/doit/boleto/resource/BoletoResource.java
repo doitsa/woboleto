@@ -21,11 +21,7 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import br.com.caelum.stella.boleto.Boleto;
-import br.com.caelum.stella.boleto.Emissor;
-import br.com.caelum.stella.boleto.bancos.Santander;
 import br.com.caelum.stella.boleto.transformer.GeradorDeBoleto;
-import br.com.caelum.stella.boleto.utils.StellaStringUtils;
-import br.com.woboleto.model.BancoEnum;
 import br.com.woboleto.model.EOBoleto;
 import br.com.woboleto.model.EORequisicao;
 
