@@ -4,6 +4,9 @@ import java.util.Calendar;
 
 import br.com.caelum.stella.boleto.Boleto;
 import br.com.caelum.stella.boleto.Datas;
+import br.com.caelum.stella.boleto.Emissor;
+import br.com.caelum.stella.boleto.bancos.Santander;
+import br.com.caelum.stella.boleto.utils.StellaStringUtils;
 
 import com.webobjects.eoaccess.EOUtilities;
 import com.webobjects.eocontrol.EOEditingContext;
@@ -79,6 +82,7 @@ public class EOBoleto extends _EOBoleto
 		boleto.comInstrucoes(stringArrayDe(instrucoes()));
 		boleto.comLocaisDePagamento(stringArrayDe(locaisPagamento()));
 
+		
 		if(aceite() != null)
 		{
 			boleto.comAceite(aceite());
@@ -112,6 +116,12 @@ public class EOBoleto extends _EOBoleto
 		if(banco() != null)
 		{
 			boleto.comBanco(banco().toStellaBanco());
+			if (banco() == BancoEnum.SANTANDER) {
+				Santander santander = new Santander();
+				Emissor emissor = boleto.getEmissor();
+				String digito = santander.calcularDigitoVerificadorNossoNumero(emissor);
+				boleto.comEmissor(emissor.comDigitoNossoNumero(digito));
+			}
 		}
 
 		return boleto;

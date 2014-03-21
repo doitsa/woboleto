@@ -148,6 +148,19 @@ public class TestEOBoleto {
 
 		assertThat(boleto.aceite(), is(false));
 	}
+	
+	@Test
+	public void colocarDigitoVerificadorNossoNumeroQuandoBancoForSantander() throws Exception {
+		boleto.setBanco(BancoEnum.SANTANDER);
+		
+		EOEmissor emissor = EOEmissor.createEOEmissor(editingContext);
+		emissor.setNossoNumero("12");
+		boleto.setEmissor(emissor);
+		
+		br.com.caelum.stella.boleto.Boleto result = boleto.toStellaBoleto();
+		
+		assertThat(result.getEmissor().getDigitoNossoNumero(), is("4"));
+	}
 
 	@Test
 	public void naoPodeTerMaisDeDoisLocaisDePagamento() throws Exception {

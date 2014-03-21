@@ -46,14 +46,10 @@ public class BoletoResource {
 			throw new WebApplicationException(new IllegalArgumentException(
 					"Não foi possível criar o boleto"), 400);
 		}
+		
 		EOEditingContext editingContext = eoBoleto.editingContext();
 		
 		EORequisicao eoRequisicao = criarRequisicao(editingContext, eoBoleto);
-		
-		if (eoBoleto.banco() == BancoEnum.SANTANDER) {
-			String nossoNumero = colocarDigitoNossoNumeroSantander(eoBoleto.emissor().nossoNumero());
-			eoBoleto.emissor().setNossoNumero(nossoNumero);
-		}
 		
 		editingContext.saveChanges();
 		
@@ -111,14 +107,4 @@ public class BoletoResource {
 		return gerador;
 	}
 	
-	String colocarDigitoNossoNumeroSantander(String nossoNumero) {
-		//TODO: melhorar
-	
-		Santander santander = new Santander();
-		Emissor emissor = Emissor.novoEmissor();
-		emissor.comNossoNumero(nossoNumero);
-		String digito = santander.calcularDigitoVerificadorNossoNumero(emissor);
-		
-		return StellaStringUtils.leftPadWithZeros(nossoNumero+digito, 13);
-	}
 }
