@@ -198,7 +198,7 @@
 			<dependency>
 				<groupId>com.wounit</groupId>
 				<artifactId>wounit</artifactId>
-				<version>1.2.1</version>
+				<version>1.3-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>commons-io</groupId>
