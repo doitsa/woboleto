@@ -120,7 +120,7 @@ public class EOBoleto extends _EOBoleto
 				Santander santander = new Santander();
 				Emissor emissor = boleto.getEmissor();
 				String digito = santander.calcularDigitoVerificadorNossoNumero(emissor);
-				boleto.comEmissor(emissor.comDigitoNossoNumero(digito));
+				boleto.comEmissor(emissor.comNossoNumero(emissor.getNossoNumero()+digito));
 			}
 		}
 
