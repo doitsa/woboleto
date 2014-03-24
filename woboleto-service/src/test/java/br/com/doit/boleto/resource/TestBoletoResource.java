@@ -169,7 +169,7 @@ public class TestBoletoResource {
 		eoEmissor.setCedente("Instituto Qualisa");
 		eoEmissor.setNumeroConvenio("3903125");
 		eoEmissor.setCarteira("102");
-		eoEmissor.setNossoNumero("3827130004722");
+		eoEmissor.setNossoNumero("382713000472");
 
 		DateTime dataDoc = new DateTime(2014, 2, 1, 0, 0, 0, 0);
 		DateTime dataVenc = new DateTime(2014, 2, 10, 0, 0, 0, 0);
