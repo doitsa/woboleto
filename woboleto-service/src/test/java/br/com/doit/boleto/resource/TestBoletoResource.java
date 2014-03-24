@@ -139,7 +139,7 @@ public class TestBoletoResource {
 
 		ByteArrayInputStream result = new ByteArrayInputStream(resultado);
 
-		assertTrue(IOUtils.contentEquals(result, expectedInput));
+		assertThat(IOUtils.contentEquals(result, expectedInput), is(true));
 	}
 
 	@Test
@@ -153,7 +153,7 @@ public class TestBoletoResource {
 
 		ByteArrayInputStream result = new ByteArrayInputStream(resultado);
 
-		assertTrue(IOUtils.contentEquals(result, expectedInput));
+		assertThat(IOUtils.contentEquals(result, expectedInput), is(true));
 	}
 	
 	@Before
