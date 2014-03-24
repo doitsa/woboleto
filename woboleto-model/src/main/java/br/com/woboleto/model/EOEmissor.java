@@ -43,12 +43,12 @@ public class EOEmissor extends _EOEmissor
 
 		if(digitoVerificadorAgencia() != null)
 		{
-			emissor.comDigitoAgencia(digitoVerificadorAgencia().charAt(0));
+			emissor.comDigitoAgencia(digitoVerificadorAgencia().substring(0));
 		}
 
 		if(digitoVerificadorContaCorrente() != null)
 		{
-			emissor.comDigitoContaCorrente(digitoVerificadorContaCorrente().charAt(0));
+			emissor.comDigitoContaCorrente(digitoVerificadorContaCorrente().substring(0));
 		}
 
 		if(digitoVerificadorNossoNumero() != null)
