@@ -159,7 +159,7 @@ public class TestEOBoleto {
 		
 		br.com.caelum.stella.boleto.Boleto result = boleto.toStellaBoleto();
 		
-		assertThat(result.getEmissor().getDigitoNossoNumero(), is("4"));
+		assertThat(result.getEmissor().getNossoNumero(), is("124"));
 	}
 
 	@Test
