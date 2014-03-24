@@ -33,15 +33,10 @@ import br.com.woboleto.model.EOLocalPagamento;
 import br.com.woboleto.model.EORequisicao;
 import br.com.woboleto.model.EOSacado;
 
-import com.webobjects.eocontrol.EOEditingContext;
-import com.webobjects.eocontrol.EOObjectStore;
 import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSTimestamp;
 import com.wounit.annotations.Dummy;
 import com.wounit.rules.MockEditingContext;
-
-import er.extensions.eof.ERXEC;
-import er.extensions.eof.ERXEC.Factory;
 
 /**
  * @author Rodrigo de Sousa
