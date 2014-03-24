@@ -129,11 +129,6 @@ public class TestBoletoResource {
 		byte[] resultado = resource.gerarBoletoPNG(123,
 				"634df2662567459339a52706b718340b");
 
-		// OutputStream out = new
-		// FileOutputStream("/Users/rdskill/Documents/workspace/woboleto/woboleto-service/src/test/resources/boleto.png");
-
-		// IOUtils.write(resultado, out);
-
 		InputStream expectedInput = getClass().getResourceAsStream(
 				"/boleto.png");
 
