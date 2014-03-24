@@ -1,25 +1,21 @@
 package br.com.doit.boleto.resource;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 
-import org.apache.commons.io.IOUtils;
 import org.joda.time.DateTime;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -125,32 +121,22 @@ public class TestBoletoResource {
 
 	@Test
 	public void retornarBoletoPNGQuandoRequisicaoExistir() throws Exception {
+		byte[] resultado = resource.gerarBoletoPNG(123,	"634df2662567459339a52706b718340b");
 
-		byte[] resultado = resource.gerarBoletoPNG(123,
-				"634df2662567459339a52706b718340b");
-
-		InputStream expectedInput = getClass().getResourceAsStream(
-				"/boleto.png");
-
-		ByteArrayInputStream result = new ByteArrayInputStream(resultado);
-
-		assertThat(IOUtils.contentEquals(result, expectedInput), is(true));
+		// Essa assertiva não garante muita coisa.
+                // Pelo menos dessa forma garantimos que a lógica de gerar o PNG não está com nenhum erro grave.
+		assertThat(resultado, notNullValue());
 	}
 
 	@Test
-	@Ignore("Ignora esse teste pois não é possível gerar um PDF idêntico a cada execução dos testes")
 	public void retornarBoletoPDFQuandoRequisicaoExistir() throws Exception {
-		byte[] resultado = resource.gerarBoletoPDF(123,
-				"634df2662567459339a52706b718340b");
+		byte[] resultado = resource.gerarBoletoPDF(123,	"634df2662567459339a52706b718340b");
 
-		InputStream expectedInput = getClass().getResourceAsStream(
-				"/boleto.pdf");
-
-		ByteArrayInputStream result = new ByteArrayInputStream(resultado);
-
-		assertThat(IOUtils.contentEquals(result, expectedInput), is(true));
+		// Essa assertiva não garante muita coisa.
+		// Pelo menos dessa forma garantimos que a lógica de gerar o PDF não está com nenhum erro grave.
+		assertThat(resultado, notNullValue());
 	}
-	
+
 	@Before
 	public void setup() {
 		locais.get(0).setValor("PAGAR PREFERENCIALMENTE NO BANCO SANTANDER");
