@@ -2,11 +2,11 @@ package br.com.woboleto.model;
 
 import java.util.Calendar;
 
+import br.com.caelum.stella.boleto.Banco;
 import br.com.caelum.stella.boleto.Boleto;
 import br.com.caelum.stella.boleto.Datas;
 import br.com.caelum.stella.boleto.Emissor;
 import br.com.caelum.stella.boleto.bancos.Santander;
-import br.com.caelum.stella.boleto.utils.StellaStringUtils;
 
 import com.webobjects.eoaccess.EOUtilities;
 import com.webobjects.eocontrol.EOEditingContext;
@@ -82,7 +82,7 @@ public class EOBoleto extends _EOBoleto
 		boleto.comInstrucoes(stringArrayDe(instrucoes()));
 		boleto.comLocaisDePagamento(stringArrayDe(locaisPagamento()));
 
-		
+
 		if(aceite() != null)
 		{
 			boleto.comAceite(aceite());
@@ -116,15 +116,43 @@ public class EOBoleto extends _EOBoleto
 		if(banco() != null)
 		{
 			boleto.comBanco(banco().toStellaBanco());
-			if (banco() == BancoEnum.SANTANDER) {
-				Santander santander = new Santander();
-				Emissor emissor = boleto.getEmissor();
-				String digito = santander.calcularDigitoVerificadorNossoNumero(emissor);
-				boleto.comEmissor(emissor.comNossoNumero(emissor.getNossoNumero()+digito));
+
+			switch (banco()) {
+			case ITAU:
+				fixBoletoItau(boleto);
+				break;
+
+			case SANTANDER:
+				fixBoletoSantander(boleto);
+				break;
+
+			default:
+				break;
 			}
 		}
 
 		return boleto;
+	}
+
+	private void fixBoletoItau(Boleto boleto) {
+		Emissor emissor = boleto.getEmissor();
+		Banco banco = boleto.getBanco();
+
+		String agencia = emissor.getAgenciaFormatado();
+		String contaCorrente = banco.getContaCorrenteDoEmissorFormatado(emissor);
+		String carteira = banco.getCarteiraDoEmissorFormatado(emissor);
+		String nossoNumero = banco.getNossoNumeroDoEmissorFormatado(emissor);
+
+		String digito = Integer.toString(banco.getGeradorDeDigito().geraDigitoMod10(agencia + contaCorrente + carteira + nossoNumero));
+
+		boleto.comEmissor(emissor.comDigitoNossoNumero(digito));
+	}
+
+	private void fixBoletoSantander(Boleto boleto) {
+		Emissor emissor = boleto.getEmissor();
+		String digito = new Santander().calcularDigitoVerificadorNossoNumero(emissor);
+
+		boleto.comEmissor(emissor.comNossoNumero(emissor.getNossoNumero() + digito));
 	}
 
 	@Override

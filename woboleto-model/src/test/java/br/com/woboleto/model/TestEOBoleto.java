@@ -2,10 +2,10 @@ package br.com.woboleto.model;
 
 import static com.wounit.matchers.EOAssert.cannotBeSavedBecause;
 import static com.wounit.matchers.EOAssert.confirm;
+import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
-import static org.junit.matchers.JUnitMatchers.hasItems;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
@@ -23,6 +23,7 @@ import br.com.woboleto.model.EOInstrucao;
 import br.com.woboleto.model.EOLocalPagamento;
 
 import com.webobjects.foundation.NSTimestamp;
+import com.wounit.annotations.Dummy;
 import com.wounit.annotations.UnderTest;
 import com.wounit.rules.MockEditingContext;
 
@@ -33,9 +34,14 @@ public class TestEOBoleto {
 	@UnderTest
 	private EOBoleto boleto;
 
+	@Dummy
+	private EOEmissor emissor;
+
+	@Dummy
+	private EOSacado sacado;
+
 	@Rule
-	public final MockEditingContext editingContext = new MockEditingContext(
-			"Boleto");
+	public final MockEditingContext editingContext = new MockEditingContext("Boleto");
 
 	@Test
 	public void converteCamposBoletoParaStellaBoleto() throws Exception {
@@ -148,19 +154,31 @@ public class TestEOBoleto {
 
 		assertThat(boleto.aceite(), is(false));
 	}
-	
+
 	@Test
 	public void colocarDigitoVerificadorNossoNumeroQuandoBancoForSantander() throws Exception {
 		boleto.setBanco(BancoEnum.SANTANDER);
-		
-		EOEmissor emissor = EOEmissor.createEOEmissor(editingContext);
 		emissor.setNossoNumero("12");
-		boleto.setEmissor(emissor);
-		
+
 		br.com.caelum.stella.boleto.Boleto result = boleto.toStellaBoleto();
-		
+
 		assertThat(result.getEmissor().getNossoNumero(), is("124"));
 	}
+
+	@Test
+	public void setarDigitoNossoNumeroQuandoBancoForItau() throws Exception {
+		emissor.setAgencia("167");
+		emissor.setContaCorrente("45145");
+		emissor.setCarteira("157");
+		emissor.setNossoNumero("21897666");
+
+		boleto.setBanco(BancoEnum.ITAU);
+
+		br.com.caelum.stella.boleto.Boleto result = boleto.toStellaBoleto();
+
+		assertThat(result.getEmissor().getDigitoNossoNumero(), is("6"));
+	}
+
 
 	@Test
 	public void naoPodeTerMaisDeDoisLocaisDePagamento() throws Exception {
@@ -174,11 +192,11 @@ public class TestEOBoleto {
 		confirm(boleto,
 				cannotBeSavedBecause("O boleto pode conter no m\u00e1ximo 2 locais de pagamento"));
 	}
-	
+
 	@Before
 	public void setup() {
-		boleto.setSacado(EOSacado.createEOSacado(editingContext));
-		boleto.setEmissor(EOEmissor.createEOEmissor(editingContext));
+		boleto.setSacado(sacado);
+		boleto.setEmissor(emissor);
 	}
 
 	@Test
