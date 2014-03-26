@@ -1,6 +1,6 @@
 package br.com.doit.boleto.pojo;
 
-public class LocalPagamento {
+public class LocalPagamento implements Informacao {
 	private String valor;
 
 	public String getValor() {

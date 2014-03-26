@@ -1,6 +1,6 @@
 package br.com.doit.boleto.pojo;
 
-public class Instrucao {
+public class Instrucao implements Informacao {
 	private String valor;
 
 	public String getValor() {
