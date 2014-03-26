@@ -16,6 +16,7 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.MessageBodyReader;
 import javax.ws.rs.ext.Provider;
 
+import org.apache.commons.lang.UnhandledException;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import com.webobjects.eoaccess.EOAttribute;
@@ -30,8 +31,7 @@ import er.extensions.eof.ERXEOControlUtilities;
 
 @Provider
 @Consumes(MediaType.APPLICATION_JSON)
-public class EnterpriseObjectReader<T extends EOEnterpriseObject> implements
-		MessageBodyReader<T> {
+public class EnterpriseObjectReader<T extends EOEnterpriseObject> implements MessageBodyReader<T> {
 	private static final List<JsonFormatter<?>> FORMATTERS = new ArrayList<JsonFormatter<?>>();
 
 	static {
@@ -50,23 +50,19 @@ public class EnterpriseObjectReader<T extends EOEnterpriseObject> implements
 	}
 
 	@Override
-	public boolean isReadable(Class<?> clazz, Type type, Annotation[] annotations,
-			MediaType mediaType) {
-		String tipo = mediaType.getType()+"/"+mediaType.getSubtype();
+	public boolean isReadable(Class<?> clazz, Type type, Annotation[] annotations, MediaType mediaType) {
+		String tipo = mediaType.getType() + "/" + mediaType.getSubtype();
 		return tipo.equals(MediaType.APPLICATION_JSON) && EOEnterpriseObject.class.isAssignableFrom(clazz);
 	}
 
 	@Override
-	public T readFrom(Class<T> clazz, Type type, Annotation[] annotations,
-			MediaType mediaType, MultivaluedMap<String, String> map,
-			InputStream input) throws IOException, WebApplicationException {
+	public T readFrom(Class<T> clazz, Type type, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, String> map, InputStream input) throws IOException, WebApplicationException {
 		ObjectMapper mapper = new ObjectMapper();
 
 		@SuppressWarnings("unchecked")
 		Map<String, Object> data = mapper.readValue(input, Map.class);
 
-		T eo = ERXEOControlUtilities.createAndInsertObject(editingContext,
-				clazz);
+		T eo = ERXEOControlUtilities.createAndInsertObject(editingContext, clazz);
 
 		populateEO(eo, data);
 
@@ -76,62 +72,75 @@ public class EnterpriseObjectReader<T extends EOEnterpriseObject> implements
 	private void populateEO(EOEnterpriseObject eo, Map<String, Object> data) {
 		Set<String> keys = data.keySet();
 
+		EOEntity entity = EOUtilities.entityForObject(editingContext, eo);
+
 		for (String key : keys) {
-			EOEntity entity = EOUtilities.entityForObject(editingContext, eo);
-
 			EOAttribute attribute = entity.attributeNamed(key);
+			EORelationship relationship = entity.relationshipNamed(key);
 
-			if (attribute == null) {
-				EORelationship relationship = entity.relationshipNamed(key);
-
-				EOEntity destinationEntity = relationship.destinationEntity();
-
-				List<Map<String, Object>> listOfData;
-
-				if (relationship.isToMany()) {
-					listOfData = (List<Map<String, Object>>) data.get(key);
-				} else {
-					listOfData = new ArrayList<Map<String, Object>>(1);
-
-					listOfData.add((Map<String, Object>) data.get(key));
-				}
-
-				for (Map<String, Object> relatedData : listOfData) {
-					EOEnterpriseObject relatedEO = ERXEOControlUtilities
-							.createAndInsertObject(editingContext,
-									destinationEntity.name());
-
-					if (relationship.isToMany()) {
-						eo.addObjectToBothSidesOfRelationshipWithKey(relatedEO,
-								key);
-					} else {
-						eo.takeValueForKey(relatedEO, key);
-					}
-
-					populateEO(relatedEO, relatedData);
-				}
-
-				continue;
-			}
-
-			String className = attribute.valueTypeClassName();
-
-			try {
-				Class<?> attributeClass = Class.forName(className);
-
-				for (JsonFormatter<?> formatter : FORMATTERS) {
-					if (formatter.canFormat(attributeClass)) {
-						Object value = formatter.format(attributeClass,
-								data.get(key));
-
-						eo.takeValueForKey(value, key);
-
-						break;
-					}
-				}
-			} catch (ClassNotFoundException exception) {
-				exception.printStackTrace();
+			if (attribute != null) {
+				populateEOAttribute(eo, data, attribute);
+			} else if (relationship != null) {
+				populateEORelationship(eo, data, relationship);
+			} else {
+				throw new WebApplicationException("The entity " + entity.name() + " has neither an attribute nor a relationship named '" + key + "'.", 400);
 			}
 		}
+	}
+
+	private void populateEOAttribute(EOEnterpriseObject eo, Map<String, Object> data, EOAttribute attribute) {
+		String className = attribute.valueTypeClassName();
+		String key = attribute.name();
+
+		try {
+			Class<?> attributeClass = Class.forName(className);
+
+			for (JsonFormatter<?> formatter : FORMATTERS) {
+				if (formatter.canFormat(attributeClass)) {
+					Object value = formatter.format(attributeClass, data.get(key));
+
+					eo.takeValueForKey(value, key);
+
+					break;
+				}
+			}
+		} catch (ClassNotFoundException exception) {
+			throw new UnhandledException(exception);
+		}
+	}
+
+	private void populateEORelationship(EOEnterpriseObject eo, Map<String, Object> data, EORelationship relationship) {
+		String key = relationship.name();
+		Object value = data.get(key);
+
+		if (value == null) {
+			return;
+		}
+
+		EOEntity destinationEntity = relationship.destinationEntity();
+
+		if (relationship.isToMany()) {
+			@SuppressWarnings("unchecked")
+			List<Map<String, Object>> listOfData = (List<Map<String, Object>>) value;
+
+			for (Map<String, Object> relatedData : listOfData) {
+				EOEnterpriseObject relatedEO = createAndPopulateEO(destinationEntity.name(), relatedData);
+
+				eo.addObjectToBothSidesOfRelationshipWithKey(relatedEO, key);
+			}
+		} else {
+			@SuppressWarnings("unchecked")
+			EOEnterpriseObject relatedEO = createAndPopulateEO(destinationEntity.name(), (Map<String, Object>) value);
+
+			eo.takeValueForKey(relatedEO, key);
+		}
+	}
+
+	private EOEnterpriseObject createAndPopulateEO(String entityName, Map<String, Object> data) {
+		EOEnterpriseObject eo = ERXEOControlUtilities.createAndInsertObject(editingContext, entityName);
+
+		populateEO(eo, data);
+
+		return eo;
 	}
 }

@@ -4,11 +4,15 @@ import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
 import org.joda.time.DateTime;
@@ -19,14 +23,9 @@ import org.junit.Test;
 import br.com.woboleto.model.BancoEnum;
 import br.com.woboleto.model.EOBoleto;
 
-import com.webobjects.eocontrol.EOEditingContext;
 import com.webobjects.eocontrol.EOEnterpriseObject;
-import com.webobjects.eocontrol.EOObjectStore;
 import com.webobjects.foundation.NSTimestamp;
 import com.wounit.rules.MockEditingContext;
-
-import er.extensions.eof.ERXEC;
-import er.extensions.eof.ERXEC.Factory;
 
 /**
  * @author rdskill
@@ -145,7 +144,40 @@ public class TestEnterpriseObjectReader {
 		assertThat(result.descricoes().get(0).valor(), is("descricao 1"));
 		assertThat(result.descricoes().get(1).valor(), is("descricao 2"));
 	}
-	
+
+	@Test
+	public void ignoreNullToManyRelationshipWhenParsingJson() throws Exception {
+		InputStream json = getClass().getResourceAsStream("/boleto10.json");
+
+		EOBoleto result = reader.readFrom(EOBoleto.class, null, null, null, null, json);
+
+		assertThat(result.descricoes(), notNullValue());
+		assertThat(result.descricoes().size(), is(0));
+	}
+
+	@Test
+	public void ignoreNullToOneRelationshipWhenParsingJson() throws Exception {
+		InputStream json = getClass().getResourceAsStream("/boleto11.json");
+
+		EOBoleto result = reader.readFrom(EOBoleto.class, null, null, null, null, json);
+
+		assertThat(result.emissor(), nullValue());
+	}
+
+	@Test
+	public void throwExceptionWhenParsingJsonWithInvalidField() throws Exception {
+		InputStream json = getClass().getResourceAsStream("/boleto12.json");
+
+		try {
+			reader.readFrom(EOBoleto.class, null, null, null, null, json);
+
+			fail("Must throw an exception");
+		} catch (WebApplicationException exception) {
+			assertThat(exception.getMessage(), is("The entity EOBoleto has neither an attribute nor a relationship named 'invalid'."));
+			assertThat(exception.getResponse().getStatus(), is(400));
+		}
+	}
+
 	@Before
 	public void setup() {
 		reader = new EnterpriseObjectReader<EOBoleto>();
