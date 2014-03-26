@@ -16,11 +16,6 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import br.com.caelum.stella.boleto.Boleto;
-import br.com.woboleto.model.BancoEnum;
-import br.com.woboleto.model.EOBoleto;
-import br.com.woboleto.model.EODescricao;
-import br.com.woboleto.model.EOInstrucao;
-import br.com.woboleto.model.EOLocalPagamento;
 
 import com.webobjects.foundation.NSTimestamp;
 import com.wounit.annotations.Dummy;
@@ -244,5 +239,8 @@ public class TestEOBoleto {
 		boleto.setDataVencimento(new NSTimestamp());
 		boleto.setNumeroDocumento("1234");
 		boleto.setValor(BigDecimal.TEN);
+		boleto.setCodigoDeBarras("102030405060708090");
+		boleto.setLinhaDigitavel("018023042030");
 	}
+	
 }

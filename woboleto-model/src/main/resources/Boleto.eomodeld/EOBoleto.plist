@@ -9,6 +9,11 @@
             valueClassName = "br.com.woboleto.model.BancoEnum"; 
         }, 
         {
+            columnName = "codigo_de_barras"; 
+            name = codigoDeBarras; 
+            prototypeName = longText; 
+        }, 
+        {
             allowsNull = Y; 
             columnName = "data_documento"; 
             name = dataDocumento; 
@@ -39,6 +44,11 @@
             prototypeName = varchar16; 
         }, 
         {allowsNull = N; name = id; prototypeName = id; }, 
+        {
+            columnName = "linha_digitavel"; 
+            name = linhaDigitavel; 
+            prototypeName = longText; 
+        }, 
         {
             allowsNull = Y; 
             columnName = "numero_documento"; 
@@ -78,6 +88,7 @@
     classProperties = (
         aceite, 
         banco, 
+        codigoDeBarras, 
         dataDocumento, 
         dataProcessamento, 
         dataVencimento, 
@@ -85,6 +96,7 @@
         emissor, 
         especieDocumento, 
         instrucoes, 
+        linhaDigitavel, 
         locaisPagamento, 
         numeroDocumento, 
         quantidadeMoeda, 

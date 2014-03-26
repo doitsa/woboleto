@@ -17,10 +17,12 @@ public abstract class _EOBoleto extends  ERXGenericRecord {
 // Attribute Keys
   public static final ERXKey<Boolean> ACEITE = new ERXKey<Boolean>("aceite");
   public static final ERXKey<br.com.woboleto.model.BancoEnum> BANCO = new ERXKey<br.com.woboleto.model.BancoEnum>("banco");
+  public static final ERXKey<String> CODIGO_DE_BARRAS = new ERXKey<String>("codigoDeBarras");
   public static final ERXKey<NSTimestamp> DATA_DOCUMENTO = new ERXKey<NSTimestamp>("dataDocumento");
   public static final ERXKey<NSTimestamp> DATA_PROCESSAMENTO = new ERXKey<NSTimestamp>("dataProcessamento");
   public static final ERXKey<NSTimestamp> DATA_VENCIMENTO = new ERXKey<NSTimestamp>("dataVencimento");
   public static final ERXKey<String> ESPECIE_DOCUMENTO = new ERXKey<String>("especieDocumento");
+  public static final ERXKey<String> LINHA_DIGITAVEL = new ERXKey<String>("linhaDigitavel");
   public static final ERXKey<String> NUMERO_DOCUMENTO = new ERXKey<String>("numeroDocumento");
   public static final ERXKey<java.math.BigDecimal> QUANTIDADE_MOEDA = new ERXKey<java.math.BigDecimal>("quantidadeMoeda");
   public static final ERXKey<java.math.BigDecimal> VALOR = new ERXKey<java.math.BigDecimal>("valor");
@@ -35,10 +37,12 @@ public abstract class _EOBoleto extends  ERXGenericRecord {
 	// Attributes
 	public static final String ACEITE_KEY = "aceite";
 	public static final String BANCO_KEY = "banco";
+	public static final String CODIGO_DE_BARRAS_KEY = "codigoDeBarras";
 	public static final String DATA_DOCUMENTO_KEY = "dataDocumento";
 	public static final String DATA_PROCESSAMENTO_KEY = "dataProcessamento";
 	public static final String DATA_VENCIMENTO_KEY = "dataVencimento";
 	public static final String ESPECIE_DOCUMENTO_KEY = "especieDocumento";
+	public static final String LINHA_DIGITAVEL_KEY = "linhaDigitavel";
 	public static final String NUMERO_DOCUMENTO_KEY = "numeroDocumento";
 	public static final String QUANTIDADE_MOEDA_KEY = "quantidadeMoeda";
 	public static final String VALOR_KEY = "valor";
@@ -83,6 +87,17 @@ public abstract class _EOBoleto extends  ERXGenericRecord {
     takeStoredValueForKey(value, "banco");
   }
 
+  public String codigoDeBarras() {
+    return (String) storedValueForKey("codigoDeBarras");
+  }
+
+  public void setCodigoDeBarras(String value) {
+    if (_EOBoleto.logger.isDebugEnabled()) {
+    	_EOBoleto.logger.debug( "updating codigoDeBarras from " + codigoDeBarras() + " to " + value);
+    }
+    takeStoredValueForKey(value, "codigoDeBarras");
+  }
+
   public NSTimestamp dataDocumento() {
     return (NSTimestamp) storedValueForKey("dataDocumento");
   }
@@ -125,6 +140,17 @@ public abstract class _EOBoleto extends  ERXGenericRecord {
     	_EOBoleto.logger.debug( "updating especieDocumento from " + especieDocumento() + " to " + value);
     }
     takeStoredValueForKey(value, "especieDocumento");
+  }
+
+  public String linhaDigitavel() {
+    return (String) storedValueForKey("linhaDigitavel");
+  }
+
+  public void setLinhaDigitavel(String value) {
+    if (_EOBoleto.logger.isDebugEnabled()) {
+    	_EOBoleto.logger.debug( "updating linhaDigitavel from " + linhaDigitavel() + " to " + value);
+    }
+    takeStoredValueForKey(value, "linhaDigitavel");
   }
 
   public String numeroDocumento() {
@@ -379,9 +405,13 @@ public abstract class _EOBoleto extends  ERXGenericRecord {
 
 
   public static EOBoleto createEOBoleto(EOEditingContext editingContext, Boolean aceite
+, String codigoDeBarras
+, String linhaDigitavel
 , br.com.woboleto.model.EOEmissor emissor, br.com.woboleto.model.EOSacado sacado) {
     EOBoleto eo = (EOBoleto) EOUtilities.createAndInsertInstance(editingContext, _EOBoleto.ENTITY_NAME);
 		eo.setAceite(aceite);
+		eo.setCodigoDeBarras(codigoDeBarras);
+		eo.setLinhaDigitavel(linhaDigitavel);
     eo.setEmissorRelationship(emissor);
     eo.setSacadoRelationship(sacado);
     return eo;

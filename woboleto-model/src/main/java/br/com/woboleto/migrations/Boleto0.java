@@ -27,12 +27,14 @@ public class Boleto0 extends ERXMigrationDatabase.Migration
         ERXMigrationTable eoBoletoTable = database.newTableNamed("boleto");
         eoBoletoTable.newFlagBooleanColumn("aceite", false);
         eoBoletoTable.newStringColumn("banco", 50, true);
+        eoBoletoTable.newLargeStringColumn("codigo_de_barras", false);
         eoBoletoTable.newDateColumn("data_documento", true);
         eoBoletoTable.newDateColumn("data_processamento", true);
         eoBoletoTable.newDateColumn("data_vencimento", true);
         eoBoletoTable.newIntegerColumn("emissor_id", false);
         eoBoletoTable.newStringColumn("especie_documento", 16, true);
         eoBoletoTable.newIntegerColumn("id", false);
+        eoBoletoTable.newLargeStringColumn("linha_digitavel", false);
         eoBoletoTable.newStringColumn("numero_documento", 16, true);
         eoBoletoTable.newBigDecimalColumn("quantidade_moeda", 30, 2, true);
         eoBoletoTable.newIntegerColumn("sacado_id", false);
