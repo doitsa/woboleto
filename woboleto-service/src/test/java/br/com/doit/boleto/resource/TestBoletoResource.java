@@ -131,7 +131,7 @@ public class TestBoletoResource {
 			resource.salvarBoleto(boleto);
 		} catch (WebApplicationException exception) {
 			assertThat(exception.getResponse().getStatus(), is(400));
-			assertThat(exception.getCause().getMessage(), is("Não foi possível criar o boleto. Verificar dados enviados."));
+			assertThat(exception.getMessage(), is("Não foi possível criar o boleto. Verificar dados enviados."));
 		}
 	}
 
