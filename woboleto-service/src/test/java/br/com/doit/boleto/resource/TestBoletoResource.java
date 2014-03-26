@@ -1,5 +1,6 @@
 package br.com.doit.boleto.resource;
 
+import static com.wounit.matchers.EOAssert.hasBeenSaved;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
@@ -22,6 +23,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import br.com.caelum.stella.boleto.Banco;
+import br.com.caelum.stella.boleto.bancos.GeradorDeLinhaDigitavel;
 import br.com.woboleto.model.BancoEnum;
 import br.com.woboleto.model.EOBoleto;
 import br.com.woboleto.model.EOEmissor;
@@ -58,11 +61,22 @@ public class TestBoletoResource {
 	private EORequisicao novaRequisicao;
 
 	@Test
-	public void saveBoletoIfDataIsCorrect() throws Exception {
+	public void validarDadosDoBoletoESalvarQuandoEstiverCorreto()
+			throws Exception {
 		Response response = resource.salvarBoleto(boleto);
+
+		Banco banco = boleto.banco().toStellaBanco();
+		String codigoDeBarras = banco.geraCodigoDeBarrasPara(boleto
+				.toStellaBoleto());
+
+		GeradorDeLinhaDigitavel gerador = new GeradorDeLinhaDigitavel();
+		String linhaDigitavel = gerador.geraLinhaDigitavelPara(codigoDeBarras,
+				banco);
 
 		assertThat(response.getStatus(), is(201));
 		assertThat(response.getEntity(), is((Object)"{\"hash\":\"abcd1234\",\"sequential\":1}"));
+		assertThat(requisicao, hasBeenSaved());
+		assertThat(boleto.linhaDigitavel(), is(linhaDigitavel));
 	}
 
 	@Test
@@ -102,6 +116,22 @@ public class TestBoletoResource {
 			assertThat(exception.getResponse().getStatus(), is(400));
 			assertThat(exception.getCause().getMessage(),
 					is("É necessário informar o número da requisição e o hash"));
+		}
+	}
+	
+	@Test
+	public void lancarExcecaoQuandoBoletoForInvalido() throws Exception {
+		try {
+			EOEmissor eoEmissor = EOEmissor.createEOEmissor(editingContext);
+			eoEmissor.setNumeroConvenio(null);
+			eoEmissor.setNossoNumero("123");
+			
+			boleto.setEmissor(eoEmissor);
+			
+			resource.salvarBoleto(boleto);
+		} catch (WebApplicationException exception) {
+			assertThat(exception.getResponse().getStatus(), is(400));
+			assertThat(exception.getCause().getMessage(), is("Não foi possível criar o boleto. Verificar dados enviados."));
 		}
 	}
 
