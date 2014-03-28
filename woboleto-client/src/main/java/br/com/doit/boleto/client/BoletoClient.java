@@ -1,10 +1,8 @@
 package br.com.doit.boleto.client;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 
-import javax.print.DocFlavor.BYTE_ARRAY;
 import javax.ws.rs.core.MediaType;
 
 import org.codehaus.jackson.map.ObjectMapper;
@@ -18,8 +16,6 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.json.JSONConfiguration;
-import com.sun.jersey.core.impl.provider.entity.ByteArrayProvider;
-import com.sun.research.ws.wadl.Response;
 
 public class BoletoClient {
 
