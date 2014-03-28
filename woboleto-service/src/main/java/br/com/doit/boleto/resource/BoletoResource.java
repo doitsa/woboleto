@@ -20,9 +20,7 @@ import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
-import br.com.caelum.stella.boleto.Banco;
 import br.com.caelum.stella.boleto.Boleto;
-import br.com.caelum.stella.boleto.bancos.GeradorDeLinhaDigitavel;
 import br.com.caelum.stella.boleto.transformer.GeradorDeBoleto;
 import br.com.woboleto.model.EOBoleto;
 import br.com.woboleto.model.EORequisicao;
@@ -48,12 +46,11 @@ public class BoletoResource {
 		EOEditingContext editingContext = eoBoleto.editingContext();
 		
 		try {
-			Banco banco = eoBoleto.banco().toStellaBanco();
-			eoBoleto.setCodigoDeBarras(banco.geraCodigoDeBarrasPara(eoBoleto.toStellaBoleto()));
-		
-			GeradorDeLinhaDigitavel gerador = new GeradorDeLinhaDigitavel();
-			eoBoleto.setLinhaDigitavel(gerador.geraLinhaDigitavelPara(eoBoleto.codigoDeBarras(), banco));
-			
+			Boleto stellaBoleto = eoBoleto.toStellaBoleto();
+
+			eoBoleto.setCodigoDeBarras(stellaBoleto.getCodigoDeBarras());
+			eoBoleto.setLinhaDigitavel(stellaBoleto.getLinhaDigitavel());
+
 		} catch (Exception exception) {
 			throw new WebApplicationException("Não foi possível criar o boleto. Verificar dados enviados.", exception, 400);
 		}
