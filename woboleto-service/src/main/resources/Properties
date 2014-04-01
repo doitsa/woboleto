@@ -46,7 +46,7 @@ dbConnectPasswordGLOBAL=p3pp3R
 dbConnectPluginGLOBAL=PostgresqlPlugIn
 dbConnectDriverGLOBAL=org.postgresql.Driver
 dbEOPrototypesEntityGLOBAL=EOJDBCPostgresqlPrototypes
-dbConnectURLGLOBAL=jdbc:postgresql://localhost/woboleto
+dbConnectURLGLOBAL=jdbc:postgresql://db.doit.com.br/woboleto
 
 #========================================================================
 # Migrations
