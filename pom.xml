@@ -28,6 +28,12 @@
 		<module>woboleto-model</module>
 	</modules>
 
+	<scm>
+		<connection>scm:git:git@github.com:doitsa/woboleto.git</connection>
+		<url>scm:git:git@github.com:doitsa/woboleto.git</url>
+		<developerConnection>scm:git:git@github.com:doitsa/woboleto.git</developerConnection>
+	</scm>
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
