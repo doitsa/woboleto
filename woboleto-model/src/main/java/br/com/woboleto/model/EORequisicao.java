@@ -4,6 +4,8 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import org.apache.commons.lang.UnhandledException;
+
 import er.extensions.eof.ERXEOControlUtilities;
 
 public class EORequisicao extends _EORequisicao {
@@ -22,7 +24,7 @@ public class EORequisicao extends _EORequisicao {
 		try {
 			setHash(criarMd5("woboleto"+sequential()));
 		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
+			throw new UnhandledException(e);
 		}
 	}
 
