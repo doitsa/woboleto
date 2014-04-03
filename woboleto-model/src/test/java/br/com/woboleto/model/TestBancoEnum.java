@@ -24,7 +24,7 @@ public class TestBancoEnum {
 		Object[][] data = new Object[][] {
 				{ BancoEnum.BANCO_DO_BRASIL, BancoDoBrasil.class },
 				{ BancoEnum.BRADESCO, Bradesco.class },
-				{ BancoEnum.CAIXA_ECONOMICA, Caixa.class },
+				{ BancoEnum.CAIXA, Caixa.class },
 				{ BancoEnum.ITAU, Itau.class } };
 
 		return Arrays.asList(data);
