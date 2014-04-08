@@ -47,11 +47,14 @@ public class BoletoResource {
 		
 		EOEditingContext editingContext = eoBoleto.editingContext();
 		
+		Boleto stellaBoleto = null;
 		try {
-			Boleto stellaBoleto = eoBoleto.toStellaBoleto();
+			stellaBoleto = eoBoleto.toStellaBoleto();
 
 			eoBoleto.setCodigoDeBarras(stellaBoleto.getCodigoDeBarras());
+			logger.info("Código de Barras: " + eoBoleto.codigoDeBarras());
 			eoBoleto.setLinhaDigitavel(stellaBoleto.getLinhaDigitavel());
+			logger.info("Linha digitável: " + eoBoleto.linhaDigitavel());
 
 		} catch (Exception exception) {
 			logger.error("Não foi possível criar o boleto. Verificar dados enviados.", exception);
@@ -70,6 +73,7 @@ public class BoletoResource {
 
 		try {
 			mapAsJson = mapper.writeValueAsString(dictionary);
+			logger.info("JSON de resposta: "+mapAsJson);
 		} catch (Exception exception) {
 			logger.error("Não foi possível criar o boleto. Erro no parse.",exception);
 			throw new WebApplicationException("Não foi possível criar o boleto. Erro no parse.", exception, 400);
@@ -78,6 +82,7 @@ public class BoletoResource {
 	}
 
 	EORequisicao criarRequisicao(EOEditingContext editingContext, EOBoleto boleto) {
+		logger.info("Criando requisição");
 		return EORequisicao.createEORequisicao(editingContext, null, null, boleto);
 	}
 	
@@ -85,8 +90,9 @@ public class BoletoResource {
 	@GET
 	@Produces("application/pdf")
 	public byte[] gerarBoletoPDF(@PathParam("sequencial") Integer sequencial, @QueryParam("hash") String hash) {
+		logger.info("Gerando boleto PDF");
 		GeradorDeBoleto gerador = consultarRequisicao(sequencial, hash);
-
+		logger.info("Boleto gerado em PDF com sucesso!");
 		return gerador.geraPDF();
 	}
 
@@ -94,26 +100,32 @@ public class BoletoResource {
 	@GET
 	@Produces("image/png")
 	public byte[] gerarBoletoPNG(@PathParam("sequencial") Integer sequencial, @QueryParam("hash") String hash) {
+		logger.info("Gerando boleto PNG");
 		GeradorDeBoleto gerador = consultarRequisicao(sequencial, hash);
-
+		logger.info("Boleto gerado em PNG com sucesso!");
 		return gerador.geraPNG();
 	}
 
 	private GeradorDeBoleto consultarRequisicao(Integer requestId, String hash) {
 		if (requestId == null || hash == null) {
+			logger.error("Erro ao consultar a requisição");
 			throw new WebApplicationException(new IllegalArgumentException(
 					"É necessário informar o número da requisição e o hash"), 400);
 		}
 		
 		EOEditingContext editingContext = ERXEC.newEditingContext();
 
+		logger.info("Fazendo busca do boleto");
 		EORequisicao eoRequisicao = EORequisicao.fetchEORequisicao(
 				editingContext, EORequisicao.SEQUENTIAL.is(requestId).and(EORequisicao.HASH.is(hash)));
 
 		if (eoRequisicao == null) {
+			logger.error("Não há boleto com os parametros enviados");
 			throw new WebApplicationException(new IllegalArgumentException(
 					"Não há boleto com o ID informado"), 404);
 		}
+		
+		logger.info("Boleto encontrado!");
 
 		Boleto boleto = eoRequisicao.boleto().toStellaBoleto();
 
