@@ -177,6 +177,20 @@ public class TestEnterpriseObjectReader {
 			assertThat(exception.getResponse().getStatus(), is(400));
 		}
 	}
+	
+	@Test
+	public void verifyIfDataIsOkWhenSendingTwoRequisitions() throws Exception {
+		EOBoleto result = reader.readFrom(EOBoleto.class, null, null, null,
+				null, getClass().getResourceAsStream("/boleto13.json"));
+				
+		EOBoleto result2 = reader.readFrom(EOBoleto.class, null, null, null,
+				null, getClass().getResourceAsStream("/boleto14.json"));
+		
+		assertThat(result.banco(), is(BancoEnum.BANCO_DO_BRASIL));
+		assertThat(result.valor(), is(new BigDecimal(1000)));
+		assertThat(result2.banco(), is(BancoEnum.BRADESCO));
+		assertThat(result2.valor(), is(new BigDecimal(100)));
+	}
 
 	@Before
 	public void setup() {
