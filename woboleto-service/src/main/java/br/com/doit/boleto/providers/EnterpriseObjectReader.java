@@ -41,14 +41,6 @@ public class EnterpriseObjectReader<T extends EOEnterpriseObject> implements Mes
 		FORMATTERS.add(new AnyObjectJsonFormatter());
 	}
 
-	private final EOEditingContext editingContext;
-
-	public EnterpriseObjectReader() {
-		super();
-
-		editingContext = ERXEC.newEditingContext();
-	}
-
 	@Override
 	public boolean isReadable(Class<?> clazz, Type type, Annotation[] annotations, MediaType mediaType) {
 		String tipo = mediaType.getType() + "/" + mediaType.getSubtype();
@@ -61,6 +53,8 @@ public class EnterpriseObjectReader<T extends EOEnterpriseObject> implements Mes
 
 		@SuppressWarnings("unchecked")
 		Map<String, Object> data = mapper.readValue(input, Map.class);
+		
+		EOEditingContext editingContext = ERXEC.newEditingContext();
 
 		T eo = ERXEOControlUtilities.createAndInsertObject(editingContext, clazz);
 
@@ -72,7 +66,7 @@ public class EnterpriseObjectReader<T extends EOEnterpriseObject> implements Mes
 	private void populateEO(EOEnterpriseObject eo, Map<String, Object> data) {
 		Set<String> keys = data.keySet();
 
-		EOEntity entity = EOUtilities.entityForObject(editingContext, eo);
+		EOEntity entity = EOUtilities.entityForObject(eo.editingContext(), eo);
 
 		for (String key : keys) {
 			EOAttribute attribute = entity.attributeNamed(key);
@@ -124,19 +118,19 @@ public class EnterpriseObjectReader<T extends EOEnterpriseObject> implements Mes
 			List<Map<String, Object>> listOfData = (List<Map<String, Object>>) value;
 
 			for (Map<String, Object> relatedData : listOfData) {
-				EOEnterpriseObject relatedEO = createAndPopulateEO(destinationEntity.name(), relatedData);
+				EOEnterpriseObject relatedEO = createAndPopulateEO(destinationEntity.name(), relatedData, eo.editingContext());
 
 				eo.addObjectToBothSidesOfRelationshipWithKey(relatedEO, key);
 			}
 		} else {
 			@SuppressWarnings("unchecked")
-			EOEnterpriseObject relatedEO = createAndPopulateEO(destinationEntity.name(), (Map<String, Object>) value);
+			EOEnterpriseObject relatedEO = createAndPopulateEO(destinationEntity.name(), (Map<String, Object>) value, eo.editingContext());
 
 			eo.takeValueForKey(relatedEO, key);
 		}
 	}
 
-	private EOEnterpriseObject createAndPopulateEO(String entityName, Map<String, Object> data) {
+	private EOEnterpriseObject createAndPopulateEO(String entityName, Map<String, Object> data, EOEditingContext editingContext) {
 		EOEnterpriseObject eo = ERXEOControlUtilities.createAndInsertObject(editingContext, entityName);
 
 		populateEO(eo, data);
