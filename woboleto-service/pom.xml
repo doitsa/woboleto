@@ -28,6 +28,11 @@
 				<targetPath>WebServerResources</targetPath>
 				<directory>${basedir}/src/main/webserver-resources</directory>
 			</resource>
+			<resource>
+				<targetPath>Resources</targetPath>
+				<directory>${basedir}/src/main/resources</directory>
+			<filtering>true</filtering>
+		</resource>
 		</resources>
 		<testResources>
 			<testResource>

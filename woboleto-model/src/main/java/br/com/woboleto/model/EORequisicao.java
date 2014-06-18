@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import er.extensions.eof.ERXEOControlUtilities;
+import er.extensions.foundation.ERXProperties;
 
 public class EORequisicao extends _EORequisicao {
 	
@@ -25,6 +26,10 @@ public class EORequisicao extends _EORequisicao {
 		if (resultado == null) {
 			resultado = 0;
 		}
+		
+		String versao = ERXProperties.stringForKey("application.version");
+		
+		setVersao(versao);
 
 		setSequential(resultado + 1);
 		

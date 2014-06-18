@@ -29,6 +29,7 @@ import com.webobjects.foundation.NSArray;
 
 import er.extensions.eof.ERXEC;
 import er.extensions.foundation.ERXDictionaryUtilities;
+import er.extensions.foundation.ERXProperties;
 
 @Path("/boletos")
 public class BoletoResource {
@@ -83,7 +84,7 @@ public class BoletoResource {
 
 	EORequisicao criarRequisicao(EOEditingContext editingContext, EOBoleto boleto) {
 		logger.info("Criando requisição");
-		return EORequisicao.createEORequisicao(editingContext, null, null, boleto);
+		return EORequisicao.createEORequisicao(editingContext, null, null, null, boleto);
 	}
 	
 	@Path("/{sequencial}.pdf")

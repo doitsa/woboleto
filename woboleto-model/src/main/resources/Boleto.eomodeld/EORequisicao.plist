@@ -8,11 +8,17 @@
         }, 
         {columnName = hash; name = hash; prototypeName = longText; }, 
         {allowsNull = N; name = id; prototypeName = id; }, 
-        {columnName = sequential; name = sequential; prototypeName = id; }
+        {columnName = sequential; name = sequential; prototypeName = id; }, 
+        {
+            allowsNull = N; 
+            columnName = versao; 
+            name = versao; 
+            prototypeName = varchar16; 
+        }
     ); 
     attributesUsedForLocking = (boletoId, id); 
     className = "br.com.woboleto.model.EORequisicao"; 
-    classProperties = (boleto, hash, sequential); 
+    classProperties = (boleto, hash, sequential, versao); 
     externalName = requisicao; 
     fetchSpecificationDictionary = {}; 
     internalInfo = {"_javaClientClassName" = EORequisicao; }; 

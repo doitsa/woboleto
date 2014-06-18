@@ -21,6 +21,8 @@ WOAutoOpenInBrowser=true
 #WOSessionTimeOut=3600
 #WOAllowsConcurrentRequestHandling=false
 
+application.version = ${project.version}
+
 #========================================================================
 # OGNL
 #========================================================================
