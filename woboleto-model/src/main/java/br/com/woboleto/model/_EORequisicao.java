@@ -17,12 +17,14 @@ public abstract class _EORequisicao extends  ERXGenericRecord {
 // Attribute Keys
   public static final ERXKey<String> HASH = new ERXKey<String>("hash");
   public static final ERXKey<Integer> SEQUENTIAL = new ERXKey<Integer>("sequential");
+  public static final ERXKey<String> VERSAO = new ERXKey<String>("versao");
   // Relationship Keys
   public static final ERXKey<br.com.woboleto.model.EOBoleto> BOLETO = new ERXKey<br.com.woboleto.model.EOBoleto>("boleto");
 
 	// Attributes
 	public static final String HASH_KEY = "hash";
 	public static final String SEQUENTIAL_KEY = "sequential";
+	public static final String VERSAO_KEY = "versao";
 
 	// Relationships
 	public static final String BOLETO_KEY = "boleto";
@@ -59,6 +61,17 @@ public abstract class _EORequisicao extends  ERXGenericRecord {
     takeStoredValueForKey(value, "sequential");
   }
 
+  public String versao() {
+    return (String) storedValueForKey("versao");
+  }
+
+  public void setVersao(String value) {
+    if (_EORequisicao.logger.isDebugEnabled()) {
+    	_EORequisicao.logger.debug( "updating versao from " + versao() + " to " + value);
+    }
+    takeStoredValueForKey(value, "versao");
+  }
+
   public br.com.woboleto.model.EOBoleto boleto() {
     return (br.com.woboleto.model.EOBoleto)storedValueForKey("boleto");
   }
@@ -84,10 +97,12 @@ public abstract class _EORequisicao extends  ERXGenericRecord {
 
   public static EORequisicao createEORequisicao(EOEditingContext editingContext, String hash
 , Integer sequential
+, String versao
 , br.com.woboleto.model.EOBoleto boleto) {
     EORequisicao eo = (EORequisicao) EOUtilities.createAndInsertInstance(editingContext, _EORequisicao.ENTITY_NAME);
 		eo.setHash(hash);
 		eo.setSequential(sequential);
+		eo.setVersao(versao);
     eo.setBoletoRelationship(boleto);
     return eo;
   }

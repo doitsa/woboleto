@@ -6,6 +6,7 @@ import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
@@ -14,6 +15,9 @@ import org.joda.time.LocalDate;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Spy;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import br.com.caelum.stella.boleto.Boleto;
 
@@ -25,8 +29,11 @@ import com.wounit.rules.MockEditingContext;
 /**
  * @author <a href="mailto:hprange@gmail.com">Henrique Prange</a>
  */
+
+@RunWith(MockitoJUnitRunner.class)
 public class TestEOBoleto {
 	@UnderTest
+	@Spy
 	private EOBoleto boleto;
 
 	@Dummy
@@ -233,6 +240,30 @@ public class TestEOBoleto {
 		return new NSTimestamp(new LocalDate(year, month, day).toDateMidnight()
 				.toDate());
 	}
+	
+	@Test
+	public void gerarBoletosAntigosComOMesmoCodigoDeBarrasELinhaDigitavel() throws Exception {
+		populateBoletoWithSampleData();
+		
+		when(boleto.isNewObject()).thenReturn(false);
+		
+		Boleto stellaBoleto = boleto.toStellaBoleto();
+		
+		assertThat(stellaBoleto.getCodigoDeBarras(), is("102030405060708090"));
+		assertThat(stellaBoleto.getLinhaDigitavel(), is("01802.304203.02345"));
+	}
+	
+	@Test
+	public void gerarBoletosNovosCodigoDeBarrasELinhaDigitavelNovos() throws Exception {
+		populateBoletoWithSampleData();
+		
+		when(boleto.isNewObject()).thenReturn(true);
+		
+		Boleto stellaBoleto = boleto.toStellaBoleto();
+		
+		assertThat(stellaBoleto.getCodigoDeBarras(), is("34199609800000010000000000000000000000000000"));
+		assertThat(stellaBoleto.getLinhaDigitavel(), is("34190.00009  00000.000000  00000.000000  9  60980000001000"));
+	}
 
 	private void populateBoletoWithSampleData() {
 		boleto.setBanco(BancoEnum.ITAU);
@@ -240,7 +271,7 @@ public class TestEOBoleto {
 		boleto.setNumeroDocumento("1234");
 		boleto.setValor(BigDecimal.TEN);
 		boleto.setCodigoDeBarras("102030405060708090");
-		boleto.setLinhaDigitavel("018023042030");
+		boleto.setLinhaDigitavel("01802.304203.02345");
 	}
 	
 }

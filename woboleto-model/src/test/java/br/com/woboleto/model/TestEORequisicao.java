@@ -64,15 +64,6 @@ public class TestEORequisicao {
 		assertThat(requisicao.hash(), is("634df2662567459339a52706b718340b"));
 	}
 	
-	@Test
-	public void testName() throws Exception {
-		ERXProperties.setStringForKey("2.0", "application.version");
-		
-		mockEditingContext.saveChanges();
-		
-		assertThat(requisicao.versao(), is("2.0"));
-	}
-	
 	@Before
 	public void setup() {
 		ERXProperties.setStringForKey("1.0", "application.version");

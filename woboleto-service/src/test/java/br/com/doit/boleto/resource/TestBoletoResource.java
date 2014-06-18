@@ -220,4 +220,16 @@ public class TestBoletoResource {
 
 		doReturn(novaRequisicao).when(resource).criarRequisicao(editingContext, boleto);
 	}
+	
+	@Test
+	public void gerarBoletosAntigosComOMesmoCodigoDeBarrasELinhaDigitavel() throws Exception {
+		boleto.setCodigoDeBarras("102030405060708090");
+		boleto.setLinhaDigitavel("01802.304203.02345");
+		
+		resource.salvarBoleto(boleto);
+		
+		assertThat(boleto.codigoDeBarras(), is("102030405060708090"));
+		assertThat(boleto.linhaDigitavel(), is("01802.304203.02345"));
+	}
+
 }

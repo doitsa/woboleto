@@ -7,6 +7,7 @@ import br.com.caelum.stella.boleto.Boleto;
 import br.com.caelum.stella.boleto.Datas;
 import br.com.caelum.stella.boleto.Emissor;
 import br.com.caelum.stella.boleto.bancos.Santander;
+import br.com.woboleto.stella.StellaBoleto;
 
 import com.webobjects.eoaccess.EOUtilities;
 import com.webobjects.eocontrol.EOEditingContext;
@@ -56,7 +57,7 @@ public class EOBoleto extends _EOBoleto
 
 	public Boleto toStellaBoleto()
 	{
-		Boleto boleto = Boleto.novoBoleto();
+		Boleto boleto = (Boleto) novoBoleto();
 
 		Datas datas = Datas.novasDatas();
 
@@ -153,6 +154,17 @@ public class EOBoleto extends _EOBoleto
 		String digito = new Santander().calcularDigitoVerificadorNossoNumero(emissor);
 
 		boleto.comEmissor(emissor.comNossoNumero(emissor.getNossoNumero() + digito));
+	}
+	
+	private Boleto novoBoleto() {
+		if (this.isNewObject()) {
+			return Boleto.novoBoleto();
+		} else {
+			StellaBoleto boleto = new StellaBoleto();
+			boleto.comCodigoDeBarras(codigoDeBarras());
+			boleto.comLinhaDigitavel(linhaDigitavel());
+			return boleto;
+		}
 	}
 
 	@Override
