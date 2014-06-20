@@ -261,8 +261,8 @@ public class TestEOBoleto {
 		
 		Boleto stellaBoleto = boleto.toStellaBoleto();
 		
-		assertThat(stellaBoleto.getCodigoDeBarras(), is("34199609800000010000000000000000000000000000"));
-		assertThat(stellaBoleto.getLinhaDigitavel(), is("34190.00009  00000.000000  00000.000000  9  60980000001000"));
+		assertThat(stellaBoleto.getCodigoDeBarras(), is("34198610000000010000000000000000000000000000"));
+		assertThat(stellaBoleto.getLinhaDigitavel(), is("34190.00009  00000.000000  00000.000000  8  61000000001000"));
 	}
 
 	private void populateBoletoWithSampleData() {

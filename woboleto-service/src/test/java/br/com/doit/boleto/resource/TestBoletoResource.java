@@ -24,6 +24,7 @@ import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import br.com.caelum.stella.boleto.Banco;
+import br.com.caelum.stella.boleto.Boleto;
 import br.com.caelum.stella.boleto.bancos.GeradorDeLinhaDigitavel;
 import br.com.woboleto.model.BancoEnum;
 import br.com.woboleto.model.EOBoleto;
@@ -180,9 +181,6 @@ public class TestBoletoResource {
 		DateTime dataDoc = new DateTime(2014, 2, 1, 0, 0, 0, 0);
 		DateTime dataVenc = new DateTime(2014, 2, 10, 0, 0, 0, 0);
 
-		Date dataDocumentoDate = dataDoc.toDate();
-		Date dataVencimentoDate = dataVenc.toDate();
-
 		EOSacado eoSacado = new EOSacado();
 		eoSacado.setNome("DOit Serviços de Informática SA");
 		eoSacado.setEndereco("Rua do Rócio, 199");
@@ -191,22 +189,13 @@ public class TestBoletoResource {
 		eoSacado.setCidade("São Paulo");
 		eoSacado.setUf("SP");
 
-		NSTimestamp dataDocumento = new NSTimestamp(dataDocumentoDate);
-		NSTimestamp dataVencimento = new NSTimestamp(dataVencimentoDate);
-
-		boleto.setEmissor(eoEmissor);
 		boleto.setSacado(eoSacado);
-		boleto.setValor(new BigDecimal(1.00));
 		boleto.setNumeroDocumento("1234");
-		boleto.setDataDocumento(dataDocumento);
-		boleto.setDataProcessamento(dataDocumento);
-		boleto.setDataVencimento(dataVencimento);
 		boleto.addToLocaisPagamentoRelationship(locais.get(0));
 		boleto.locaisPagamento();
-		boleto.setEspecieDocumento("DM");
 
-		boleto.setBanco(BancoEnum.SANTANDER);
-
+		editarBoleto(BancoEnum.SANTANDER, eoEmissor, dataDoc, dataVenc, new BigDecimal(1.00));
+		
 		requisicao.setBoleto(boleto);
 		requisicao.setSequential(123);
 		requisicao.setHash("634df2662567459339a52706b718340b");
@@ -231,5 +220,78 @@ public class TestBoletoResource {
 		assertThat(boleto.codigoDeBarras(), is("102030405060708090"));
 		assertThat(boleto.linhaDigitavel(), is("01802.304203.02345"));
 	}
-
+	
+	@Test
+	public void gerarCodigoDeBarrasBoletoSantander() throws Exception {
+		EOEmissor eoEmissor = new EOEmissor();
+		eoEmissor.setCedente("Instituto Qualisa");
+		eoEmissor.setNumeroConvenio("3903125");
+		eoEmissor.setCarteira("102");
+		eoEmissor.setNossoNumero("2263");
+		
+		DateTime dataDoc = new DateTime(2014, 5, 5, 0, 0, 0, 0);
+		DateTime dataVenc = new DateTime(2014, 5, 9, 0, 0, 0, 0);
+		
+		Boleto stellaBoleto = editarBoleto(BancoEnum.SANTANDER, eoEmissor, dataDoc, dataVenc, new BigDecimal("1563.79"));
+		
+		assertThat(stellaBoleto.getCodigoDeBarras(), is("03391605800001563799390312500000000226320102"));
+		assertThat(stellaBoleto.getLinhaDigitavel(), is("03399.39035  12500.000000  02263.201028  1  60580000156379"));
+	}
+	
+	@Test
+	public void gerarCodigoDeBarrasBoletoBancoDoBrasil() throws Exception {
+		EOEmissor eoEmissor = new EOEmissor();
+		eoEmissor.setCedente("studio felix arquitetura e design");
+		eoEmissor.setContaCorrente("8093");
+		eoEmissor.setDigitoVerificadorContaCorrente("4");
+		eoEmissor.setAgencia("4039");
+		eoEmissor.setDigitoVerificadorAgencia("8");
+		eoEmissor.setNumeroConvenio("2548144");
+		eoEmissor.setCarteira("18");
+		eoEmissor.setNossoNumero("677");
+		
+		DateTime dataDoc = new DateTime(2014, 5, 15, 0, 0, 0, 0);
+		DateTime dataVenc = new DateTime(2014, 5, 22, 0, 0, 0, 0);
+		
+		Boleto stellaBoleto = editarBoleto(BancoEnum.BANCO_DO_BRASIL, eoEmissor, dataDoc, dataVenc, new BigDecimal("4925.00"));
+		
+		assertThat(stellaBoleto.getCodigoDeBarras(), is("00193607100004925000000002548144000000067718"));
+		assertThat(stellaBoleto.getLinhaDigitavel(), is("00190.00009  02548.144001  00000.677187  3  60710000492500"));
+	}
+	
+	@Test
+	public void gerarCodigoDeBarrasBoletoItau() throws Exception {
+		EOEmissor eoEmissor = new EOEmissor();
+		eoEmissor.setCedente("studio mk27");
+		eoEmissor.setAgencia("8462");
+		eoEmissor.setContaCorrente("05825");
+		eoEmissor.setDigitoVerificadorContaCorrente("9");
+		eoEmissor.setCarteira("174");
+		eoEmissor.setNossoNumero("14936");
+		eoEmissor.setNumeroConvenio("0000");
+		
+		DateTime dataDoc = new DateTime(2014, 5, 5, 0, 0, 0, 0);
+		DateTime dataVenc = new DateTime(2014, 5, 20, 0, 0, 0, 0);
+		
+		Boleto stellaBoleto = editarBoleto(BancoEnum.ITAU, eoEmissor, dataDoc, dataVenc, new BigDecimal("19708.50"));
+		
+		assertThat(stellaBoleto.getCodigoDeBarras(), is("34196606900019708501740001493688462058259000"));
+		assertThat(stellaBoleto.getLinhaDigitavel(), is("34191.74002  01493.688467  20582.590004  6  60690001970850"));
+	}
+	
+	public Boleto editarBoleto(BancoEnum banco, EOEmissor emissor, DateTime dataDoc, DateTime dataVenc, BigDecimal valor) {
+		boleto.setEmissor(emissor);
+		boleto.setBanco(banco);
+		boleto.setDataDocumento(dataTimeToNSTimestamp(dataDoc));
+		boleto.setDataProcessamento(dataTimeToNSTimestamp(dataDoc));
+		boleto.setDataVencimento(dataTimeToNSTimestamp(dataVenc));
+		boleto.setValor(valor);
+		
+		return boleto.toStellaBoleto();
+	}
+	
+	public NSTimestamp dataTimeToNSTimestamp(DateTime dataTime) {
+		Date data = dataTime.toDate();
+		return new NSTimestamp(data);
+	}
 }

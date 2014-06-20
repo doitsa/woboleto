@@ -163,6 +163,7 @@ public class EOBoleto extends _EOBoleto
 			StellaBoleto boleto = new StellaBoleto();
 			boleto.comCodigoDeBarras(codigoDeBarras());
 			boleto.comLinhaDigitavel(linhaDigitavel());
+			boleto.comCodigoEspecieMoeda(9);
 			return boleto;
 		}
 	}
