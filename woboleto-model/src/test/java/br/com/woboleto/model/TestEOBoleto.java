@@ -10,7 +10,9 @@ import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
+import java.util.Date;
 
+import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.junit.Before;
 import org.junit.Rule;
@@ -257,12 +259,30 @@ public class TestEOBoleto {
 	public void gerarBoletosNovosCodigoDeBarrasELinhaDigitavelNovos() throws Exception {
 		populateBoletoWithSampleData();
 		
+		emissor.setAgencia("8462");
+		emissor.setContaCorrente("05825");
+		emissor.setDigitoVerificadorContaCorrente("9");
+		emissor.setCarteira("174");
+		emissor.setNossoNumero("14936");
+		emissor.setNumeroConvenio("0000");
+		
+		boleto.setEmissor(emissor);
+		
+		boleto.setNumeroDocumento("1234");
+		
+		DateTime dataDoc = new DateTime(2014, 5, 5, 0, 0, 0, 0);
+		DateTime dataVenc = new DateTime(2014, 5, 20, 0, 0, 0, 0);
+		
+		boleto.setDataDocumento(dataTimeToNSTimestamp(dataDoc));
+		boleto.setDataProcessamento(dataTimeToNSTimestamp(dataDoc));
+		boleto.setDataVencimento(dataTimeToNSTimestamp(dataVenc));
+		
 		when(boleto.isNewObject()).thenReturn(true);
 		
 		Boleto stellaBoleto = boleto.toStellaBoleto();
 		
-		assertThat(stellaBoleto.getCodigoDeBarras(), is("34198610000000010000000000000000000000000000"));
-		assertThat(stellaBoleto.getLinhaDigitavel(), is("34190.00009  00000.000000  00000.000000  8  61000000001000"));
+		assertThat(stellaBoleto.getCodigoDeBarras(), is("34193606900000010001740001493688462058259000"));
+		assertThat(stellaBoleto.getLinhaDigitavel(), is("34191.74002  01493.688467  20582.590004  3  60690000001000"));
 	}
 
 	private void populateBoletoWithSampleData() {
@@ -272,6 +292,11 @@ public class TestEOBoleto {
 		boleto.setValor(BigDecimal.TEN);
 		boleto.setCodigoDeBarras("102030405060708090");
 		boleto.setLinhaDigitavel("01802.304203.02345");
+	}
+	
+	public NSTimestamp dataTimeToNSTimestamp(DateTime dataTime) {
+		Date data = dataTime.toDate();
+		return new NSTimestamp(data);
 	}
 	
 }
