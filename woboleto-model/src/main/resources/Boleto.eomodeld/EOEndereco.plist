@@ -13,15 +13,13 @@
             name = cidade; 
             prototypeName = varchar255; 
         }, 
-        {allowsNull = Y; columnName = cpf; name = cpf; prototypeName = varchar50; }, 
+        {allowsNull = N; name = id; prototypeName = id; }, 
         {
             allowsNull = Y; 
-            columnName = endereco; 
-            name = endereco; 
+            columnName = logradouro; 
+            name = logradouro; 
             prototypeName = varchar255; 
         }, 
-        {allowsNull = N; name = id; prototypeName = id; }, 
-        {allowsNull = Y; columnName = nome; name = nome; prototypeName = varchar255; }, 
         {
             allowsNull = Y; 
             columnName = uf; 
@@ -31,10 +29,10 @@
         }
     ); 
     attributesUsedForLocking = (id); 
-    className = "br.com.woboleto.model.EOSacado"; 
-    classProperties = (bairro, cep, cidade, cpf, endereco, nome, uf); 
-    externalName = sacado; 
+    className = "br.com.woboleto.model.EOEndereco"; 
+    classProperties = (bairro, cep, cidade, logradouro, uf); 
+    externalName = endereco; 
     fetchSpecificationDictionary = {}; 
-    name = EOSacado; 
+    name = EOEndereco; 
     primaryKeyAttributes = (id); 
 }

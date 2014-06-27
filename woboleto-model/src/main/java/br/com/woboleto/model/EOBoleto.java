@@ -2,12 +2,14 @@ package br.com.woboleto.model;
 
 import java.util.Calendar;
 
+import br.com.caelum.stella.DigitoPara;
 import br.com.caelum.stella.boleto.Banco;
+import br.com.caelum.stella.boleto.Beneficiario;
 import br.com.caelum.stella.boleto.Boleto;
 import br.com.caelum.stella.boleto.Datas;
-import br.com.caelum.stella.boleto.Emissor;
-import br.com.caelum.stella.boleto.bancos.Santander;
 import br.com.woboleto.stella.StellaBoleto;
+
+import static br.com.caelum.stella.boleto.utils.StellaStringUtils.leftPadWithZeros;
 
 import com.webobjects.eoaccess.EOUtilities;
 import com.webobjects.eocontrol.EOEditingContext;
@@ -77,8 +79,8 @@ public class EOBoleto extends _EOBoleto
 		}
 
 		boleto.comDatas(datas);
-		boleto.comEmissor(emissor().toStellaEmissor());
-		boleto.comSacado(sacado().toStellaSacado());
+		boleto.comBeneficiario(beneficiario().toStellaBeneficiario());
+		boleto.comPagador(pagador().toStellaPagador());
 		boleto.comDescricoes(stringArrayDe(descricoes()));
 		boleto.comInstrucoes(stringArrayDe(instrucoes()));
 		boleto.comLocaisDePagamento(stringArrayDe(locaisPagamento()));
@@ -136,24 +138,42 @@ public class EOBoleto extends _EOBoleto
 	}
 
 	private void fixBoletoItau(Boleto boleto) {
-		Emissor emissor = boleto.getEmissor();
+		Beneficiario beneficiario = boleto.getBeneficiario();
 		Banco banco = boleto.getBanco();
 
-		String agencia = emissor.getAgenciaFormatado();
-		String contaCorrente = banco.getContaCorrenteDoEmissorFormatado(emissor);
-		String carteira = banco.getCarteiraDoEmissorFormatado(emissor);
-		String nossoNumero = banco.getNossoNumeroDoEmissorFormatado(emissor);
+		String agencia = beneficiario.getAgenciaFormatada();
+		String contaCorrente = banco.getCodigoBeneficiarioFormatado(beneficiario);
+		String carteira = banco.getCarteiraFormatado(beneficiario);
+		String nossoNumero = banco.getNossoNumeroFormatado(beneficiario);
 
 		String digito = Integer.toString(banco.getGeradorDeDigito().geraDigitoMod10(agencia + contaCorrente + carteira + nossoNumero));
 
-		boleto.comEmissor(emissor.comDigitoNossoNumero(digito));
+		boleto.comBeneficiario(beneficiario.comDigitoNossoNumero(digito));
 	}
 
 	private void fixBoletoSantander(Boleto boleto) {
-		Emissor emissor = boleto.getEmissor();
-		String digito = new Santander().calcularDigitoVerificadorNossoNumero(emissor);
+		Beneficiario beneficiario = boleto.getBeneficiario();
+		String digito = calcularDigitoVerificadorNossoNumero(beneficiario);
 
-		boleto.comEmissor(emissor.comNossoNumero(emissor.getNossoNumero() + digito));
+		boleto.comBeneficiario(beneficiario.comNossoNumero(beneficiario.getNossoNumero() + digito));
+	}
+	
+public String calcularDigitoVerificadorNossoNumero (Beneficiario beneficiario) {
+		
+		DigitoPara digitoPara = new DigitoPara(leftPadWithZeros(beneficiario.getNossoNumero(), 12));
+
+		
+		int digito = Integer.parseInt(digitoPara.comMultiplicadoresDeAte(2,9)
+				.mod(11)
+
+		.trocandoPorSeEncontrar("0", 1)
+		.trocandoPorSeEncontrar("1", 10)
+		.calcula());
+		
+		if (digito > 1) {		
+			digito = 11-digito;
+		}
+		return String.valueOf(digito);
 	}
 	
 	private Boleto novoBoleto() {

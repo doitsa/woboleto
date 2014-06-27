@@ -27,11 +27,12 @@ import br.com.caelum.stella.boleto.Banco;
 import br.com.caelum.stella.boleto.Boleto;
 import br.com.caelum.stella.boleto.bancos.GeradorDeLinhaDigitavel;
 import br.com.woboleto.model.BancoEnum;
+import br.com.woboleto.model.EOBeneficiario;
 import br.com.woboleto.model.EOBoleto;
-import br.com.woboleto.model.EOEmissor;
+import br.com.woboleto.model.EOEndereco;
 import br.com.woboleto.model.EOLocalPagamento;
+import br.com.woboleto.model.EOPagador;
 import br.com.woboleto.model.EORequisicao;
-import br.com.woboleto.model.EOSacado;
 
 import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSTimestamp;
@@ -123,11 +124,11 @@ public class TestBoletoResource {
 	@Test
 	public void lancarExcecaoQuandoBoletoForInvalido() throws Exception {
 		try {
-			EOEmissor eoEmissor = EOEmissor.createEOEmissor(editingContext);
-			eoEmissor.setNumeroConvenio(null);
-			eoEmissor.setNossoNumero("123");
+			EOBeneficiario eoBeneficiario = EOBeneficiario.createEOBeneficiario(editingContext);
+			eoBeneficiario.setNumeroConvenio(null);
+			eoBeneficiario.setNossoNumero("123");
 			
-			boleto.setEmissor(eoEmissor);
+			boleto.setBeneficiario(eoBeneficiario);
 			
 			resource.salvarBoleto(boleto);
 		} catch (WebApplicationException exception) {
@@ -172,29 +173,32 @@ public class TestBoletoResource {
 	public void setup() {
 		locais.get(0).setValor("PAGAR PREFERENCIALMENTE NO BANCO SANTANDER");
 
-		EOEmissor eoEmissor = new EOEmissor();
-		eoEmissor.setCedente("Instituto Qualisa");
-		eoEmissor.setNumeroConvenio("3903125");
-		eoEmissor.setCarteira("102");
-		eoEmissor.setNossoNumero("382713000472");
+		EOBeneficiario eoBeneficiario = new EOBeneficiario();
+		eoBeneficiario.setNomeBeneficiario("Instituto Qualisa");
+		eoBeneficiario.setNumeroConvenio("3903125");
+		eoBeneficiario.setCarteira("102");
+		eoBeneficiario.setNossoNumero("382713000472");
 
 		DateTime dataDoc = new DateTime(2014, 2, 1, 0, 0, 0, 0);
 		DateTime dataVenc = new DateTime(2014, 2, 10, 0, 0, 0, 0);
 
-		EOSacado eoSacado = new EOSacado();
-		eoSacado.setNome("DOit Serviços de Informática SA");
-		eoSacado.setEndereco("Rua do Rócio, 199");
-		eoSacado.setBairro("Itaim");
-		eoSacado.setCep("04552-000");
-		eoSacado.setCidade("São Paulo");
-		eoSacado.setUf("SP");
+		EOPagador eoPagador = new EOPagador();
+		eoPagador.setNome("DOit Serviços de Informática SA");
+		
+		EOEndereco eoEndereco = new EOEndereco();
+		eoEndereco.setBairro("Itaim");
+		eoEndereco.setCep("04552-000");
+		eoEndereco.setCidade("São Paulo");
+		eoEndereco.setUf("SP");
 
-		boleto.setSacado(eoSacado);
+		eoPagador.setEndereco(eoEndereco);
+		
+		boleto.setPagador(eoPagador);
 		boleto.setNumeroDocumento("1234");
 		boleto.addToLocaisPagamentoRelationship(locais.get(0));
 		boleto.locaisPagamento();
 
-		editarBoleto(BancoEnum.SANTANDER, eoEmissor, dataDoc, dataVenc, new BigDecimal(1.00));
+		editarBoleto(BancoEnum.SANTANDER, eoBeneficiario, dataDoc, dataVenc, new BigDecimal(1.00));
 		
 		requisicao.setBoleto(boleto);
 		requisicao.setSequential(123);
@@ -223,16 +227,16 @@ public class TestBoletoResource {
 	
 	@Test
 	public void gerarCodigoDeBarrasBoletoSantander() throws Exception {
-		EOEmissor eoEmissor = new EOEmissor();
-		eoEmissor.setCedente("Instituto Qualisa");
-		eoEmissor.setNumeroConvenio("3903125");
-		eoEmissor.setCarteira("102");
-		eoEmissor.setNossoNumero("2263");
+		EOBeneficiario eoBeneficiario = new EOBeneficiario();
+		eoBeneficiario.setNomeBeneficiario("Instituto Qualisa");
+		eoBeneficiario.setNumeroConvenio("3903125");
+		eoBeneficiario.setCarteira("102");
+		eoBeneficiario.setNossoNumero("2263");
 		
 		DateTime dataDoc = new DateTime(2014, 5, 5, 0, 0, 0, 0);
 		DateTime dataVenc = new DateTime(2014, 5, 9, 0, 0, 0, 0);
 		
-		Boleto stellaBoleto = editarBoleto(BancoEnum.SANTANDER, eoEmissor, dataDoc, dataVenc, new BigDecimal("1563.79"));
+		Boleto stellaBoleto = editarBoleto(BancoEnum.SANTANDER, eoBeneficiario, dataDoc, dataVenc, new BigDecimal("1563.79"));
 		
 		assertThat(stellaBoleto.getCodigoDeBarras(), is("03391605800001563799390312500000000226320102"));
 		assertThat(stellaBoleto.getLinhaDigitavel(), is("03399.39035  12500.000000  02263.201028  1  60580000156379"));
@@ -240,20 +244,20 @@ public class TestBoletoResource {
 	
 	@Test
 	public void gerarCodigoDeBarrasBoletoBancoDoBrasil() throws Exception {
-		EOEmissor eoEmissor = new EOEmissor();
-		eoEmissor.setCedente("studio felix arquitetura e design");
-		eoEmissor.setContaCorrente("8093");
-		eoEmissor.setDigitoVerificadorContaCorrente("4");
-		eoEmissor.setAgencia("4039");
-		eoEmissor.setDigitoVerificadorAgencia("8");
-		eoEmissor.setNumeroConvenio("2548144");
-		eoEmissor.setCarteira("18");
-		eoEmissor.setNossoNumero("677");
+		EOBeneficiario eoBeneficiario = new EOBeneficiario();
+		eoBeneficiario.setNomeBeneficiario("studio felix arquitetura e design");
+		eoBeneficiario.setCodigoBeneficiario("8093");
+		eoBeneficiario.setDigitoVerificadorCodigoBeneficiario("4");
+		eoBeneficiario.setAgencia("4039");
+		eoBeneficiario.setDigitoVerificadorAgencia("8");
+		eoBeneficiario.setNumeroConvenio("2548144");
+		eoBeneficiario.setCarteira("18");
+		eoBeneficiario.setNossoNumero("677");
 		
 		DateTime dataDoc = new DateTime(2014, 5, 15, 0, 0, 0, 0);
 		DateTime dataVenc = new DateTime(2014, 5, 22, 0, 0, 0, 0);
 		
-		Boleto stellaBoleto = editarBoleto(BancoEnum.BANCO_DO_BRASIL, eoEmissor, dataDoc, dataVenc, new BigDecimal("4925.00"));
+		Boleto stellaBoleto = editarBoleto(BancoEnum.BANCO_DO_BRASIL, eoBeneficiario, dataDoc, dataVenc, new BigDecimal("4925.00"));
 		
 		assertThat(stellaBoleto.getCodigoDeBarras(), is("00193607100004925000000002548144000000067718"));
 		assertThat(stellaBoleto.getLinhaDigitavel(), is("00190.00009  02548.144001  00000.677187  3  60710000492500"));
@@ -261,26 +265,26 @@ public class TestBoletoResource {
 	
 	@Test
 	public void gerarCodigoDeBarrasBoletoItau() throws Exception {
-		EOEmissor eoEmissor = new EOEmissor();
-		eoEmissor.setCedente("studio mk27");
-		eoEmissor.setAgencia("8462");
-		eoEmissor.setContaCorrente("05825");
-		eoEmissor.setDigitoVerificadorContaCorrente("9");
-		eoEmissor.setCarteira("174");
-		eoEmissor.setNossoNumero("14936");
-		eoEmissor.setNumeroConvenio("0000");
+		EOBeneficiario eoBeneficiario = new EOBeneficiario();
+		eoBeneficiario.setNomeBeneficiario("studio mk27");
+		eoBeneficiario.setAgencia("8462");
+		eoBeneficiario.setCodigoBeneficiario("05825");
+		eoBeneficiario.setDigitoVerificadorCodigoBeneficiario("9");
+		eoBeneficiario.setCarteira("174");
+		eoBeneficiario.setNossoNumero("14936");
+		eoBeneficiario.setNumeroConvenio("0000");
 		
 		DateTime dataDoc = new DateTime(2014, 5, 5, 0, 0, 0, 0);
 		DateTime dataVenc = new DateTime(2014, 5, 20, 0, 0, 0, 0);
 		
-		Boleto stellaBoleto = editarBoleto(BancoEnum.ITAU, eoEmissor, dataDoc, dataVenc, new BigDecimal("19708.50"));
+		Boleto stellaBoleto = editarBoleto(BancoEnum.ITAU, eoBeneficiario, dataDoc, dataVenc, new BigDecimal("19708.50"));
 		
 		assertThat(stellaBoleto.getCodigoDeBarras(), is("34196606900019708501740001493688462058259000"));
 		assertThat(stellaBoleto.getLinhaDigitavel(), is("34191.74002  01493.688467  20582.590004  6  60690001970850"));
 	}
 	
-	public Boleto editarBoleto(BancoEnum banco, EOEmissor emissor, DateTime dataDoc, DateTime dataVenc, BigDecimal valor) {
-		boleto.setEmissor(emissor);
+	public Boleto editarBoleto(BancoEnum banco, EOBeneficiario beneficiario, DateTime dataDoc, DateTime dataVenc, BigDecimal valor) {
+		boleto.setBeneficiario(beneficiario);
 		boleto.setBanco(banco);
 		boleto.setDataDocumento(dataTimeToNSTimestamp(dataDoc));
 		boleto.setDataProcessamento(dataTimeToNSTimestamp(dataDoc));

@@ -4,10 +4,10 @@
     "dataDocumento":"2014-04-06 00:00:00",
     "dataProcessamento":"2014-04-06 00:00:00",
     "dataVencimento":"2014-05-10 00:00:00",
-    "emissor": {
-        "cedente":"DOit",
-        "contaCorrente":"36135",
-        "digitoVerificadorContaCorrente":"6",
+    "beneficiario": {
+        "nomeBeneficiario":"DOit",
+        "codigoBeneficiario":"36135",
+        "digitoVerificadorCodigoBeneficiario":"6",
         "agencia":"0100",
         "digitoVerificadorAgencia":"7",
         "carteira":"18",
@@ -17,13 +17,8 @@
     "especieDocumento":"DM",
     "numeroDocumento":"1234",
     "quantidadeMoeda":"0",
-    "sacado": {
-        "nome":"DOit SA",
-        "endereco":"Rua do Rocio, 199",
-        "bairro":"Itaim",
-        "cep":"09983-040",
-        "cidade":"Sao Paulo",
-        "uf":"SP"
+    "pagador": {
+        "nome":"DOit SA"
     },
     "valor":"100",
     "valorMoeda":"1",

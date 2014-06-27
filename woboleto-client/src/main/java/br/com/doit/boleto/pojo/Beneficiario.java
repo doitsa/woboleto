@@ -1,14 +1,12 @@
 package br.com.doit.boleto.pojo;
 
-public class Emissor {
+public class Beneficiario {
 	private String agencia;
 	private String carteira;
-	private String cedente;
-	private String codigoFornecidoPelaAgencia;
-	private String codigoOperacao;
-	private String contaCorrente;
+	private String nomeBeneficiario;
+	private String codigoBeneficiario;
 	private String digitoVerificadorAgencia;
-	private String digitoVerificadorContaCorrente;
+	private String digitoVerificadorCodigoBeneficiario;
 	private String digitoVerificadorNossoNumero;
 	private String nossoNumero;
 	private String numeroConvenio;
@@ -29,36 +27,20 @@ public class Emissor {
 		this.carteira = carteira;
 	}
 
-	public String getCedente() {
-		return cedente;
+	public String getNomeBeneficiario() {
+		return nomeBeneficiario;
 	}
 
-	public void setCedente(String cedente) {
-		this.cedente = cedente;
+	public void setNomeBeneficiario(String nomeBeneficiario) {
+		this.nomeBeneficiario = nomeBeneficiario;
 	}
 
-	public String getCodigoFornecidoPelaAgencia() {
-		return codigoFornecidoPelaAgencia;
+	public String getCodigoBeneficiario() {
+		return codigoBeneficiario;
 	}
 
-	public void setCodigoFornecidoPelaAgencia(String codigoFornecidoPelaAgencia) {
-		this.codigoFornecidoPelaAgencia = codigoFornecidoPelaAgencia;
-	}
-
-	public String getCodigoOperacao() {
-		return codigoOperacao;
-	}
-
-	public void setCodigoOperacao(String codigoOperacao) {
-		this.codigoOperacao = codigoOperacao;
-	}
-
-	public String getContaCorrente() {
-		return contaCorrente;
-	}
-
-	public void setContaCorrente(String contaCorrente) {
-		this.contaCorrente = contaCorrente;
+	public void setContaCorrente(String codigoBeneficiario) {
+		this.codigoBeneficiario = codigoBeneficiario;
 	}
 
 	public String getDigitoVerificadorAgencia() {
@@ -69,13 +51,13 @@ public class Emissor {
 		this.digitoVerificadorAgencia = digitoVerificadorAgencia;
 	}
 
-	public String getDigitoVerificadorContaCorrente() {
-		return digitoVerificadorContaCorrente;
+	public String getDigitoVerificadorCodigoBeneficiario() {
+		return digitoVerificadorCodigoBeneficiario;
 	}
 
-	public void setDigitoVerificadorContaCorrente(
-			String digitoVerificadorContaCorrente) {
-		this.digitoVerificadorContaCorrente = digitoVerificadorContaCorrente;
+	public void setDigitoVerificadorCodigoBeneficiario(
+			String digitoVerificadorCodigoBeneficiario) {
+		this.digitoVerificadorCodigoBeneficiario = digitoVerificadorCodigoBeneficiario;
 	}
 
 	public String getDigitoVerificadorNossoNumero() {

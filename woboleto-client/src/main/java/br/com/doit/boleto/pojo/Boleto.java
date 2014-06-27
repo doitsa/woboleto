@@ -23,10 +23,10 @@ public class Boleto {
 	private BigDecimal valor;
 	private BigDecimal valorMoeda;
 	private ArrayList<Descricao> descricoes;
-	private Emissor emissor;
+	private Beneficiario beneficiario;
 	private ArrayList<Instrucao> instrucoes;
 	private ArrayList<LocalPagamento> locaisPagamento;
-	private Sacado sacado;
+	private Pagador pagador;
 
 	public boolean isAceite() {
 		return aceite;
@@ -119,12 +119,12 @@ public class Boleto {
 		this.descricoes = descricoes;
 	}
 
-	public Emissor getEmissor() {
-		return emissor;
+	public Beneficiario getBeneficiario() {
+		return beneficiario;
 	}
 
-	public void setEmissor(Emissor emissor) {
-		this.emissor = emissor;
+	public void setBeneficiario(Beneficiario beneficiario) {
+		this.beneficiario = beneficiario;
 	}
 
 	public ArrayList<Instrucao> getInstrucoes() {
@@ -143,11 +143,11 @@ public class Boleto {
 		this.locaisPagamento = locaisPagamento;
 	}
 
-	public Sacado getSacado() {
-		return sacado;
+	public Pagador getPagador() {
+		return pagador;
 	}
 
-	public void setSacado(Sacado sacado) {
-		this.sacado = sacado;
+	public void setPagador(Pagador pagador) {
+		this.pagador = pagador;
 	}
 }

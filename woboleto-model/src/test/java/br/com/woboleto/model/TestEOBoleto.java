@@ -39,10 +39,10 @@ public class TestEOBoleto {
 	private EOBoleto boleto;
 
 	@Dummy
-	private EOEmissor emissor;
+	private EOBeneficiario beneficiario;
 
 	@Dummy
-	private EOSacado sacado;
+	private EOPagador pagador;
 
 	@Rule
 	public final MockEditingContext editingContext = new MockEditingContext("Boleto");
@@ -108,7 +108,7 @@ public class TestEOBoleto {
 	public void converteEmissorParaStellaBoleto() throws Exception {
 		br.com.caelum.stella.boleto.Boleto result = boleto.toStellaBoleto();
 
-		assertThat(result.getEmissor(), notNullValue());
+		assertThat(result.getBeneficiario(), notNullValue());
 	}
 
 	@Test
@@ -149,7 +149,7 @@ public class TestEOBoleto {
 	public void converteSacadoParaStellaBoleto() throws Exception {
 		br.com.caelum.stella.boleto.Boleto result = boleto.toStellaBoleto();
 
-		assertThat(result.getSacado(), notNullValue());
+		assertThat(result.getPagador(), notNullValue());
 	}
 
 	@Test
@@ -162,25 +162,25 @@ public class TestEOBoleto {
 	@Test
 	public void colocarDigitoVerificadorNossoNumeroQuandoBancoForSantander() throws Exception {
 		boleto.setBanco(BancoEnum.SANTANDER);
-		emissor.setNossoNumero("12");
+		beneficiario.setNossoNumero("12");
 
 		br.com.caelum.stella.boleto.Boleto result = boleto.toStellaBoleto();
 
-		assertThat(result.getEmissor().getNossoNumero(), is("124"));
+		assertThat(result.getBeneficiario().getNossoNumero(), is("124"));
 	}
 
 	@Test
 	public void setarDigitoNossoNumeroQuandoBancoForItau() throws Exception {
-		emissor.setAgencia("167");
-		emissor.setContaCorrente("45145");
-		emissor.setCarteira("157");
-		emissor.setNossoNumero("21897666");
+		beneficiario.setAgencia("167");
+		beneficiario.setCodigoBeneficiario("45145");
+		beneficiario.setCarteira("157");
+		beneficiario.setNossoNumero("21897666");
 
 		boleto.setBanco(BancoEnum.ITAU);
 
 		br.com.caelum.stella.boleto.Boleto result = boleto.toStellaBoleto();
 
-		assertThat(result.getEmissor().getDigitoNossoNumero(), is("6"));
+		assertThat(result.getBeneficiario().getDigitoNossoNumero(), is("6"));
 	}
 
 
@@ -199,8 +199,8 @@ public class TestEOBoleto {
 
 	@Before
 	public void setup() {
-		boleto.setSacado(sacado);
-		boleto.setEmissor(emissor);
+		boleto.setPagador(pagador);
+		boleto.setBeneficiario(beneficiario);
 	}
 
 	@Test
@@ -259,14 +259,14 @@ public class TestEOBoleto {
 	public void gerarBoletosNovosCodigoDeBarrasELinhaDigitavelNovos() throws Exception {
 		populateBoletoWithSampleData();
 		
-		emissor.setAgencia("8462");
-		emissor.setContaCorrente("05825");
-		emissor.setDigitoVerificadorContaCorrente("9");
-		emissor.setCarteira("174");
-		emissor.setNossoNumero("14936");
-		emissor.setNumeroConvenio("0000");
+		beneficiario.setAgencia("8462");
+		beneficiario.setCodigoBeneficiario("05825");
+		beneficiario.setDigitoVerificadorCodigoBeneficiario("9");
+		beneficiario.setCarteira("174");
+		beneficiario.setNossoNumero("14936");
+		beneficiario.setNumeroConvenio("0000");
 		
-		boleto.setEmissor(emissor);
+		boleto.setBeneficiario(beneficiario);
 		
 		boleto.setNumeroDocumento("1234");
 		

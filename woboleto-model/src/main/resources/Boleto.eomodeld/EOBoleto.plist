@@ -9,6 +9,12 @@
             valueClassName = "br.com.woboleto.model.BancoEnum"; 
         }, 
         {
+            allowsNull = N; 
+            columnName = "beneficiario_id"; 
+            name = beneficiarioId; 
+            prototypeName = id; 
+        }, 
+        {
             columnName = "codigo_de_barras"; 
             name = codigoDeBarras; 
             prototypeName = longText; 
@@ -32,12 +38,6 @@
             prototypeName = date; 
         }, 
         {
-            allowsNull = N; 
-            columnName = "emissor_id"; 
-            name = emissorId; 
-            prototypeName = id; 
-        }, 
-        {
             allowsNull = Y; 
             columnName = "especie_documento"; 
             name = especieDocumento; 
@@ -56,17 +56,17 @@
             prototypeName = varchar16; 
         }, 
         {
+            allowsNull = N; 
+            columnName = "pagador_id"; 
+            name = pagadorId; 
+            prototypeName = id; 
+        }, 
+        {
             allowsNull = Y; 
             columnName = "quantidade_moeda"; 
             name = quantidadeMoeda; 
             precision = 30; 
             prototypeName = amount; 
-        }, 
-        {
-            allowsNull = N; 
-            columnName = "sacado_id"; 
-            name = sacadoId; 
-            prototypeName = id; 
         }, 
         {
             allowsNull = Y; 
@@ -83,24 +83,24 @@
             prototypeName = amount; 
         }
     ); 
-    attributesUsedForLocking = (emissorId, id, sacadoId); 
+    attributesUsedForLocking = (beneficiarioId, id, pagadorId); 
     className = "br.com.woboleto.model.EOBoleto"; 
     classProperties = (
         aceite, 
         banco, 
+        beneficiario, 
         codigoDeBarras, 
         dataDocumento, 
         dataProcessamento, 
         dataVencimento, 
         descricoes, 
-        emissor, 
         especieDocumento, 
         instrucoes, 
         linhaDigitavel, 
         locaisPagamento, 
         numeroDocumento, 
+        pagador, 
         quantidadeMoeda, 
-        sacado, 
         valor, 
         valorMoeda
     ); 
@@ -111,20 +111,20 @@
     relationships = (
         {
             deleteRule = EODeleteRuleCascade; 
+            destination = EOBeneficiario; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = beneficiarioId; }); 
+            name = beneficiario; 
+        }, 
+        {
+            deleteRule = EODeleteRuleCascade; 
             destination = EODescricao; 
             isToMany = Y; 
             joinSemantic = EOInnerJoin; 
             joins = ({destinationAttribute = boletoId; sourceAttribute = id; }); 
             name = descricoes; 
-        }, 
-        {
-            deleteRule = EODeleteRuleCascade; 
-            destination = EOEmissor; 
-            isMandatory = Y; 
-            isToMany = N; 
-            joinSemantic = EOInnerJoin; 
-            joins = ({destinationAttribute = id; sourceAttribute = emissorId; }); 
-            name = emissor; 
         }, 
         {
             deleteRule = EODeleteRuleCascade; 
@@ -144,12 +144,12 @@
         }, 
         {
             deleteRule = EODeleteRuleCascade; 
-            destination = EOSacado; 
+            destination = EOPagador; 
             isMandatory = Y; 
             isToMany = N; 
             joinSemantic = EOInnerJoin; 
-            joins = ({destinationAttribute = id; sourceAttribute = sacadoId; }); 
-            name = sacado; 
+            joins = ({destinationAttribute = id; sourceAttribute = pagadorId; }); 
+            name = pagador; 
         }
     ); 
 }

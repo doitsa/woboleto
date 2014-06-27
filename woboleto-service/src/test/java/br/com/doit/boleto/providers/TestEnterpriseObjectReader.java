@@ -122,9 +122,9 @@ public class TestEnterpriseObjectReader {
 		EOBoleto result = reader.readFrom(EOBoleto.class, null, null, null,
 				null, getClass().getResourceAsStream("/boleto4.json"));
 
-		assertThat(result.emissor(), notNullValue());
-		assertThat(result.emissor().agencia(), is("1"));
-		assertThat(editingContext.insertedObjects(), hasItem(result.emissor()));
+		assertThat(result.beneficiario(), notNullValue());
+		assertThat(result.beneficiario().agencia(), is("1"));
+		assertThat(editingContext.insertedObjects(), hasItem(result.beneficiario()));
 	}
 
 	@Test
@@ -161,7 +161,7 @@ public class TestEnterpriseObjectReader {
 
 		EOBoleto result = reader.readFrom(EOBoleto.class, null, null, null, null, json);
 
-		assertThat(result.emissor(), nullValue());
+		assertThat(result.beneficiario(), nullValue());
 	}
 
 	@Test

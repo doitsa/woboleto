@@ -14,26 +14,8 @@
         }, 
         {
             allowsNull = Y; 
-            columnName = cedente; 
-            name = cedente; 
-            prototypeName = varchar255; 
-        }, 
-        {
-            allowsNull = Y; 
-            columnName = "codigo_fornecido_pela_agencia"; 
-            name = codigoFornecidoPelaAgencia; 
-            prototypeName = varchar255; 
-        }, 
-        {
-            allowsNull = Y; 
-            columnName = "codigo_operacao"; 
-            name = codigoOperacao; 
-            prototypeName = varchar255; 
-        }, 
-        {
-            allowsNull = Y; 
-            columnName = "conta_corrente"; 
-            name = contaCorrente; 
+            columnName = "codigo_beneficiario"; 
+            name = codigoBeneficiario; 
             prototypeName = varchar255; 
         }, 
         {
@@ -44,8 +26,8 @@
         }, 
         {
             allowsNull = Y; 
-            columnName = "digito_verificador_conta_corrente"; 
-            name = digitoVerificadorContaCorrente; 
+            columnName = "digito_verificador_codigo_beneficiario"; 
+            name = digitoVerificadorCodigoBeneficiario; 
             prototypeName = varchar10; 
         }, 
         {
@@ -54,7 +36,19 @@
             name = digitoVerificadorNossoNumero; 
             prototypeName = varchar10; 
         }, 
+        {
+            allowsNull = Y; 
+            columnName = documento; 
+            name = documento; 
+            prototypeName = varchar255; 
+        }, 
         {allowsNull = N; name = id; prototypeName = id; }, 
+        {
+            allowsNull = Y; 
+            columnName = "nome_beneficiario"; 
+            name = nomeBeneficiario; 
+            prototypeName = varchar255; 
+        }, 
         {
             allowsNull = Y; 
             columnName = "nosso_numero"; 
@@ -69,22 +63,21 @@
         }
     ); 
     attributesUsedForLocking = (id); 
-    className = "br.com.woboleto.model.EOEmissor"; 
+    className = "br.com.woboleto.model.EOBeneficiario"; 
     classProperties = (
         agencia, 
         carteira, 
-        cedente, 
-        codigoFornecidoPelaAgencia, 
-        codigoOperacao, 
-        contaCorrente, 
+        codigoBeneficiario, 
         digitoVerificadorAgencia, 
-        digitoVerificadorContaCorrente, 
+        digitoVerificadorCodigoBeneficiario, 
         digitoVerificadorNossoNumero, 
+        documento, 
+        nomeBeneficiario, 
         nossoNumero, 
         numeroConvenio
     ); 
-    externalName = emissor; 
+    externalName = beneficiario; 
     fetchSpecificationDictionary = {}; 
-    name = EOEmissor; 
+    name = EOBeneficiario; 
     primaryKeyAttributes = (id); 
 }

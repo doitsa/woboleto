@@ -28,11 +28,11 @@ public abstract class _EOBoleto extends  ERXGenericRecord {
   public static final ERXKey<java.math.BigDecimal> VALOR = new ERXKey<java.math.BigDecimal>("valor");
   public static final ERXKey<java.math.BigDecimal> VALOR_MOEDA = new ERXKey<java.math.BigDecimal>("valorMoeda");
   // Relationship Keys
+  public static final ERXKey<br.com.woboleto.model.EOBeneficiario> BENEFICIARIO = new ERXKey<br.com.woboleto.model.EOBeneficiario>("beneficiario");
   public static final ERXKey<br.com.woboleto.model.EODescricao> DESCRICOES = new ERXKey<br.com.woboleto.model.EODescricao>("descricoes");
-  public static final ERXKey<br.com.woboleto.model.EOEmissor> EMISSOR = new ERXKey<br.com.woboleto.model.EOEmissor>("emissor");
   public static final ERXKey<br.com.woboleto.model.EOInstrucao> INSTRUCOES = new ERXKey<br.com.woboleto.model.EOInstrucao>("instrucoes");
   public static final ERXKey<br.com.woboleto.model.EOLocalPagamento> LOCAIS_PAGAMENTO = new ERXKey<br.com.woboleto.model.EOLocalPagamento>("locaisPagamento");
-  public static final ERXKey<br.com.woboleto.model.EOSacado> SACADO = new ERXKey<br.com.woboleto.model.EOSacado>("sacado");
+  public static final ERXKey<br.com.woboleto.model.EOPagador> PAGADOR = new ERXKey<br.com.woboleto.model.EOPagador>("pagador");
 
 	// Attributes
 	public static final String ACEITE_KEY = "aceite";
@@ -49,11 +49,11 @@ public abstract class _EOBoleto extends  ERXGenericRecord {
 	public static final String VALOR_MOEDA_KEY = "valorMoeda";
 
 	// Relationships
+	public static final String BENEFICIARIO_KEY = "beneficiario";
 	public static final String DESCRICOES_KEY = "descricoes";
-	public static final String EMISSOR_KEY = "emissor";
 	public static final String INSTRUCOES_KEY = "instrucoes";
 	public static final String LOCAIS_PAGAMENTO_KEY = "locaisPagamento";
-	public static final String SACADO_KEY = "sacado";
+	public static final String PAGADOR_KEY = "pagador";
 
   private static Logger logger = Logger.getLogger(_EOBoleto.class);
 
@@ -197,48 +197,48 @@ public abstract class _EOBoleto extends  ERXGenericRecord {
     takeStoredValueForKey(value, "valorMoeda");
   }
 
-  public br.com.woboleto.model.EOEmissor emissor() {
-    return (br.com.woboleto.model.EOEmissor)storedValueForKey("emissor");
+  public br.com.woboleto.model.EOBeneficiario beneficiario() {
+    return (br.com.woboleto.model.EOBeneficiario)storedValueForKey("beneficiario");
   }
 
-  protected void setEmissorRelationship(br.com.woboleto.model.EOEmissor value) {
+  protected void setBeneficiarioRelationship(br.com.woboleto.model.EOBeneficiario value) {
     if (_EOBoleto.logger.isDebugEnabled()) {
-      _EOBoleto.logger.debug("updating emissor from " + emissor() + " to " + value);
+      _EOBoleto.logger.debug("updating beneficiario from " + beneficiario() + " to " + value);
     }
     if (value == null) {
-    	br.com.woboleto.model.EOEmissor oldValue = emissor();
+    	br.com.woboleto.model.EOBeneficiario oldValue = beneficiario();
     	if (oldValue != null) {
-    		removeObjectFromBothSidesOfRelationshipWithKey(oldValue, "emissor");
+    		removeObjectFromBothSidesOfRelationshipWithKey(oldValue, "beneficiario");
       }
     } else {
-    	addObjectToBothSidesOfRelationshipWithKey(value, "emissor");
+    	addObjectToBothSidesOfRelationshipWithKey(value, "beneficiario");
     }
   }
 
-  public void setEmissor(br.com.woboleto.model.EOEmissor value) {
-      this.takeStoredValueForKey(value, "emissor");
+  public void setBeneficiario(br.com.woboleto.model.EOBeneficiario value) {
+      this.takeStoredValueForKey(value, "beneficiario");
   }
 
-  public br.com.woboleto.model.EOSacado sacado() {
-    return (br.com.woboleto.model.EOSacado)storedValueForKey("sacado");
+  public br.com.woboleto.model.EOPagador pagador() {
+    return (br.com.woboleto.model.EOPagador)storedValueForKey("pagador");
   }
 
-  protected void setSacadoRelationship(br.com.woboleto.model.EOSacado value) {
+  protected void setPagadorRelationship(br.com.woboleto.model.EOPagador value) {
     if (_EOBoleto.logger.isDebugEnabled()) {
-      _EOBoleto.logger.debug("updating sacado from " + sacado() + " to " + value);
+      _EOBoleto.logger.debug("updating pagador from " + pagador() + " to " + value);
     }
     if (value == null) {
-    	br.com.woboleto.model.EOSacado oldValue = sacado();
+    	br.com.woboleto.model.EOPagador oldValue = pagador();
     	if (oldValue != null) {
-    		removeObjectFromBothSidesOfRelationshipWithKey(oldValue, "sacado");
+    		removeObjectFromBothSidesOfRelationshipWithKey(oldValue, "pagador");
       }
     } else {
-    	addObjectToBothSidesOfRelationshipWithKey(value, "sacado");
+    	addObjectToBothSidesOfRelationshipWithKey(value, "pagador");
     }
   }
 
-  public void setSacado(br.com.woboleto.model.EOSacado value) {
-      this.takeStoredValueForKey(value, "sacado");
+  public void setPagador(br.com.woboleto.model.EOPagador value) {
+      this.takeStoredValueForKey(value, "pagador");
   }
 
   public NSArray<br.com.woboleto.model.EODescricao> descricoes() {
@@ -407,13 +407,13 @@ public abstract class _EOBoleto extends  ERXGenericRecord {
   public static EOBoleto createEOBoleto(EOEditingContext editingContext, Boolean aceite
 , String codigoDeBarras
 , String linhaDigitavel
-, br.com.woboleto.model.EOEmissor emissor, br.com.woboleto.model.EOSacado sacado) {
+, br.com.woboleto.model.EOBeneficiario beneficiario, br.com.woboleto.model.EOPagador pagador) {
     EOBoleto eo = (EOBoleto) EOUtilities.createAndInsertInstance(editingContext, _EOBoleto.ENTITY_NAME);
 		eo.setAceite(aceite);
 		eo.setCodigoDeBarras(codigoDeBarras);
 		eo.setLinhaDigitavel(linhaDigitavel);
-    eo.setEmissorRelationship(emissor);
-    eo.setSacadoRelationship(sacado);
+    eo.setBeneficiarioRelationship(beneficiario);
+    eo.setPagadorRelationship(pagador);
     return eo;
   }
 

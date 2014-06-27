@@ -1,0 +1,34 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = documento; 
+            name = documento; 
+            prototypeName = varchar50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "endereco_id"; 
+            name = enderecoID; 
+            prototypeName = id; 
+        }, 
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {allowsNull = Y; columnName = nome; name = nome; prototypeName = varchar255; }
+    ); 
+    attributesUsedForLocking = (enderecoID, id); 
+    className = "br.com.woboleto.model.EOPagador"; 
+    classProperties = (documento, endereco, nome); 
+    externalName = pagador; 
+    fetchSpecificationDictionary = {}; 
+    name = EOPagador; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            destination = EOEndereco; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = enderecoID; }); 
+            name = endereco; 
+        }
+    ); 
+}
