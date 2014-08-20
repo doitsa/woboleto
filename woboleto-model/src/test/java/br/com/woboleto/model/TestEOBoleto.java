@@ -160,16 +160,6 @@ public class TestEOBoleto {
 	}
 
 	@Test
-	public void colocarDigitoVerificadorNossoNumeroQuandoBancoForSantander() throws Exception {
-		boleto.setBanco(BancoEnum.SANTANDER);
-		beneficiario.setNossoNumero("12");
-
-		br.com.caelum.stella.boleto.Boleto result = boleto.toStellaBoleto();
-
-		assertThat(result.getBeneficiario().getNossoNumero(), is("124"));
-	}
-
-	@Test
 	public void setarDigitoNossoNumeroQuandoBancoForItau() throws Exception {
 		beneficiario.setAgencia("167");
 		beneficiario.setCodigoBeneficiario("45145");

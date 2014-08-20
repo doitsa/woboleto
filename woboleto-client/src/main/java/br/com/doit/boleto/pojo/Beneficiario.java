@@ -10,6 +10,7 @@ public class Beneficiario {
 	private String digitoVerificadorNossoNumero;
 	private String nossoNumero;
 	private String numeroConvenio;
+	private String documento;
 
 	public String getAgencia() {
 		return agencia;
@@ -83,5 +84,13 @@ public class Beneficiario {
 
 	public void setNumeroConvenio(String numeroConvenio) {
 		this.numeroConvenio = numeroConvenio;
+	}
+
+	public String getDocumento() {
+		return documento;
+	}
+
+	public void setDocumento(String documento) {
+		this.documento = documento;
 	}
 }

@@ -51,6 +51,10 @@ public class EOBeneficiario extends _EOBeneficiario {
 		{
 			beneficiario.comNumeroConvenio(numeroConvenio());
 		}
+		
+		if (documento() != null) {
+			beneficiario.comDocumento(documento());
+		}
 
 		return beneficiario;
 	}

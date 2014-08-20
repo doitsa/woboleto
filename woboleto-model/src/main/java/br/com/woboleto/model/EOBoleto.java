@@ -125,10 +125,6 @@ public class EOBoleto extends _EOBoleto
 				fixBoletoItau(boleto);
 				break;
 
-			case SANTANDER:
-				fixBoletoSantander(boleto);
-				break;
-
 			default:
 				break;
 			}
@@ -149,13 +145,6 @@ public class EOBoleto extends _EOBoleto
 		String digito = Integer.toString(banco.getGeradorDeDigito().geraDigitoMod10(agencia + contaCorrente + carteira + nossoNumero));
 
 		boleto.comBeneficiario(beneficiario.comDigitoNossoNumero(digito));
-	}
-
-	private void fixBoletoSantander(Boleto boleto) {
-		Beneficiario beneficiario = boleto.getBeneficiario();
-		String digito = calcularDigitoVerificadorNossoNumero(beneficiario);
-
-		boleto.comBeneficiario(beneficiario.comNossoNumero(beneficiario.getNossoNumero() + digito));
 	}
 	
 public String calcularDigitoVerificadorNossoNumero (Beneficiario beneficiario) {
