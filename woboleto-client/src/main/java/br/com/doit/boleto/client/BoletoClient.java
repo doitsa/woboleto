@@ -48,8 +48,7 @@ public class BoletoClient {
 
 			return mapper.readValue(response, Requisicao.class);
 		} catch (Exception exception) {
-			throw new BoletoException("Não foi possível criar o boleto",
-					exception);
+			throw new BoletoException("Não foi possível criar o boleto: " + exception.getMessage(), exception);
 		}
 	}
 	
