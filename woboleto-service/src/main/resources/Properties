@@ -43,12 +43,12 @@ er.extensions.ERXEnterpriseObject.applyRestrictingQualifierOnInsert=true
 er.extensions.ERXEnterpriseObject.updateInverseRelationships=true
 
 # Database Connection Configuration
-dbConnectUserGLOBAL=postgres
-dbConnectPasswordGLOBAL=p3pp3R
+dbConnectUserGLOBAL=service_woboleto
+dbConnectPasswordGLOBAL=xhqWtTQRKN2AdZFc
 dbConnectPluginGLOBAL=PostgresqlPlugIn
 dbConnectDriverGLOBAL=org.postgresql.Driver
 dbEOPrototypesEntityGLOBAL=EOJDBCPostgresqlPrototypes
-dbConnectURLGLOBAL=jdbc:postgresql://db.doit.com.br/woboleto
+dbConnectURLGLOBAL=jdbc:postgresql://db.doit.internal/woboleto
 
 #========================================================================
 # Migrations
