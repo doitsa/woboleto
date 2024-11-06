@@ -8,7 +8,9 @@ public enum Banco {
 	HSBC("399","HSBC"),
 	ITAU("341","Itau"),
 	SANTANDER("033","Santander"),
-	SAFRA("422","Safra");
+	SAFRA("422","Safra"),
+	SICREDI("748", "Sicredi");
+	
 	
 	private final String codigo;
 	private final String nome;
