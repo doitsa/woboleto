@@ -1,96 +1,112 @@
 package br.com.doit.boleto.pojo;
 
 public class Beneficiario {
-	private String agencia;
-	private String carteira;
-	private String nomeBeneficiario;
-	private String codigoBeneficiario;
-	private String digitoVerificadorAgencia;
-	private String digitoVerificadorCodigoBeneficiario;
-	private String digitoVerificadorNossoNumero;
-	private String nossoNumero;
-	private String numeroConvenio;
-	private String documento;
+    private String agencia;
+    private String carteira;
+    private String nomeBeneficiario;
+    private String codigoBeneficiario;
+    private String digitoVerificadorAgencia;
+    private String digitoVerificadorCodigoBeneficiario;
+    private String digitoVerificadorNossoNumero;
+    private String nossoNumero;
+    private String numeroConvenio;
+    private String documento;
+    private String posto;
+    private String codigoDoBeneficiario;
 
-	public String getAgencia() {
-		return agencia;
-	}
+    public String getAgencia() {
+        return agencia;
+    }
 
-	public void setAgencia(String agencia) {
-		this.agencia = agencia;
-	}
+    public void setAgencia(String agencia) {
+        this.agencia = agencia;
+    }
 
-	public String getCarteira() {
-		return carteira;
-	}
+    public String getCarteira() {
+        return carteira;
+    }
 
-	public void setCarteira(String carteira) {
-		this.carteira = carteira;
-	}
+    public void setCarteira(String carteira) {
+        this.carteira = carteira;
+    }
 
-	public String getNomeBeneficiario() {
-		return nomeBeneficiario;
-	}
+    public String getNomeBeneficiario() {
+        return nomeBeneficiario;
+    }
 
-	public void setNomeBeneficiario(String nomeBeneficiario) {
-		this.nomeBeneficiario = nomeBeneficiario;
-	}
+    public void setNomeBeneficiario(String nomeBeneficiario) {
+        this.nomeBeneficiario = nomeBeneficiario;
+    }
 
-	public String getCodigoBeneficiario() {
-		return codigoBeneficiario;
-	}
+    public String getCodigoBeneficiario() {
+        return codigoBeneficiario;
+    }
 
-	public void setContaCorrente(String codigoBeneficiario) {
-		this.codigoBeneficiario = codigoBeneficiario;
-	}
+    public void setContaCorrente(String codigoBeneficiario) {
+        this.codigoBeneficiario = codigoBeneficiario;
+    }
 
-	public String getDigitoVerificadorAgencia() {
-		return digitoVerificadorAgencia;
-	}
+    public String getDigitoVerificadorAgencia() {
+        return digitoVerificadorAgencia;
+    }
 
-	public void setDigitoVerificadorAgencia(String digitoVerificadorAgencia) {
-		this.digitoVerificadorAgencia = digitoVerificadorAgencia;
-	}
+    public void setDigitoVerificadorAgencia(String digitoVerificadorAgencia) {
+        this.digitoVerificadorAgencia = digitoVerificadorAgencia;
+    }
 
-	public String getDigitoVerificadorCodigoBeneficiario() {
-		return digitoVerificadorCodigoBeneficiario;
-	}
+    public String getDigitoVerificadorCodigoBeneficiario() {
+        return digitoVerificadorCodigoBeneficiario;
+    }
 
-	public void setDigitoVerificadorCodigoBeneficiario(
-			String digitoVerificadorCodigoBeneficiario) {
-		this.digitoVerificadorCodigoBeneficiario = digitoVerificadorCodigoBeneficiario;
-	}
+    public void setDigitoVerificadorCodigoBeneficiario(String digitoVerificadorCodigoBeneficiario) {
+        this.digitoVerificadorCodigoBeneficiario = digitoVerificadorCodigoBeneficiario;
+    }
 
-	public String getDigitoVerificadorNossoNumero() {
-		return digitoVerificadorNossoNumero;
-	}
+    public String getDigitoVerificadorNossoNumero() {
+        return digitoVerificadorNossoNumero;
+    }
 
-	public void setDigitoVerificadorNossoNumero(
-			String digitoVerificadorNossoNumero) {
-		this.digitoVerificadorNossoNumero = digitoVerificadorNossoNumero;
-	}
+    public void setDigitoVerificadorNossoNumero(String digitoVerificadorNossoNumero) {
+        this.digitoVerificadorNossoNumero = digitoVerificadorNossoNumero;
+    }
 
-	public String getNossoNumero() {
-		return nossoNumero;
-	}
+    public String getNossoNumero() {
+        return nossoNumero;
+    }
 
-	public void setNossoNumero(String nossoNumero) {
-		this.nossoNumero = nossoNumero;
-	}
+    public void setNossoNumero(String nossoNumero) {
+        this.nossoNumero = nossoNumero;
+    }
 
-	public String getNumeroConvenio() {
-		return numeroConvenio;
-	}
+    public String getNumeroConvenio() {
+        return numeroConvenio;
+    }
 
-	public void setNumeroConvenio(String numeroConvenio) {
-		this.numeroConvenio = numeroConvenio;
-	}
+    public void setNumeroConvenio(String numeroConvenio) {
+        this.numeroConvenio = numeroConvenio;
+    }
 
-	public String getDocumento() {
-		return documento;
-	}
+    public String getDocumento() {
+        return documento;
+    }
 
-	public void setDocumento(String documento) {
-		this.documento = documento;
-	}
+    public void setDocumento(String documento) {
+        this.documento = documento;
+    }
+
+    public String getPosto() {
+        return posto;
+    }
+
+    public void setPosto(String posto) {
+        this.posto = posto;
+    }
+
+    public String getCodigoDoBeneficiario() {
+        return codigoDoBeneficiario;
+    }
+
+    public void setCodigoDoBeneficiario(String codigoDoBeneficiario) {
+        this.codigoDoBeneficiario = codigoDoBeneficiario;
+    }
 }
