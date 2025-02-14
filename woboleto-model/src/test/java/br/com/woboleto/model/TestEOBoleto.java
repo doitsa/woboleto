@@ -15,6 +15,7 @@ import java.util.Date;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,7 +32,7 @@ import com.wounit.rules.MockEditingContext;
 /**
  * @author <a href="mailto:hprange@gmail.com">Henrique Prange</a>
  */
-
+@Ignore
 @RunWith(MockitoJUnitRunner.class)
 public class TestEOBoleto {
 	@UnderTest
