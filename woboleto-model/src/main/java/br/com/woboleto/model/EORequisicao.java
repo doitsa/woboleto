@@ -12,45 +12,44 @@ import er.extensions.eof.ERXEOControlUtilities;
 import er.extensions.foundation.ERXProperties;
 
 public class EORequisicao extends _EORequisicao {
-	
-	final Logger logger = LoggerFactory.getLogger(EORequisicao.class);
-	
-	@Override
-	public void willInsert() {
-		super.willInsert();
 
-		Integer resultado = maiorSequencial();
+    final Logger logger = LoggerFactory.getLogger(EORequisicao.class);
 
-		logger.info("DEPOIS DE VERIFICAR MAX DE REQUISICAO. ID: "+resultado);
-		
-		if (resultado == null) {
-			resultado = 0;
-		}
-		
-		String versao = ERXProperties.stringForKey("application.version");
-		
-		setVersao(versao);
+    @Override
+    public void willInsert() {
+        super.willInsert();
 
-		setSequential(resultado + 1);
-		
-		try {
-			setHash(criarMd5("woboleto"+sequential()));
-		} catch (NoSuchAlgorithmException e) {
-			logger.error("Erro ao criar o hash",e);
-			throw new UnhandledException(e);
-		}
-	}
+        Integer resultado = maiorSequencial();
 
-	Integer maiorSequencial() {
-		logger.info("ANTES DE VERIFICAR MAX DE REQUISICAO");
-		return (Integer) ERXEOControlUtilities.aggregateFunctionWithQualifier(
-				editingContext(), ENTITY_NAME, SEQUENTIAL_KEY, "MAX", null);
-	}
+        logger.info("DEPOIS DE VERIFICAR MAX DE REQUISICAO. ID: " + resultado);
 
-	String criarMd5(String senha) throws NoSuchAlgorithmException {
-		MessageDigest md = MessageDigest.getInstance("MD5");
+        if (resultado == null) {
+            resultado = 0;
+        }
 
-		BigInteger hash = new BigInteger(1, md.digest(senha.getBytes()));
-		return hash.toString(16);
-	}
+        String versao = ERXProperties.stringForKey("application.version");
+
+        setVersao(versao);
+
+        setSequential(resultado + 1);
+
+        try {
+            setHash(criarMd5("woboleto" + sequential()));
+        } catch (NoSuchAlgorithmException e) {
+            logger.error("Erro ao criar o hash", e);
+            throw new UnhandledException(e);
+        }
+    }
+
+    Integer maiorSequencial() {
+        logger.info("ANTES DE VERIFICAR MAX DE REQUISICAO");
+        return (Integer) ERXEOControlUtilities.aggregateFunctionWithQualifier(editingContext(), ENTITY_NAME, SEQUENTIAL_KEY, "MAX", null);
+    }
+
+    String criarMd5(String senha) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+
+        BigInteger hash = new BigInteger(1, md.digest(senha.getBytes()));
+        return hash.toString(16);
+    }
 }
