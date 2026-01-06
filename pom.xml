@@ -10,7 +10,7 @@
 
 	<groupId>br.com.doit</groupId>
 	<artifactId>woboleto</artifactId>
-	<version>2.4</version>
+	<version>2.5-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>WOBoleto</name>
 	<description>Integra\u00e7\u00e3o para gera\u00e7\u00e3o de boletos.</description>
@@ -237,6 +237,6 @@
 		<connection>scm:git:https://github.com/doitsa/woboleto.git</connection>
 		<url>scm:git:https://github.com/doitsa/woboleto.git</url>
 		<developerConnection>scm:git:https://github.com/doitsa/woboleto.git</developerConnection>
-		<tag>woboleto-2.4</tag>
+		<tag>HEAD</tag>
 	</scm>
 </project>
